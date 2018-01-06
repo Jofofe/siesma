@@ -8,6 +8,16 @@
 		rendered="#{empregadoBean.empregado != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 		
+			<h:outputLabel value="* Função:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+			<p:selectOneMenu id="funcao_som"
+				value="#{empregadoBean.empregado.funcao}" converter="funcaoConverter" effect="fade"
+				required="true" label="Função" rendered="#{empregadoBean.empregado.idUsuario == null}">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{empregadoBean.funcoes}" var="func"
+					itemLabel="#{func.nomeFuncao}" itemValue="#{func}" />
+				<p:ajax event="change" update="form_principal, cad" />
+			</p:selectOneMenu>
+		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{empregadoBean.empregado.nome}" required="true"
 				label="Nome"/>
@@ -39,19 +49,11 @@
 			<h:outputLabel for="orgaoExp" value="* Orgão expeditor:" />
 			<p:inputMask id="orgaoExp" value="#{empregadoBean.empregado.orgaoExpeditor}" 
 				mask="aaa/aa" required="true" label="Orgão Expeditor"/>
-			
-			<h:outputLabel for="valorHora" value="* Valor hora aula:" />
+				
+			<h:outputLabel for="valorHora" value="Valor hora aula:" 
+				rendered="#{empregadoBean.empregado.funcao.idFuncao == 2}"/>
 			<p:inputNumber id="valorHora" value="#{empregadoBean.empregado.valorHora}" 
-				required="true" label="Valor hora"/>  
-			
-			<h:outputLabel value="* Função:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
-			<p:selectOneMenu id="funcao_som"
-				value="#{empregadoBean.empregado.funcao}" converter="funcaoConverter" effect="fade"
-				required="true" label="Função" rendered="#{empregadoBean.empregado.idUsuario == null}">
-				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				<f:selectItems value="#{empregadoBean.funcoes}" var="func"
-					itemLabel="#{func.nomeFuncao}" itemValue="#{func}" />
-			</p:selectOneMenu>
+				label="Valor hora" rendered="#{empregadoBean.empregado.funcao.idFuncao == 2}"/> 
 			
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
