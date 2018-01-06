@@ -1,0 +1,127 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="cad" header="Cadastro de Aluno" style="width:600px"
+		rendered="#{alunoBean.aluno != null}">
+		<p:panelGrid columns="2" id="itensCadastro">
+		
+			<h:outputLabel for="nome" value="* Nome:" />
+			<p:inputText id="nome" value="#{alunoBean.aluno.nome}" required="true"
+				label="Nome"/>
+			
+			<h:outputLabel for="cpf" value="* CPF:" />
+			<p:inputMask id="cpf" value="#{alunoBean.aluno.cpf}" validator="#{alunoBean.validateCpf}"
+				mask="999.999.999-99" required="true" label="CPF"/>
+			
+			<h:outputLabel for="senha" value="* Email:" />
+			<p:inputText id="senha" value="#{alunoBean.aluno.email}" required="true"
+				validator="#{alunoBean.validateEmail}" label="Email"/>
+			
+			<h:outputLabel for="celular" value="* Celular:" />
+			<p:inputMask id="celular" value="#{alunoBean.aluno.telCelular}" 
+				mask="(99) 99999-9999" required="true" label="Celular"/>
+			
+			<h:outputLabel for="pwd1" value="* Senha:" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+        	<p:password id="pwd1" value="#{alunoBean.aluno.senha}" match="pwd2" label="Senha" 
+        		required="true" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+ 
+        	<h:outputLabel for="pwd2" value="* Confirmar Senha:" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+        	<p:password id="pwd2" value="#{alunoBean.aluno.senha}" label="Confirmar Senha" 
+        		required="true" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+			
+			<h:outputLabel value="* Nivel de Acesso:" />
+			<p:selectOneMenu id="nivelAcesso_som"
+				value="#{alunoBean.aluno.nivelAcesso}" converter="nivelAcessoConverter"
+				effect="fade" required="true" label="Nivel de Acesso">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{alunoBean.niveisAcesso}" var="nivel"
+					itemLabel="#{nivel.nomeAcesso}" itemValue="#{nivel}" />
+			</p:selectOneMenu>
+	
+			<p:outputLabel for="dtNasc" value="* Data de Nascimento:" />
+	        <p:calendar id="dtNasc" value="#{alunoBean.aluno.dtNascimento}" showOn="button" 
+	        	label="Data de nascimento" required="true"/>
+				
+			<h:outputLabel value="* Genero:" />
+			<p:selectOneMenu id="genero_som"
+				value="#{alunoBean.aluno.genero}" converter="generoConverter"
+				effect="fade" required="true" label="Genero">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{alunoBean.generos}" var="gen"
+					itemLabel="#{gen.nomeGenero}" itemValue="#{gen}" />
+			</p:selectOneMenu>
+			
+			<h:outputLabel for="rg" value="* RG:" />
+			<p:inputText id="rg" value="#{alunoBean.aluno.rg}" required="true"
+				label="RG"/>
+				
+			<h:outputLabel for="orgaoExp" value="* Orgão Expeditor:" />
+			<p:inputMask id="orgaoExp" value="#{alunoBean.aluno.orgaoExpeditor}" 
+				mask="aaa/aa" required="true" label="Orgão Expeditor"/>
+				
+			<h:outputLabel for="nat" value="* Naturalidade " />
+			<p:inputText id="nat" value="#{alunoBean.aluno.naturalidade}" required="true"
+				label="Naturalidade"/>
+				
+			<h:outputLabel for="prof" value="Profissão:" />
+			<p:inputText id="prof" value="#{alunoBean.aluno.profissao}" label="Profissão"/>
+				
+			<h:outputLabel for="end" value="* Endereço:" />
+			<p:inputText id="end" value="#{alunoBean.aluno.endereco}" required="true"
+				label="Endereço"/>
+				
+			<h:outputLabel for="cid" value="* Cidade:" />
+			<p:inputText id="cid" value="#{alunoBean.aluno.cidade}" required="true"
+				label="Cidade"/>
+				
+			<h:outputLabel for="bairro" value="* Bairro:" />
+			<p:inputText id="bairro" value="#{alunoBean.aluno.bairro}" label="Bairro"/>
+			
+			<h:outputLabel for="cep" value="* CEP:" />
+			<p:inputMask id="cep" value="#{alunoBean.aluno.cep}" 
+				mask="99999-999" required="true" label="CEP"/>
+			
+			<h:outputLabel value="* UF:" />
+			<p:selectOneMenu id="uf_som"
+				value="#{alunoBean.aluno.uf}" converter="ufConverter"
+				effect="fade" required="true" label="UF">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{alunoBean.ufs}" var="u"
+					itemLabel="#{u.nomeUf}" itemValue="#{u}" />
+			</p:selectOneMenu>
+			
+			<h:outputLabel for="telRes" value="Telefone Residencial:" />
+			<p:inputMask id="telRes" value="#{alunoBean.aluno.telResidencia}" 
+				mask="(99) 9999-9999" label="Telefone Residencial"/>
+					
+			<h:outputLabel for="telCom" value="Telefone Comercial:" />
+			<p:inputMask id="telCom" value="#{alunoBean.aluno.telComercial}" 
+				mask="(99) 9999-9999" label="Telefone Comercial"/>
+				
+			<p:outputLabel for="dtVenc" value="* Data de vencimento:" />
+	        <p:calendar id="dtVenc" value="#{alunoBean.aluno.dtVencimento}" showOn="button" 
+	        	label="Data de vencimento:"/>
+	        	
+	        <h:outputLabel for="ies" value="* Graduação" />
+			<p:inputText id="ies" value="#{alunoBean.aluno.iesGraduacao}" required="true"
+				label="Graduação"/>
+			
+			<h:outputLabel for="sitCom" value="* Situação Comercial" />
+			<p:inputText id="sitCom" value="#{alunoBean.aluno.situacaoComercial}" required="true"
+				label="Situação Comercial"/>
+			
+		</p:panelGrid>
+		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
+			action="#{alunoBean.saveAndUpdate()}" update="form_principal, itensCadastro">
+			<span class="fa-icon-save" />
+		</p:commandButton>
+		<p:commandButton icon="voltar-icon" value="Voltar"
+			action="#{alunoBean.back()}" immediate="true"
+			update="form_principal" />
+	</p:panel>
+	<p:blockUI block="cad" trigger="btn_salvar" />
+
+</ui:composition>

@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="cad" header="Cadastro de Empregado" style="width:600px"
+		rendered="#{empregadoBean.empregado != null}">
+		<p:panelGrid columns="2" id="itensCadastro">
+		
+			<h:outputLabel for="nome" value="* Nome:" />
+			<p:inputText id="nome" value="#{empregadoBean.empregado.nome}" required="true"
+				label="Nome"/>
+			
+			<h:outputLabel for="cpf" value="* CPF:" />
+			<p:inputMask id="cpf" value="#{empregadoBean.empregado.cpf}" validator="#{empregadoBean.validateCpf}"
+				mask="999.999.999-99" required="true" label="CPF" />
+			
+			<h:outputLabel for="email" value="* Email:" />
+			<p:inputText id="email" value="#{empregadoBean.empregado.email}" required="true"
+				validator="#{empregadoBean.validateEmail}" label="Email" />
+			
+			<h:outputLabel for="celular" value="* Celular:" />
+			<p:inputMask id="celular" value="#{empregadoBean.empregado.telCelular}" 
+				mask="(99) 99999-9999" required="true" label="Celular"/>
+			
+			<h:outputLabel for="pwd1" value="* Senha:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+        	<p:password id="pwd1" value="#{empregadoBean.empregado.senha}" match="pwd2" label="Senha" 
+        		required="true" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+ 
+        	<h:outputLabel for="pwd2" value="* Confirmar Senha:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+        	<p:password id="pwd2" value="#{empregadoBean.empregado.senha}" label="Confirmar Senha" 
+        		required="true" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+			
+			<h:outputLabel value="* Nivel de acesso:" />
+			<p:selectOneMenu id="nivelAcesso_som"
+				value="#{empregadoBean.empregado.nivelAcesso}" converter="nivelAcessoConverter"
+				effect="fade" required="true" label="Nivel de Acesso">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{empregadoBean.niveisAcesso}" var="nivel"
+					itemLabel="#{nivel.nomeAcesso}" itemValue="#{nivel}" />
+			</p:selectOneMenu>
+			
+			<h:outputLabel for="rg" value="* RG:" />
+			<p:inputText id="rg" value="#{empregadoBean.empregado.rg}" required="true"
+				label="RG"/>
+				
+			<h:outputLabel for="orgaoExp" value="* Orgão expeditor:" />
+			<p:inputMask id="orgaoExp" value="#{empregadoBean.empregado.orgaoExpeditor}" 
+				mask="aaa/aa" required="true" label="Orgão Expeditor"/>
+			
+			<h:outputLabel for="valorHora" value="* Valor hora aula:" />
+			<p:inputNumber id="valorHora" value="#{empregadoBean.empregado.valorHora}" 
+				required="true" label="Valor hora"/>  
+			
+			<h:outputLabel value="* Função:" />
+			<p:selectOneMenu id="funcao_som"
+				value="#{empregadoBean.empregado.funcao}" converter="funcaoConverter"
+				effect="fade" required="true" label="Função">
+				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{empregadoBean.funcoes}" var="func"
+					itemLabel="#{func.nomeFuncao}" itemValue="#{func}" />
+			</p:selectOneMenu>
+			
+		</p:panelGrid>
+		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
+			action="#{empregadoBean.saveAndUpdate()}" update="form_principal, itensCadastro">
+			<span class="fa-icon-save" />
+		</p:commandButton>
+		<p:commandButton icon="voltar-icon" value="Voltar"
+			action="#{empregadoBean.back()}" immediate="true"
+			update="form_principal" />
+	</p:panel>
+	<p:blockUI block="cad" trigger="btn_salvar" />
+
+</ui:composition>

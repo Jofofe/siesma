@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.3
+   http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
+
+	<url-mapping id="empregado">
+		<pattern value="/empregado/" />
+		<view-id value="/paginas/empregado/page_principal.xhtml" />
+		<action onPostback="false">#{empregadoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="aluno">
+		<pattern value="/aluno/" />
+		<view-id value="/paginas/aluno/page_principal.xhtml" />
+		<action onPostback="false">#{alunoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="curso">
+		<pattern value="/curso/" />
+		<view-id value="/paginas/curso/page_principal.xhtml" />
+		<action onPostback="false">#{cursoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="modulo">
+		<pattern value="/modulo/" />
+		<view-id value="/paginas/modulo/page_principal.xhtml" />
+		<action onPostback="false">#{moduloBean.init}</action>
+	</url-mapping>
+	<url-mapping id="disciplina">
+		<pattern value="/disciplina/" />
+		<view-id value="/paginas/disciplina/page_principal.xhtml" />
+		<action onPostback="false">#{disciplinaBean.init}</action>
+	</url-mapping>
+	
+</pretty-config>
