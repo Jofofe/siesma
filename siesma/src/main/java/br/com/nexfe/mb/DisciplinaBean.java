@@ -66,7 +66,7 @@ public class DisciplinaBean {
 		} else {
 			disciplinaDAO.salvar(getDisciplina());		
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "OperaÁ„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Opera√ß√£o realizada com sucesso!"));
 		init();
 	}
 	
@@ -77,7 +77,7 @@ public class DisciplinaBean {
 	public void delete(){
 		disciplinaDAO.excluir(getDisciplinaExclusao());
 		setDisciplinaExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus√£o realizada com sucesso!"));
 		init();
 	}
 	

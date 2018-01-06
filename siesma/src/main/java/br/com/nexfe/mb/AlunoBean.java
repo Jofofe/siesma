@@ -78,7 +78,7 @@ public class AlunoBean {
 			getAluno().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ALUNO.getChave()));
 			alunoDAO.salvar(getAluno());		
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "OperaÁ„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Opera√ß√£o realizada com sucesso!"));
 		init();
 	}
 	
@@ -89,7 +89,7 @@ public class AlunoBean {
 	public void delete(){
 		alunoDAO.excluir(getAlunoExclusao());
 		setAlunoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus√£o realizada com sucesso!"));
 		init();
 	}
 	

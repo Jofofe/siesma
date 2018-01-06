@@ -58,7 +58,7 @@ public class ModuloBean {
 		} else {
 			moduloDAO.salvar(getModulo());		
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "OperaÁ„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Opera√ß√£o realizada com sucesso!"));
 		init();
 	}
 	
@@ -69,7 +69,7 @@ public class ModuloBean {
 	public void delete(){
 		moduloDAO.excluir(getModuloExclusao());
 		setModuloExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus√£o realizada com sucesso!"));
 		init();
 	}
 	

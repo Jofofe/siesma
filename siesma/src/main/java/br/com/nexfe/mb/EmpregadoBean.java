@@ -74,7 +74,7 @@ public class EmpregadoBean {
 			}
 			empregadoDAO.salvar(getEmpregado());		
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "OperaÁ„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Opera√ß√£o realizada com sucesso!"));
 		init();
 	}
 	
@@ -85,7 +85,7 @@ public class EmpregadoBean {
 	public void delete(){
 		empregadoDAO.excluir(getEmpregadoExclusao());
 		setEmpregadoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus√£o realizada com sucesso!"));
 		init();
 	}
 	

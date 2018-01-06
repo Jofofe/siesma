@@ -50,7 +50,7 @@ public class CursoBean {
 		} else {
 			cursoDAO.salvar(getCurso());		
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "OperaÁ„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Opera√ß√£o realizada com sucesso!"));
 		init();
 	}
 	
@@ -61,7 +61,7 @@ public class CursoBean {
 	public void delete(){
 		cursoDAO.excluir(getCursoExclusao());
 		setCursoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus„o realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclus√£o realizada com sucesso!"));
 		init();
 	}
 	

@@ -19,7 +19,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 	final FacesContext facesContext = FacesContext.getCurrentInstance();
 	//Obtem um mapa do FacesContext
 	final Map<String, Object> requestMap = facesContext.getExternalContext().getRequestMap();
-	//Obtem o estado atual da navegaÁ„o entre p·ginas do JSF
+	//Obtem o estado atual da navega√ß√£o entre p√°ginas do JSF
 	final NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
 
 	CustomExceptionHandler(ExceptionHandler exception) {
@@ -44,11 +44,11 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 				if(exception instanceof Exception){
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro inesperado. Tente novamente mais tarde!", ""));
 				}
-				// Seta a navegaÁ„oo para uma p·gina padr„o.
+				// Seta a navega√ß√£o para uma p√°gina padr√£o.
 				//navigationHandler.handleNavigation(facesContext, null, "/usuario/index.xhtml");
 				facesContext.renderResponse();
 			} finally {
-				// Remove a exeÁ„o da fila
+				// Remove a exe√ß√£o da fila
 				iterator.remove();
 			}
 		}
