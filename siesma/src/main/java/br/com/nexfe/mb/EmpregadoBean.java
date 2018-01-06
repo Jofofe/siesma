@@ -10,12 +10,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import br.com.nexfe.constantes.ConstantesNivelAcesso;
 import br.com.nexfe.dao.EmpregadoDAO;
 import br.com.nexfe.dao.FuncaoDAO;
 import br.com.nexfe.dao.NivelAcessoDAO;
 import br.com.nexfe.entidades.Empregado;
 import br.com.nexfe.entidades.Funcao;
-import br.com.nexfe.entidades.NivelAcesso;
 import br.com.nexfe.util.UtilCpf;
 
 @ManagedBean
@@ -36,8 +36,6 @@ public class EmpregadoBean {
 	
 	private List<Empregado> empregadosFiltrados;
 	
-	private List<NivelAcesso> niveisAcesso;
-	
 	private List<Funcao> funcoes;
 	
 	public void init() {
@@ -45,7 +43,6 @@ public class EmpregadoBean {
 		nivelAcessoDAO = new NivelAcessoDAO();
 		funcaoDAO = new FuncaoDAO();
 		setEmpregados(empregadoDAO.listar(Empregado.class));
-		setNiveisAcesso(nivelAcessoDAO.listar(NivelAcesso.class));
 		setFuncoes(funcaoDAO.listar(Funcao.class));
 		setEmpregado(null);
 	}
@@ -70,6 +67,11 @@ public class EmpregadoBean {
 			}
 		} else {
 			getEmpregado().setDtCadastro(new Date());
+			if(getEmpregado().getFuncao().getNomeFuncao().compareTo(ConstantesNivelAcesso.ADMINISTRATIVO.getNome()) == 0) {
+				getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ADMINISTRATIVO.getChave()));
+			} else {
+				getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.DOCENTE.getChave()));
+			}
 			empregadoDAO.salvar(getEmpregado());		
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
@@ -139,14 +141,6 @@ public class EmpregadoBean {
 
 	public void setEmpregadosFiltrados(List<Empregado> empregadosFiltrados) {
 		this.empregadosFiltrados = empregadosFiltrados;
-	}
-
-	public List<NivelAcesso> getNiveisAcesso() {
-		return niveisAcesso;
-	}
-
-	public void setNiveisAcesso(List<NivelAcesso> niveisAcesso) {
-		this.niveisAcesso = niveisAcesso;
 	}
 
 	public List<Funcao> getFuncoes() {

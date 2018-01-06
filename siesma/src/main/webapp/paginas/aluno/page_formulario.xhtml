@@ -32,15 +32,6 @@
         	<p:password id="pwd2" value="#{alunoBean.aluno.senha}" label="Confirmar Senha" 
         		required="true" rendered="#{alunoBean.aluno.idUsuario == null}"/>
 			
-			<h:outputLabel value="* Nivel de Acesso:" />
-			<p:selectOneMenu id="nivelAcesso_som"
-				value="#{alunoBean.aluno.nivelAcesso}" converter="nivelAcessoConverter"
-				effect="fade" required="true" label="Nivel de Acesso">
-				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				<f:selectItems value="#{alunoBean.niveisAcesso}" var="nivel"
-					itemLabel="#{nivel.nomeAcesso}" itemValue="#{nivel}" />
-			</p:selectOneMenu>
-	
 			<p:outputLabel for="dtNasc" value="* Data de Nascimento:" />
 	        <p:calendar id="dtNasc" value="#{alunoBean.aluno.dtNascimento}" showOn="button" 
 	        	label="Data de nascimento" required="true"/>

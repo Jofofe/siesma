@@ -32,15 +32,6 @@
         	<p:password id="pwd2" value="#{empregadoBean.empregado.senha}" label="Confirmar Senha" 
         		required="true" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
 			
-			<h:outputLabel value="* Nivel de acesso:" />
-			<p:selectOneMenu id="nivelAcesso_som"
-				value="#{empregadoBean.empregado.nivelAcesso}" converter="nivelAcessoConverter"
-				effect="fade" required="true" label="Nivel de Acesso">
-				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				<f:selectItems value="#{empregadoBean.niveisAcesso}" var="nivel"
-					itemLabel="#{nivel.nomeAcesso}" itemValue="#{nivel}" />
-			</p:selectOneMenu>
-			
 			<h:outputLabel for="rg" value="* RG:" />
 			<p:inputText id="rg" value="#{empregadoBean.empregado.rg}" required="true"
 				label="RG"/>
@@ -53,10 +44,10 @@
 			<p:inputNumber id="valorHora" value="#{empregadoBean.empregado.valorHora}" 
 				required="true" label="Valor hora"/>  
 			
-			<h:outputLabel value="* Função:" />
+			<h:outputLabel value="* Função:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
 			<p:selectOneMenu id="funcao_som"
-				value="#{empregadoBean.empregado.funcao}" converter="funcaoConverter"
-				effect="fade" required="true" label="Função">
+				value="#{empregadoBean.empregado.funcao}" converter="funcaoConverter" effect="fade"
+				required="true" label="Função" rendered="#{empregadoBean.empregado.idUsuario == null}">
 				<f:selectItem itemLabel="Selecione" itemValue="#{null}" />
 				<f:selectItems value="#{empregadoBean.funcoes}" var="func"
 					itemLabel="#{func.nomeFuncao}" itemValue="#{func}" />

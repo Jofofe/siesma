@@ -10,13 +10,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import br.com.nexfe.constantes.ConstantesNivelAcesso;
 import br.com.nexfe.dao.AlunoDAO;
 import br.com.nexfe.dao.GeneroDAO;
 import br.com.nexfe.dao.NivelAcessoDAO;
 import br.com.nexfe.dao.UfDAO;
 import br.com.nexfe.entidades.Aluno;
 import br.com.nexfe.entidades.Genero;
-import br.com.nexfe.entidades.NivelAcesso;
 import br.com.nexfe.entidades.Uf;
 import br.com.nexfe.util.UtilCpf;
 
@@ -40,8 +40,6 @@ public class AlunoBean {
 	
 	private List<Aluno> alunosFiltrados;
 	
-	private List<NivelAcesso> niveisAcesso;
-	
 	private List<Genero> generos;
 	
 	private List<Uf> ufs;
@@ -52,7 +50,6 @@ public class AlunoBean {
 		generoDAO = new GeneroDAO();
 		ufDAO = new UfDAO();
 		setAlunos(alunoDAO.listar(Aluno.class));
-		setNiveisAcesso(nivelAcessoDAO.listar(NivelAcesso.class));
 		setGeneros(generoDAO.listar(Genero.class));
 		setUfs(ufDAO.listar(Uf.class));
 		setAluno(null);
@@ -78,6 +75,7 @@ public class AlunoBean {
 			}
 		} else {
 			getAluno().setDtCadastro(new Date());
+			getAluno().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ALUNO.getChave()));
 			alunoDAO.salvar(getAluno());		
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
@@ -147,14 +145,6 @@ public class AlunoBean {
 
 	public void setAlunosFiltrados(List<Aluno> alunosFiltrados) {
 		this.alunosFiltrados = alunosFiltrados;
-	}
-
-	public List<NivelAcesso> getNiveisAcesso() {
-		return niveisAcesso;
-	}
-
-	public void setNiveisAcesso(List<NivelAcesso> niveisAcesso) {
-		this.niveisAcesso = niveisAcesso;
 	}
 
 	public List<Genero> getGeneros() {
