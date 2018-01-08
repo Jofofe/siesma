@@ -10,10 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="Curso.selectAll", query="select e from Curso e order by e.nome") } )
 @Table(name = "CURSO")
 public class Curso implements Serializable {
 	

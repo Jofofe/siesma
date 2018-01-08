@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="Aluno.selectAll", query="select e from Aluno e order by e.nome") } )
 @Table(name = "ALUNO")
 @PrimaryKeyJoinColumn(name="ID_USUARIO")
 public class Aluno extends Usuario {

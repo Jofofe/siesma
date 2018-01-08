@@ -8,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="Empregado.selectAll", query="select e from Empregado e order by e.nome") } )
 @Table(name = "EMPREGADO")
 @PrimaryKeyJoinColumn(name="ID_USUARIO")
 public class Empregado extends Usuario{

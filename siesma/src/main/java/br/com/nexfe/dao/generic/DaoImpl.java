@@ -3,13 +3,15 @@ package br.com.nexfe.dao.generic;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.nexfe.fabrica.JPAUtil;
 
 public abstract class DaoImpl<E> implements Dao<E> {
 	
 	protected EntityManager em = JPAUtil.getEntityManager();
+	
+	private static final String SELECT_ALL = "selectAll";
 	
 	@Override
 	public void salvar(E entidade) {
@@ -48,10 +50,9 @@ public abstract class DaoImpl<E> implements Dao<E> {
 	}
 	
 	@Override
-    public List<E> listar(Class<E> classe) {
-        String hql="Select e from "+classe.getSimpleName() +" e";
-        Query query = em.createQuery(hql);
-        return query.getResultList();
-    }
+	public List<E> listar(Class<E> classe) {
+		TypedQuery<E> query = em.createNamedQuery(classe.getSimpleName()+"."+SELECT_ALL, classe);
+		return query.getResultList(); 
+	}
 
 }

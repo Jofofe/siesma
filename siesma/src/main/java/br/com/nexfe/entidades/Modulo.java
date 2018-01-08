@@ -12,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="Modulo.selectAll", query="select e from Modulo e order by e.nome") } )
 @Table(name = "MODULO")
 public class Modulo implements Serializable {
 	

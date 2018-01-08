@@ -7,10 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="NivelAcesso.selectAll", query="select e from NivelAcesso e order by e.nomeAcesso") } )
 @Table(name = "NIVEL_ACESSO")
 public class NivelAcesso implements Serializable {
 	

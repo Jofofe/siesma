@@ -11,9 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name="Disciplina.selectAll", query="select e from Disciplina e order by e.nome") } )
 @Table(name = "DISCIPLINA")
 public class Disciplina implements Serializable {
 	
