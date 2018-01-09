@@ -29,5 +29,25 @@
 		<view-id value="/paginas/disciplina/page_principal.xhtml" />
 		<action onPostback="false">#{disciplinaBean.init}</action>
 	</url-mapping>
+	<url-mapping id="matricula">
+		<pattern value="/matricula/" />
+		<view-id value="/paginas/matricula/page_principal.xhtml" />
+		<action onPostback="false">#{matriculaBean.init}</action>
+	</url-mapping>
+	<url-mapping id="desconto">
+		<pattern value="/desconto/" />
+		<view-id value="/paginas/desconto/page_principal.xhtml" />
+		<action onPostback="false">#{descontoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="avaliacao">
+		<pattern value="/avaliacao/" />
+		<view-id value="/paginas/avaliacao/page_principal.xhtml" />
+		<action onPostback="false">#{avaliacaoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="descontoAplicado">
+		<pattern value="/descontoAplicado/" />
+		<view-id value="/paginas/descontoAplicado/page_principal.xhtml" />
+		<action onPostback="false">#{descontoAplicadoBean.init}</action>
+	</url-mapping>
 	
 </pretty-config>

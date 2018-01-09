@@ -38,6 +38,9 @@ public class Curso implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Modulo.class, mappedBy="curso")
 	private List<Modulo> modulos;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Matricula.class, mappedBy="curso")
+	private List<Matricula> matriculas;
 
 	public Long getIdCurso() {
 		return idCurso;

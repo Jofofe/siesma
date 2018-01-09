@@ -1,6 +1,7 @@
 package br.com.nexfe.entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -63,7 +65,13 @@ public class Aluno extends Usuario {
 	
 	@Column(name = "SITUACAO_COMERCIAL", length = 50, nullable = false)
 	private String situacaoComercial;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Matricula.class, mappedBy="aluno")
+	private List<Matricula> matriculas;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = DescontoAplicado.class, mappedBy="aluno")
+	private List<DescontoAplicado> descontosAplicados;
+	
 	public Date getDtNascimento() {
 		return dtNascimento;
 	}
@@ -174,6 +182,22 @@ public class Aluno extends Usuario {
 
 	public void setSituacaoComercial(String situacaoComercial) {
 		this.situacaoComercial = situacaoComercial;
+	}
+	
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
+	public List<DescontoAplicado> getDescontosAplicados() {
+		return descontosAplicados;
+	}
+
+	public void setDescontosAplicados(List<DescontoAplicado> descontosAplicados) {
+		this.descontosAplicados = descontosAplicados;
 	}
 
 	@Override

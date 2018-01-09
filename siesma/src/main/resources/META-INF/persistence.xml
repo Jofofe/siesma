@@ -16,6 +16,11 @@
         <class>br.com.nexfe.entidades.Curso</class>
         <class>br.com.nexfe.entidades.Modulo</class>
         <class>br.com.nexfe.entidades.Disciplina</class>
+        <class>br.com.nexfe.entidades.Desconto</class>
+        <class>br.com.nexfe.entidades.DescontoAplicado</class>
+        <class>br.com.nexfe.entidades.Matricula</class>
+        <class>br.com.nexfe.entidades.TipoAvaliacao</class>
+        <class>br.com.nexfe.entidades.Avaliacao</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
