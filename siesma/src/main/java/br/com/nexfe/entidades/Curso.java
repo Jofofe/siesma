@@ -27,13 +27,13 @@ public class Curso implements Serializable {
 	@Column(name = "ID_CURSO")
 	private Long idCurso;
 	
-	@Column(name = "NOME_CURSO")
+	@Column(name = "NOME_CURSO", length = 30, nullable = false)
 	private String nome;
 	
-	@Column(name = "CARGA_HORARIA")
+	@Column(name = "CARGA_HORARIA", nullable = false)
 	private Integer cargaHoraria;
 	
-	@Column(name = "VALOR_CURSO")
+	@Column(name = "VALOR_CURSO", nullable = false)
 	private BigDecimal valorCurso;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Modulo.class, mappedBy="curso")

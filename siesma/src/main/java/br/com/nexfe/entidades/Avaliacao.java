@@ -26,10 +26,10 @@ public class Avaliacao implements Serializable {
 	@Column(name = "ID_AVALIACAO")
 	private Long idAvaliacao;
 	
-	@Column(name = "NOME_AVALIACAO", nullable = false)
+	@Column(name = "NOME_AVALIACAO", length = 30, nullable = false)
 	private String nome;
 	
-	@Column(name = "OBS_AVALIACAO", nullable = false)
+	@Column(name = "OBS_AVALIACAO", length = 100)
 	private String obsAvaliacao;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

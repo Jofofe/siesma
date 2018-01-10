@@ -28,7 +28,7 @@ public class Desconto implements Serializable {
 	@Column(name = "ID_DESCONTO")
 	private Long idDesconto;
 	
-	@Column(name = "NOME_DESCONTO", nullable = false)
+	@Column(name = "NOME_DESCONTO", length = 30, nullable = false)
 	private String nome;
 	
 	@Column(name = "PERCENTUAL_DESCONTO", nullable = false)

@@ -38,7 +38,7 @@ public class DescontoAplicado implements Serializable {
 	@JoinColumn(name = "ID_DESCONTO")
 	private Desconto desconto;
 	
-	@Column(name = "OBS_DESCONTO_APLICADO")
+	@Column(name = "OBS_DESCONTO_APLICADO", length = 100)
 	private String obsDesconto;
 
 	public Long getIdDescontoAplicado() {

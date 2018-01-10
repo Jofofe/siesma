@@ -33,13 +33,13 @@ public class Modulo implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;
 	
-	@Column(name = "NOME_MODULO")
+	@Column(name = "NOME_MODULO", length = 30, nullable = false)
 	private String nome;
 	
-	@Column(name = "DT_INICIO")
+	@Column(name = "DT_INICIO", nullable = false)
 	private Date dtInicio;
 	
-	@Column(name = "DT_FIM")
+	@Column(name = "DT_FIM", nullable = false)
 	private Date dtFim;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Disciplina.class, mappedBy="modulo")

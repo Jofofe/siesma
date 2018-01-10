@@ -29,9 +29,9 @@
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="editar-icon"
+				<p:commandButton icon="ui-icon-pencil"
 					action="#{alunoBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="excluir-icon"
+				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{alunoBean.selectDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />

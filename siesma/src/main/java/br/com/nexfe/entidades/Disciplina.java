@@ -35,13 +35,13 @@ public class Disciplina implements Serializable {
 	@JoinColumn(name = "ID_USUARIO")
 	private Empregado empregado;
 	
-	@Column(name = "NOME_DISCIPLINA")
+	@Column(name = "NOME_DISCIPLINA", length = 30, nullable = false)
 	private String nome;
 	
-	@Column(name = "DT_INICIO")
+	@Column(name = "DT_INICIO", nullable = false)
 	private Date dtInicio;
 	
-	@Column(name = "DT_FIM")
+	@Column(name = "DT_FIM", nullable = false)
 	private Date dtFim;
 
 	public Long getIdDisciplina() {
