@@ -8,10 +8,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.nexfe.dao.DisciplinaDAO;
-import br.com.nexfe.dao.EmpregadoDAO;
 import br.com.nexfe.dao.ModuloDAO;
 import br.com.nexfe.entidades.Disciplina;
-import br.com.nexfe.entidades.Empregado;
 import br.com.nexfe.entidades.Modulo;
 
 @ManagedBean
@@ -22,27 +20,21 @@ public class DisciplinaBean {
 	
 	private ModuloDAO moduloDAO;
 	
-	private EmpregadoDAO empregadoDAO;
-	
 	private Disciplina disciplina;
 	
 	private Disciplina disciplinaExclusao;
 	
 	private List<Modulo> modulos;
 	
-	private List<Empregado> empregados;
-	
 	private List<Disciplina> disciplinas;
 	
-	private List<Modulo> disciplinasFiltrados;
+	private List<Disciplina> disciplinasFiltrados;
 	
 	public void init() {
 		disciplinaDAO = new DisciplinaDAO();
 		moduloDAO = new ModuloDAO();
-		empregadoDAO = new EmpregadoDAO();
 		setModulos(moduloDAO.listarDataAtual());
 		setDisciplinas(disciplinaDAO.listarDataAtual());
-		setEmpregados(empregadoDAO.listarProfessores());
 		setDisciplina(null);
 	}
 
@@ -75,7 +67,8 @@ public class DisciplinaBean {
 	}
 	
 	public boolean canDelete(Disciplina d) {
-		return d.getAvaliacoes() == null || d.getAvaliacoes().isEmpty();
+		return (d.getAvaliacoes() == null || d.getAvaliacoes().isEmpty()) && 
+				(d.getProfessoresDisciplinas() == null || d.getProfessoresDisciplinas().isEmpty());
 	}
 	   
 	public void delete(){
@@ -111,14 +104,6 @@ public class DisciplinaBean {
 		this.modulos = modulos;
 	}
 	
-	public List<Empregado> getEmpregados() {
-		return empregados;
-	}
-
-	public void setEmpregados(List<Empregado> empregados) {
-		this.empregados = empregados;
-	}
-
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
@@ -127,11 +112,11 @@ public class DisciplinaBean {
 		this.disciplinas = disciplinas;
 	}
 
-	public List<Modulo> getDisciplinasFiltrados() {
+	public List<Disciplina> getDisciplinasFiltrados() {
 		return disciplinasFiltrados;
 	}
 
-	public void setDisciplinasFiltrados(List<Modulo> disciplinasFiltrados) {
+	public void setDisciplinasFiltrados(List<Disciplina> disciplinasFiltrados) {
 		this.disciplinasFiltrados = disciplinasFiltrados;
 	}
 	

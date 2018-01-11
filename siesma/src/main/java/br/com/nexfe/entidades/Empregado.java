@@ -33,8 +33,8 @@ public class Empregado extends Usuario{
 	@JoinColumn(name = "ID_FUNCAO")
 	private Funcao funcao;
 	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Disciplina.class, mappedBy="empregado")
-	private List<Disciplina> disciplinas;
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = ProfessorDisciplina.class, mappedBy="empregado")
+	private List<ProfessorDisciplina> professoresDisciplinas;
 
 	public BigDecimal getValorHora() {
 		return valorHora;
@@ -52,12 +52,12 @@ public class Empregado extends Usuario{
 		this.funcao = funcao;
 	}
 
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
+	public List<ProfessorDisciplina> getProfessoresDisciplinas() {
+		return professoresDisciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setProfessoresDisciplinas(List<ProfessorDisciplina> professoresDisciplinas) {
+		this.professoresDisciplinas = professoresDisciplinas;
 	}
 
 	@Override
@@ -65,6 +65,7 @@ public class Empregado extends Usuario{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((funcao == null) ? 0 : funcao.hashCode());
+		result = prime * result + ((professoresDisciplinas == null) ? 0 : professoresDisciplinas.hashCode());
 		result = prime * result + ((valorHora == null) ? 0 : valorHora.hashCode());
 		return result;
 	}
@@ -83,6 +84,11 @@ public class Empregado extends Usuario{
 				return false;
 		} else if (!funcao.equals(other.funcao))
 			return false;
+		if (professoresDisciplinas == null) {
+			if (other.professoresDisciplinas != null)
+				return false;
+		} else if (!professoresDisciplinas.equals(other.professoresDisciplinas))
+			return false;
 		if (valorHora == null) {
 			if (other.valorHora != null)
 				return false;
@@ -90,5 +96,5 @@ public class Empregado extends Usuario{
 			return false;
 		return true;
 	}
-	
+
 }

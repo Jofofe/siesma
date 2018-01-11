@@ -6,21 +6,21 @@
 
 
 
-	<p:panel header="Lista de disciplinas"
-		rendered="#{disciplinaBean.disciplina == null}">
-		<p:commandButton value="Nova disciplina" icon="adicionar-icon"
-			action="#{disciplinaBean.add()}" update="form_principal" />
+	<p:panel header="Lista de professores das disciplinas"
+		rendered="#{professorDisciplinaBean.professorDisciplina == null}">
+		<p:commandButton value="Nova professor de disciplina" icon="adicionar-icon"
+			action="#{professorDisciplinaBean.add()}" update="form_principal" />
 
-		<p:dataTable id="tabela" value="#{disciplinaBean.disciplinas}" var="item"
-			filteredValue="#{disciplinaBean.disciplinasFiltrados}" paginator="true"
+		<p:dataTable id="tabela" value="#{professorDisciplinaBean.professoresDisciplinas}" var="item"
+			filteredValue="#{professorDisciplinaBean.professoresDisciplinasFiltrados}" paginator="true"
 			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
-			<p:column headerText="Nome" filterMatchMode="contains"
-				sortBy="#{item.nome}" filterBy="#{item.nome}">
-				<h:outputText value="#{item.nome}" />
+			<p:column headerText="Disciplina" filterMatchMode="contains"
+				sortBy="#{item.disciplina.nome}" filterBy="#{item.disciplina.nome}">
+				<h:outputText value="#{item.disciplina.nome}" />
 			</p:column>
-			<p:column headerText="Modulo" filterMatchMode="contains"
-				sortBy="#{item.modulo.nome}" filterBy="#{item.modulo.nome}">
-				<h:outputText value="#{item.modulo.nome}" />
+			<p:column headerText="Professor" filterMatchMode="contains"
+				sortBy="#{item.empregado.nome}" filterBy="#{item.empregado.nome}">
+				<h:outputText value="#{item.empregado.nome}" />
 			</p:column>
 			<p:column headerText="Data de início" filterMatchMode="contains"
 				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
@@ -36,11 +36,10 @@
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
 				<p:commandButton icon="ui-icon-pencil"
-					action="#{disciplinaBean.edit(item)}" update="form_principal" />
+					action="#{professorDisciplinaBean.edit(item)}" update="form_principal" />
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
-					actionListener="#{disciplinaBean.selectDelete(item)}"
-					rendered="#{disciplinaBean.canDelete(item)}"
+					actionListener="#{professorDisciplinaBean.selectDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
 			</p:column>
 
@@ -48,12 +47,13 @@
 
 	</p:panel>
 	<p:confirmDialog
-		message="Deseja realmente excluir o disciplina #{disciplinaBean.disciplinaExclusao.nome}?"
+		message="Deseja realmente excluir o o professor #{professorDisciplinaBean.professorDisciplinaExclusao.empregado.nome} 
+			da disciplina #{professorDisciplinaBean.professorDisciplinaExclusao.disciplina.nome} ?"
 		widgetVar="confirmaExclusao">
 
 		<p:commandButton value="Sim" update="form_principal"
 			oncomplete="PF('confirmaExclusao').hide();"
-			action="#{disciplinaBean.delete()}" />
+			action="#{professorDisciplinaBean.delete()}" />
 		<p:commandButton value="Não"
 			oncomplete="PF('confirmaExclusao').hide();" />
 	</p:confirmDialog>

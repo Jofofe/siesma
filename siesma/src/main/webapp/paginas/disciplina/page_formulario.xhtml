@@ -11,11 +11,6 @@
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{disciplinaBean.disciplina.nome}"
 				required="true" label="Nome" />
-				
-			<h:outputLabel for="prof" value="* Professor:" />
-			<p:autoComplete id="prof" value="#{disciplinaBean.disciplina.empregado}" required="true"
-				completeMethod="#{disciplinaBean.getEmpregados()}" converter="empregadoConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Professor"/>
 
 			<h:outputLabel for="modulo" value="* Modulo:" />
 			<p:autoComplete id="modulo" value="#{disciplinaBean.disciplina.modulo}" required="true"

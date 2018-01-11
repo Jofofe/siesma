@@ -21,6 +21,7 @@
         <class>br.com.nexfe.entidades.Matricula</class>
         <class>br.com.nexfe.entidades.TipoAvaliacao</class>
         <class>br.com.nexfe.entidades.Avaliacao</class>
+        <class>br.com.nexfe.entidades.ProfessorDisciplina</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

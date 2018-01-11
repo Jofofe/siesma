@@ -34,10 +34,6 @@ public class Disciplina implements Serializable {
 	@JoinColumn(name = "ID_MODULO")
 	private Modulo modulo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_USUARIO")
-	private Empregado empregado;
-	
 	@Column(name = "NOME_DISCIPLINA", length = 30, nullable = false)
 	private String nome;
 	
@@ -46,6 +42,9 @@ public class Disciplina implements Serializable {
 	
 	@Column(name = "DT_FIM", nullable = false)
 	private Date dtFim;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = ProfessorDisciplina.class, mappedBy="disciplina")
+	private List<ProfessorDisciplina> professoresDisciplinas;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Avaliacao.class, mappedBy="disciplina")
 	private List<Avaliacao> avaliacoes;
@@ -62,14 +61,6 @@ public class Disciplina implements Serializable {
 		return modulo;
 	}
 	
-	public Empregado getEmpregado() {
-		return empregado;
-	}
-
-	public void setEmpregado(Empregado empregado) {
-		this.empregado = empregado;
-	}
-
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
 	}
@@ -105,6 +96,14 @@ public class Disciplina implements Serializable {
 	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
+	
+	public List<ProfessorDisciplina> getProfessoresDisciplinas() {
+		return professoresDisciplinas;
+	}
+
+	public void setProfessoresDisciplinas(List<ProfessorDisciplina> professoresDisciplinas) {
+		this.professoresDisciplinas = professoresDisciplinas;
+	}
 
 	@Override
 	public int hashCode() {
@@ -112,7 +111,6 @@ public class Disciplina implements Serializable {
 		int result = 1;
 		result = prime * result + ((dtFim == null) ? 0 : dtFim.hashCode());
 		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
-		result = prime * result + ((empregado == null) ? 0 : empregado.hashCode());
 		result = prime * result + ((idDisciplina == null) ? 0 : idDisciplina.hashCode());
 		result = prime * result + ((modulo == null) ? 0 : modulo.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -138,11 +136,6 @@ public class Disciplina implements Serializable {
 				return false;
 		} else if (!dtInicio.equals(other.dtInicio))
 			return false;
-		if (empregado == null) {
-			if (other.empregado != null)
-				return false;
-		} else if (!empregado.equals(other.empregado))
-			return false;
 		if (idDisciplina == null) {
 			if (other.idDisciplina != null)
 				return false;
@@ -160,5 +153,5 @@ public class Disciplina implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

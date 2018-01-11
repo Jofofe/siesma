@@ -29,6 +29,11 @@
 		<view-id value="/paginas/disciplina/page_principal.xhtml" />
 		<action onPostback="false">#{disciplinaBean.init}</action>
 	</url-mapping>
+	<url-mapping id="professorDisciplina">
+		<pattern value="/professorDisciplina/" />
+		<view-id value="/paginas/professorDisciplina/page_principal.xhtml" />
+		<action onPostback="false">#{professorDisciplinaBean.init}</action>
+	</url-mapping>
 	<url-mapping id="matricula">
 		<pattern value="/matricula/" />
 		<view-id value="/paginas/matricula/page_principal.xhtml" />
