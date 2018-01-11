@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.nexfe.constantes.ConstantesExclusao;
 import br.com.nexfe.dao.CursoDAO;
 import br.com.nexfe.entidades.Curso;
 
@@ -48,6 +49,7 @@ public class CursoBean {
 				cursoDAO.alterar(getCurso());			
 			}
 		} else {
+			getCurso().setInExcluido(ConstantesExclusao.NAO_EXCLUIDO.getNome());
 			cursoDAO.salvar(getCurso());		
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
@@ -59,7 +61,8 @@ public class CursoBean {
 	}
 	   
 	public void delete(){
-		cursoDAO.excluir(getCursoExclusao());
+		getCursoExclusao().setInExcluido(ConstantesExclusao.EXCLUIDO.getNome());
+		cursoDAO.alterar(getCursoExclusao());
 		setCursoExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
 		init();

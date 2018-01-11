@@ -9,13 +9,10 @@ import br.com.nexfe.entidades.Empregado;
 
 public class EmpregadoDAO extends DaoImpl<Empregado> {
 	
-	public static final String CODIGO_ADMINISTRATIVO = "1";
-	public static final String CODIGO_PROFESSOR = "2";
-	
+	@SuppressWarnings("unchecked")
 	public List<Empregado> listarProfessores() {
-        String hql = "Select e from Empregado e where e.funcao.idFuncao = " + CODIGO_PROFESSOR;
-        Query query = em.createQuery(hql);
-        return query.getResultList();
-    }
+		Query query = em.createNamedQuery("Empregado.listarProfessores", Empregado.class);
+		return query.getResultList(); 
+	}
 
 }

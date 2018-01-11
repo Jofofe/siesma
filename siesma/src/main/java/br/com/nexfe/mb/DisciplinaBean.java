@@ -40,8 +40,8 @@ public class DisciplinaBean {
 		disciplinaDAO = new DisciplinaDAO();
 		moduloDAO = new ModuloDAO();
 		empregadoDAO = new EmpregadoDAO();
-		setModulos(moduloDAO.listar(Modulo.class));
-		setDisciplinas(disciplinaDAO.listar(Disciplina.class));
+		setModulos(moduloDAO.listarDataAtual());
+		setDisciplinas(disciplinaDAO.listarDataAtual());
 		setEmpregados(empregadoDAO.listarProfessores());
 		setDisciplina(null);
 	}
@@ -72,6 +72,10 @@ public class DisciplinaBean {
 	
 	public void selectDelete(Disciplina d){
 		setDisciplinaExclusao(d);
+	}
+	
+	public boolean canDelete(Disciplina d) {
+		return d.getAvaliacoes() == null || d.getAvaliacoes().isEmpty();
 	}
 	   
 	public void delete(){

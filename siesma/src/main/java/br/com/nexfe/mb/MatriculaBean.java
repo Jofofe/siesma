@@ -70,6 +70,10 @@ public class MatriculaBean {
 		init();
 	}
 	
+	//public boolean canDelete(Matricula m) {
+	//	return m.get() == null || m.get.isEmpty();
+	//}
+	
 	public void selectDelete(Matricula m){
 		setMatriculaExclusao(m);
 	}

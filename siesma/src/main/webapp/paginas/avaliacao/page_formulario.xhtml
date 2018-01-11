@@ -12,6 +12,11 @@
 			<p:inputText id="nome" value="#{avaliacaoBean.avaliacao.nome}"
 				required="true" label="Nome" />
 				
+			<h:outputLabel for="disciplina" value="* Disciplina:" />
+			<p:autoComplete id="disciplina" value="#{avaliacaoBean.avaliacao.disciplina}" required="true"
+				completeMethod="#{avaliacaoBean.getDisciplinas()}" converter="disciplinaConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Disciplina"/>
+				
 			<h:outputLabel value="* Tipo de avaliação:" rendered="#{avaliacaoBean.avaliacao.idAvaliacao == null}"/>
 			<p:selectOneMenu id="avaliacao_som"
 				value="#{avaliacaoBean.avaliacao.tipoAvaliacao}" converter="tipoAvaliacaoConverter" effect="fade"

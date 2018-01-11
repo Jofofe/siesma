@@ -15,7 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Avaliacao.selectAll", query="select e from Avaliacao e order by e.nome") } )
+@NamedQueries(value = { @NamedQuery(name="Avaliacao.selectAllDate", query="select e from Avaliacao e where :dataAtual between e.disciplina.dtInicio and e.disciplina.dtFim "
+		+ " and :dataAtual between e.disciplina.modulo.dtInicio and e.disciplina.modulo.dtFim and e.disciplina.modulo.curso.inExcluido = 'N' order by e.disciplina.nome") } )
 @Table(name = "AVALIACAO")
 public class Avaliacao implements Serializable {
 	
@@ -35,6 +36,10 @@ public class Avaliacao implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_TIPO_AVALIACAO")
 	private TipoAvaliacao tipoAvaliacao;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_DISCIPLINA")
+	private Disciplina disciplina;
 
 	public Long getIdAvaliacao() {
 		return idAvaliacao;
@@ -66,6 +71,14 @@ public class Avaliacao implements Serializable {
 
 	public void setTipoAvaliacao(TipoAvaliacao tipoAvaliacao) {
 		this.tipoAvaliacao = tipoAvaliacao;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 	
 }

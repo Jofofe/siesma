@@ -40,6 +40,7 @@
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{descontoBean.selectDelete(item)}"
+					rendered="#{descontoBean.canDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
 			</p:column>
 

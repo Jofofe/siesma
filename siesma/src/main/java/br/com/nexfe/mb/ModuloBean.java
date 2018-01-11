@@ -34,7 +34,7 @@ public class ModuloBean {
 		moduloDAO = new ModuloDAO();
 		cursoDAO = new CursoDAO();
 		setCursos(cursoDAO.listar(Curso.class));
-		setModulos(moduloDAO.listar(Modulo.class));
+		setModulos(moduloDAO.listarDataAtual());
 		setModulo(null);
 	}
 
@@ -60,6 +60,10 @@ public class ModuloBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
+	}
+	
+	public boolean canDelete(Modulo m) {
+		return m.getDisciplinas() == null || m.getDisciplinas().isEmpty();
 	}
 	
 	public void selectDelete(Modulo m){

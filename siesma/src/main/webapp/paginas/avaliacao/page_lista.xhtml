@@ -22,9 +22,9 @@
 				sortBy="#{item.tipoAvaliacao.nomeAvaliacao}" filterBy="#{item.tipoAvaliacao.nomeAvaliacao}">
 				<h:outputText value="#{item.tipoAvaliacao.nomeAvaliacao}" />
 			</p:column>
-			<p:column headerText="Observação" filterMatchMode="contains"
-				sortBy="#{item.obsAvaliacao}" filterBy="#{item.obsAvaliacao}">
-				<h:outputText value="#{item.obsAvaliacao}" />
+			<p:column headerText="Disciplina" filterMatchMode="contains"
+				sortBy="#{item.disciplina.nome}" filterBy="#{item.disciplina.nome}">
+				<h:outputText value="#{item.disciplina.nome}" />
 			</p:column>
 
 
@@ -42,7 +42,7 @@
 
 	</p:panel>
 	<p:confirmDialog
-		message="Deseja realmente excluir o avaliacao #{avaliacaoBean.avaliacaoExclusao.nome}?"
+		message="Deseja realmente excluir o avaliação #{avaliacaoBean.avaliacaoExclusao.nome}?"
 		widgetVar="confirmaExclusao">
 
 		<p:commandButton value="Sim" update="form_principal"

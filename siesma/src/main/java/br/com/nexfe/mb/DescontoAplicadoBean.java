@@ -47,10 +47,10 @@ public class DescontoAplicadoBean {
 		alunoDAO = new AlunoDAO();
 		moduloDAO = new ModuloDAO();
 		descontoDAO = new DescontoDAO();
-		setDescontosAplicados(descontoAplicadoDAO.listar(DescontoAplicado.class));
+		setDescontosAplicados(descontoAplicadoDAO.listarDataAtual());
 		setAlunos(alunoDAO.listar(Aluno.class));
-		setModulos(moduloDAO.listar(Modulo.class));
-		setDescontos(descontoDAO.listar(Desconto.class));
+		setModulos(moduloDAO.listarDataAtual());
+		setDescontos(descontoDAO.listarDataAtual());
 		setDescontoAplicado(null);
 	}
 
@@ -77,6 +77,10 @@ public class DescontoAplicadoBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
+	
+	//public boolean canDelete(DescontoAplicado d) {
+	//	return d.get() == null || d.get.isEmpty();
+	//}
 	
 	public void selectDelete(DescontoAplicado d){
 		setDescontoAplicadoExclusao(d);

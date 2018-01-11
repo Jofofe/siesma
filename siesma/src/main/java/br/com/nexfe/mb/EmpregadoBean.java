@@ -83,7 +83,8 @@ public class EmpregadoBean {
 	}
 	   
 	public void delete(){
-		empregadoDAO.excluir(getEmpregadoExclusao());
+		getEmpregadoExclusao().setDtFimVinculo(new Date());
+		empregadoDAO.alterar(getEmpregadoExclusao());
 		setEmpregadoExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
 		init();

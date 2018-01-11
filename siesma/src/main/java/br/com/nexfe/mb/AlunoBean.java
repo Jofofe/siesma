@@ -87,7 +87,8 @@ public class AlunoBean {
 	}
 	   
 	public void delete(){
-		alunoDAO.excluir(getAlunoExclusao());
+		getAlunoExclusao().setDtFimVinculo(new Date());
+		alunoDAO.alterar(getAlunoExclusao());
 		setAlunoExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
 		init();

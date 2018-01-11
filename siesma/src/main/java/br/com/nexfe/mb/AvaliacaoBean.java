@@ -8,8 +8,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.nexfe.dao.AvaliacaoDAO;
+import br.com.nexfe.dao.DisciplinaDAO;
 import br.com.nexfe.dao.TipoAvaliacaoDAO;
 import br.com.nexfe.entidades.Avaliacao;
+import br.com.nexfe.entidades.Disciplina;
 import br.com.nexfe.entidades.TipoAvaliacao;
 
 @ManagedBean
@@ -20,6 +22,8 @@ public class AvaliacaoBean {
 	
 	private TipoAvaliacaoDAO tipoAvaliacaoDAO;
 	
+	private DisciplinaDAO disciplinaDAO;
+	
 	private Avaliacao avaliacao;
 	
 	private Avaliacao avaliacaoExclusao;
@@ -28,13 +32,17 @@ public class AvaliacaoBean {
 	
 	private List<TipoAvaliacao> tiposAvaliacoes;
 	
+	private List<Disciplina> disciplinas;
+	
 	private List<Avaliacao> avaliacaoFiltrados;
 	
 	public void init() {
 		avaliacaoDAO = new AvaliacaoDAO();
 		tipoAvaliacaoDAO = new TipoAvaliacaoDAO();
-		setAvaliacoes(avaliacaoDAO.listar(Avaliacao.class));
+		disciplinaDAO = new DisciplinaDAO();
+		setAvaliacoes(avaliacaoDAO.listarDataAtual());
 		setTiposAvaliacoes(tipoAvaliacaoDAO.listar(TipoAvaliacao.class));
+		setDisciplinas(disciplinaDAO.listarDataAtual());
 		setAvaliacao(null);
 	}
 
@@ -61,6 +69,10 @@ public class AvaliacaoBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
+	
+	//public boolean canDelete(Avaliacao a) {
+	//	return a.get() == null || a.get.isEmpty();
+	//}
 	
 	public void selectDelete(Avaliacao a){
 		setAvaliacaoExclusao(a);
@@ -105,6 +117,14 @@ public class AvaliacaoBean {
 
 	public void setTiposAvaliacoes(List<TipoAvaliacao> tiposAvaliacoes) {
 		this.tiposAvaliacoes = tiposAvaliacoes;
+	}
+	
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public List<Avaliacao> getAvaliacaoFiltrados() {

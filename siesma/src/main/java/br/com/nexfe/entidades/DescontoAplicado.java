@@ -15,7 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="DescontoAplicado.selectAll", query="select e from DescontoAplicado e order by e.aluno.nome") } )
+@NamedQueries(value = { @NamedQuery(name="DescontoAplicado.selectAllDate", query="select e from DescontoAplicado e where e.aluno.dtFimVinculo is null "
+		+ "and :dataAtual between e.modulo.dtInicio and e.modulo.dtFim and :dataAtual between e.desconto.dtInicio and e.desconto.dtFim order by e.aluno.nome") } )
 @Table(name = "DESCONTO_APLICADO")
 public class DescontoAplicado implements Serializable {
 	

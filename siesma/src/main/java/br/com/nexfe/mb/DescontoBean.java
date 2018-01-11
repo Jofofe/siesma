@@ -26,7 +26,7 @@ public class DescontoBean {
 	
 	public void init() {
 		descontoDAO = new DescontoDAO();
-		setDescontos(descontoDAO.listar(Desconto.class));
+		setDescontos(descontoDAO.listarDataAtual());
 		setDesconto(null);
 	}
 
@@ -52,6 +52,10 @@ public class DescontoBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
+	}
+	
+	public boolean canDelete(Desconto d) {
+		return d.getDescontosAplicados() == null || d.getDescontosAplicados().isEmpty();
 	}
 	
 	public void selectDelete(Desconto d){

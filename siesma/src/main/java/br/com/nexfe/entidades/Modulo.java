@@ -18,7 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Modulo.selectAll", query="select e from Modulo e order by e.nome") } )
+@NamedQueries(value = { @NamedQuery(name="Modulo.selectAllDate", query="select e from Modulo e where e.curso.inExcluido = 'N' "
+		+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") } )
 @Table(name = "MODULO")
 public class Modulo implements Serializable {
 	

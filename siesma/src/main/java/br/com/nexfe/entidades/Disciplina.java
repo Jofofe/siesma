@@ -2,6 +2,7 @@ package br.com.nexfe.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Disciplina.selectAll", query="select e from Disciplina e order by e.nome") } )
+@NamedQueries(value = { @NamedQuery(name="Disciplina.selectAllDate", query="select e from Disciplina e where :dataAtual between e.dtInicio and e.dtFim "
+		+ " and :dataAtual between e.modulo.dtInicio and e.modulo.dtFim and e.modulo.curso.inExcluido = 'N' order by e.nome") } )
 @Table(name = "DISCIPLINA")
 public class Disciplina implements Serializable {
 	
@@ -43,6 +46,9 @@ public class Disciplina implements Serializable {
 	
 	@Column(name = "DT_FIM", nullable = false)
 	private Date dtFim;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Avaliacao.class, mappedBy="disciplina")
+	private List<Avaliacao> avaliacoes;
 
 	public Long getIdDisciplina() {
 		return idDisciplina;
@@ -92,4 +98,67 @@ public class Disciplina implements Serializable {
 		this.dtFim = dtFim;
 	}
 
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dtFim == null) ? 0 : dtFim.hashCode());
+		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
+		result = prime * result + ((empregado == null) ? 0 : empregado.hashCode());
+		result = prime * result + ((idDisciplina == null) ? 0 : idDisciplina.hashCode());
+		result = prime * result + ((modulo == null) ? 0 : modulo.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Disciplina other = (Disciplina) obj;
+		if (dtFim == null) {
+			if (other.dtFim != null)
+				return false;
+		} else if (!dtFim.equals(other.dtFim))
+			return false;
+		if (dtInicio == null) {
+			if (other.dtInicio != null)
+				return false;
+		} else if (!dtInicio.equals(other.dtInicio))
+			return false;
+		if (empregado == null) {
+			if (other.empregado != null)
+				return false;
+		} else if (!empregado.equals(other.empregado))
+			return false;
+		if (idDisciplina == null) {
+			if (other.idDisciplina != null)
+				return false;
+		} else if (!idDisciplina.equals(other.idDisciplina))
+			return false;
+		if (modulo == null) {
+			if (other.modulo != null)
+				return false;
+		} else if (!modulo.equals(other.modulo))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
 }

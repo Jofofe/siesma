@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Curso.selectAll", query="select e from Curso e order by e.nome") } )
+@NamedQueries(value = { @NamedQuery(name="Curso.selectAll", query="select e from Curso e where e.inExcluido = 'N' order by e.nome") } )
 @Table(name = "CURSO")
 public class Curso implements Serializable {
 	
@@ -35,6 +35,9 @@ public class Curso implements Serializable {
 	
 	@Column(name = "VALOR_CURSO", nullable = false)
 	private BigDecimal valorCurso;
+	
+	@Column(name = "IN_EXCLUIDO", nullable = false)
+	private String inExcluido;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Modulo.class, mappedBy="curso")
 	private List<Modulo> modulos;
@@ -72,6 +75,22 @@ public class Curso implements Serializable {
 
 	public void setValorCurso(BigDecimal valorCurso) {
 		this.valorCurso = valorCurso;
+	}
+	
+	public String getInExcluido() {
+		return inExcluido;
+	}
+
+	public void setInExcluido(String inExcluido) {
+		this.inExcluido = inExcluido;
+	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	public List<Modulo> getModulos() {

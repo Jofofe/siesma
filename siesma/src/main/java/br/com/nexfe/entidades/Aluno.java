@@ -15,7 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Aluno.selectAll", query="select e from Aluno e order by e.nome") } )
+@NamedQueries(value = { @NamedQuery(name="Aluno.selectAll", query="select e from Aluno e where e.dtFimVinculo is null order by e.nome") } )
 @Table(name = "ALUNO")
 @PrimaryKeyJoinColumn(name="ID_USUARIO")
 public class Aluno extends Usuario {
