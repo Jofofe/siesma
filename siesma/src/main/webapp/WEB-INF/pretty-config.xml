@@ -54,5 +54,15 @@
 		<view-id value="/paginas/descontoAplicado/page_principal.xhtml" />
 		<action onPostback="false">#{descontoAplicadoBean.init}</action>
 	</url-mapping>
+	<url-mapping id="formaPagamento">
+		<pattern value="/formaPagamento/" />
+		<view-id value="/paginas/formaPagamento/page_principal.xhtml" />
+		<action onPostback="false">#{formaPagamentoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="lancamentoComercial">
+		<pattern value="/lancamentoComercial/" />
+		<view-id value="/paginas/lancamentoComercial/page_principal.xhtml" />
+		<action onPostback="false">#{lancamentoComercialBean.init}</action>
+	</url-mapping>
 	
 </pretty-config>

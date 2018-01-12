@@ -22,6 +22,9 @@
         <class>br.com.nexfe.entidades.TipoAvaliacao</class>
         <class>br.com.nexfe.entidades.Avaliacao</class>
         <class>br.com.nexfe.entidades.ProfessorDisciplina</class>
+        <class>br.com.nexfe.entidades.ClassePagamento</class>
+        <class>br.com.nexfe.entidades.FormaPagamento</class>
+        <class>br.com.nexfe.entidades.LancamentoComercial</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

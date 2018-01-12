@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:panel header="Lista de formas de pagamento"
+		rendered="#{formaPagamentoBean.formaPagamento == null}">
+		<p:commandButton value="Nova forma de pagamento" icon="adicionar-icon"
+			action="#{formaPagamentoBean.add()}" update="form_principal" />
+
+		<p:dataTable id="tabela" value="#{formaPagamentoBean.formasPagamentos}" var="item"
+			filteredValue="#{formaPagamentoBean.formasPagamentosFiltrados}" paginator="true"
+			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Nome" filterMatchMode="contains"
+				sortBy="#{item.nome}" filterBy="#{item.nome}">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="Classe pagamento" filterMatchMode="contains"
+				sortBy="#{item.classePagamento.nomeClassePagamento}" filterBy="#{item.classePagamento.nomeClassePagamento}">
+				<h:outputText value="#{item.classePagamento.nomeClassePagamento}" />
+			</p:column>
+			<p:column headerText="Quantidade de parcelas" filterMatchMode="contains"
+				sortBy="#{item.qtdParcelas}" filterBy="#{item.qtdParcelas}">
+				<h:outputText value="#{item.qtdParcelas}" />
+			</p:column>
+			<p:column headerText="Data de início" filterMatchMode="contains"
+				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
+				<h:outputText value="#{item.dtInicio}" />
+			</p:column>
+			<p:column headerText="Data de termino" filterMatchMode="contains"
+				sortBy="#{item.dtFim}" filterBy="#{item.dtFim}">
+				<h:outputText value="#{item.dtFim}" />
+			</p:column>
+
+
+
+			<p:column headerText="Ação" style="text-align:center;" width="150"
+				exportable="false">
+				<p:commandButton icon="ui-icon-pencil"
+					action="#{formaPagamentoBean.edit(item)}" update="form_principal" />
+				<p:commandButton icon="ui-icon-close"
+					style="color:red; margin-left:20px;"
+					actionListener="#{formaPagamentoBean.selectDelete(item)}"
+					rendered="#{formaPagamentoBean.canDelete(item)}"
+					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
+			</p:column>
+
+		</p:dataTable>
+
+	</p:panel>
+	<p:confirmDialog
+		message="Deseja realmente excluir a forma de pagamento #{formaPagamentoBean.formaPagamentoExclusao.nome}?"
+		widgetVar="confirmaExclusao">
+
+		<p:commandButton value="Sim" update="form_principal"
+			oncomplete="PF('confirmaExclusao').hide();"
+			action="#{formaPagamentoBean.delete()}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaExclusao').hide();" />
+	</p:confirmDialog>
+
+
+</ui:composition>
