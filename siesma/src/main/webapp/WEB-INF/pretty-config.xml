@@ -64,5 +64,15 @@
 		<view-id value="/paginas/lancamentoComercial/page_principal.xhtml" />
 		<action onPostback="false">#{lancamentoComercialBean.init}</action>
 	</url-mapping>
+	<url-mapping id="pagamentoAluno">
+		<pattern value="/pagamentoAluno/" />
+		<view-id value="/paginas/pagamentoAluno/page_principal.xhtml" />
+		<action onPostback="false">#{pagamentoAlunoBean.init}</action>
+	</url-mapping>
+	<url-mapping id="pagamentoProfessor">
+		<pattern value="/pagamentoProfessor/" />
+		<view-id value="/paginas/pagamentoProfessor/page_principal.xhtml" />
+		<action onPostback="false">#{pagamentoProfessorBean.init}</action>
+	</url-mapping>
 	
 </pretty-config>

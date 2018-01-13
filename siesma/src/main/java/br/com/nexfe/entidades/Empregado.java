@@ -35,6 +35,9 @@ public class Empregado extends Usuario{
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = ProfessorDisciplina.class, mappedBy="empregado")
 	private List<ProfessorDisciplina> professoresDisciplinas;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoProfessor.class, mappedBy="empregado")
+	private List<PagamentoProfessor> pagamentosProfessores;
 
 	public BigDecimal getValorHora() {
 		return valorHora;
@@ -58,6 +61,14 @@ public class Empregado extends Usuario{
 
 	public void setProfessoresDisciplinas(List<ProfessorDisciplina> professoresDisciplinas) {
 		this.professoresDisciplinas = professoresDisciplinas;
+	}
+	
+	public List<PagamentoProfessor> getPagamentosProfessores() {
+		return pagamentosProfessores;
+	}
+
+	public void setPagamentosProfessores(List<PagamentoProfessor> pagamentosProfessores) {
+		this.pagamentosProfessores = pagamentosProfessores;
 	}
 
 	@Override

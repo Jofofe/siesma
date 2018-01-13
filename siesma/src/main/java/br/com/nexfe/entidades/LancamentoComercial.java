@@ -3,6 +3,7 @@ package br.com.nexfe.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -47,6 +49,12 @@ public class LancamentoComercial implements Serializable {
 	
 	@Column(name = "OBS_RECEBIMENTO", length = 100)
 	private String obsRecebimento;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoAluno.class, mappedBy="lancamentoComercial")
+	private List<PagamentoAluno> pagamentosAlunos;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoProfessor.class, mappedBy="lancamentoComercial")
+	private List<PagamentoProfessor> pagamentosProfessores;
 
 	public Long getIdLancamentoComercial() {
 		return idLancamentoComercial;
@@ -102,6 +110,22 @@ public class LancamentoComercial implements Serializable {
 
 	public void setObsRecebimento(String obsRecebimento) {
 		this.obsRecebimento = obsRecebimento;
+	}
+	
+	public List<PagamentoAluno> getPagamentosAlunos() {
+		return pagamentosAlunos;
+	}
+
+	public void setPagamentosAlunos(List<PagamentoAluno> pagamentosAlunos) {
+		this.pagamentosAlunos = pagamentosAlunos;
+	}
+
+	public List<PagamentoProfessor> getPagamentosProfessores() {
+		return pagamentosProfessores;
+	}
+
+	public void setPagamentosProfessores(List<PagamentoProfessor> pagamentosProfessores) {
+		this.pagamentosProfessores = pagamentosProfessores;
 	}
 
 	@Override
