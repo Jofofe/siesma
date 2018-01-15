@@ -4,13 +4,13 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Aluno" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Aluno" style="width:800px;height:auto;margin:auto;"
 		rendered="#{alunoBean.aluno != null}">
-		<p:panelGrid columns="2" id="itensCadastro">
+		<p:panelGrid columns="4" id="itensCadastro">
 		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{alunoBean.aluno.nome}" required="true"
-				label="Nome"/>
+				maxlength="100" label="Nome" style="width:300px"/>
 			
 			<h:outputLabel for="cpf" value="* CPF:" />
 			<p:inputMask id="cpf" value="#{alunoBean.aluno.cpf}" validator="#{alunoBean.validateCpf}"
@@ -18,7 +18,7 @@
 			
 			<h:outputLabel for="senha" value="* Email:" />
 			<p:inputText id="senha" value="#{alunoBean.aluno.email}" required="true"
-				validator="#{alunoBean.validateEmail}" label="Email"/>
+				validator="#{alunoBean.validateEmail}" maxlength="50" label="Email"/>
 			
 			<h:outputLabel for="celular" value="* Celular:" />
 			<p:inputMask id="celular" value="#{alunoBean.aluno.telCelular}" 
@@ -26,11 +26,11 @@
 			
 			<h:outputLabel for="pwd1" value="* Senha:" rendered="#{alunoBean.aluno.idUsuario == null}"/>
         	<p:password id="pwd1" value="#{alunoBean.aluno.senha}" match="pwd2" label="Senha" 
-        		required="true" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+        		required="true" maxlength="20" rendered="#{alunoBean.aluno.idUsuario == null}"/>
  
         	<h:outputLabel for="pwd2" value="* Confirmar Senha:" rendered="#{alunoBean.aluno.idUsuario == null}"/>
         	<p:password id="pwd2" value="#{alunoBean.aluno.senha}" label="Confirmar Senha" 
-        		required="true" rendered="#{alunoBean.aluno.idUsuario == null}"/>
+        		required="true" maxlength="20" rendered="#{alunoBean.aluno.idUsuario == null}"/>
 			
 			<p:outputLabel for="dtNasc" value="* Data de Nascimento:" />
 	        <p:calendar id="dtNasc" value="#{alunoBean.aluno.dtNascimento}" showOn="button" 
@@ -47,7 +47,7 @@
 			
 			<h:outputLabel for="rg" value="* RG:" />
 			<p:inputText id="rg" value="#{alunoBean.aluno.rg}" required="true"
-				label="RG"/>
+				maxlength="20" label="RG"/>
 				
 			<h:outputLabel for="orgaoExp" value="* Orgão Expeditor:" />
 			<p:inputMask id="orgaoExp" value="#{alunoBean.aluno.orgaoExpeditor}" 
@@ -55,21 +55,22 @@
 				
 			<h:outputLabel for="nat" value="* Naturalidade " />
 			<p:inputText id="nat" value="#{alunoBean.aluno.naturalidade}" required="true"
-				label="Naturalidade"/>
+				maxlength="20" label="Naturalidade"/>
 				
 			<h:outputLabel for="prof" value="Profissão:" />
-			<p:inputText id="prof" value="#{alunoBean.aluno.profissao}" label="Profissão"/>
+			<p:inputText id="prof" value="#{alunoBean.aluno.profissao}" maxlength="20" label="Profissão"/>
 				
 			<h:outputLabel for="end" value="* Endereço:" />
 			<p:inputText id="end" value="#{alunoBean.aluno.endereco}" required="true"
-				label="Endereço"/>
+				maxlength="100" label="Endereço" style="width:300px"/>
 				
 			<h:outputLabel for="cid" value="* Cidade:" />
 			<p:inputText id="cid" value="#{alunoBean.aluno.cidade}" required="true"
-				label="Cidade"/>
+				maxlength="50" label="Cidade"/>
 				
 			<h:outputLabel for="bairro" value="* Bairro:" />
-			<p:inputText id="bairro" value="#{alunoBean.aluno.bairro}" label="Bairro"/>
+			<p:inputText id="bairro" value="#{alunoBean.aluno.bairro}" required="true" 
+				maxlength="50" label="Bairro"/>
 			
 			<h:outputLabel for="cep" value="* CEP:" />
 			<p:inputMask id="cep" value="#{alunoBean.aluno.cep}" 
@@ -98,19 +99,19 @@
 	        	
 	        <h:outputLabel for="ies" value="* Graduação" />
 			<p:inputText id="ies" value="#{alunoBean.aluno.iesGraduacao}" required="true"
-				label="Graduação"/>
+				maxlength="50" label="Graduação"/>
 			
 			<h:outputLabel for="sitCom" value="* Situação Comercial" />
 			<p:inputText id="sitCom" value="#{alunoBean.aluno.situacaoComercial}" required="true"
-				label="Situação Comercial"/>
+				maxlength="50" label="Situação Comercial"/>
 			
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
-			action="#{alunoBean.saveAndUpdate()}" update="form_principal, itensCadastro">
+			action="#{alunoBean.saveAndUpdate}" update="form_principal, itensCadastro">
 			<span class="fa-icon-save" />
 		</p:commandButton>
 		<p:commandButton icon="voltar-icon" value="Voltar"
-			action="#{alunoBean.back()}" immediate="true"
+			action="#{alunoBean.back}" immediate="true"
 			update="form_principal" />
 	</p:panel>
 	<p:blockUI block="cad" trigger="btn_salvar" />

@@ -63,7 +63,8 @@ public class EmpregadoBean {
 		//Criptografar a Senha
 		if (getEmpregado().getIdUsuario() != null) {
 			if (getEmpregado().getIdUsuario() > 0) {
-				empregadoDAO.alterar(getEmpregado());			
+				empregadoDAO.alterar(getEmpregado());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
 			getEmpregado().setDtCadastro(new Date());
@@ -72,9 +73,9 @@ public class EmpregadoBean {
 			} else {
 				getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.DOCENTE.getChave()));
 			}
-			empregadoDAO.salvar(getEmpregado());		
+			empregadoDAO.salvar(getEmpregado());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -86,7 +87,7 @@ public class EmpregadoBean {
 		getEmpregadoExclusao().setDtFimVinculo(new Date());
 		empregadoDAO.alterar(getEmpregadoExclusao());
 		setEmpregadoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Vinculo encerrado com sucesso!"));
 		init();
 	}
 	

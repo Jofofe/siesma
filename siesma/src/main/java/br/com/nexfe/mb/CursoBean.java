@@ -46,13 +46,14 @@ public class CursoBean {
 	public void saveAndUpdate() {
 		if (getCurso().getIdCurso() != null) {
 			if (getCurso().getIdCurso() > 0) {
-				cursoDAO.alterar(getCurso());			
+				cursoDAO.alterar(getCurso());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
 			getCurso().setInExcluido(ConstantesExclusao.NAO_EXCLUIDO.getNome());
-			cursoDAO.salvar(getCurso());		
+			cursoDAO.salvar(getCurso());	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -64,7 +65,7 @@ public class CursoBean {
 		getCursoExclusao().setInExcluido(ConstantesExclusao.EXCLUIDO.getNome());
 		cursoDAO.alterar(getCursoExclusao());
 		setCursoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
 	}
 	

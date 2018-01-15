@@ -4,7 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Empregado" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Empregado" style="width:600px;height:auto;margin:auto;"
 		rendered="#{empregadoBean.empregado != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 		
@@ -20,7 +20,7 @@
 		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{empregadoBean.empregado.nome}" required="true"
-				label="Nome"/>
+				maxlength="100" label="Nome" style="width:300px"/>
 			
 			<h:outputLabel for="cpf" value="* CPF:" />
 			<p:inputMask id="cpf" value="#{empregadoBean.empregado.cpf}" validator="#{empregadoBean.validateCpf}"
@@ -28,7 +28,7 @@
 			
 			<h:outputLabel for="email" value="* Email:" />
 			<p:inputText id="email" value="#{empregadoBean.empregado.email}" required="true"
-				validator="#{empregadoBean.validateEmail}" label="Email" />
+				validator="#{empregadoBean.validateEmail}" maxlength="50" label="Email" />
 			
 			<h:outputLabel for="celular" value="* Celular:" />
 			<p:inputMask id="celular" value="#{empregadoBean.empregado.telCelular}" 
@@ -36,14 +36,14 @@
 			
 			<h:outputLabel for="pwd1" value="* Senha:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
         	<p:password id="pwd1" value="#{empregadoBean.empregado.senha}" match="pwd2" label="Senha" 
-        		required="true" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+        		required="true" maxlength="20" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
  
         	<h:outputLabel for="pwd2" value="* Confirmar Senha:" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
         	<p:password id="pwd2" value="#{empregadoBean.empregado.senha}" label="Confirmar Senha" 
-        		required="true" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
+        		required="true" maxlength="20" rendered="#{empregadoBean.empregado.idUsuario == null}"/>
 			
 			<h:outputLabel for="rg" value="* RG:" />
-			<p:inputText id="rg" value="#{empregadoBean.empregado.rg}" required="true"
+			<p:inputText id="rg" maxlength="20" value="#{empregadoBean.empregado.rg}" required="true"
 				label="RG"/>
 				
 			<h:outputLabel for="orgaoExp" value="* Orgão expeditor:" />
@@ -53,15 +53,15 @@
 			<h:outputLabel for="valorHora" value="Valor hora aula:" 
 				rendered="#{empregadoBean.empregado.funcao.idFuncao == 2}"/>
 			<p:inputNumber id="valorHora" value="#{empregadoBean.empregado.valorHora}" 
-				label="Valor hora" rendered="#{empregadoBean.empregado.funcao.idFuncao == 2}"/> 
+				label="Valor hora" maxlength="9" rendered="#{empregadoBean.empregado.funcao.idFuncao == 2}"/> 
 			
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
-			action="#{empregadoBean.saveAndUpdate()}" update="form_principal, itensCadastro">
+			action="#{empregadoBean.saveAndUpdate}" update="form_principal, itensCadastro">
 			<span class="fa-icon-save" />
 		</p:commandButton>
 		<p:commandButton icon="voltar-icon" value="Voltar"
-			action="#{empregadoBean.back()}" immediate="true"
+			action="#{empregadoBean.back}" immediate="true"
 			update="form_principal" />
 	</p:panel>
 	<p:blockUI block="cad" trigger="btn_salvar" />

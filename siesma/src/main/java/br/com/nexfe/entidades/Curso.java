@@ -27,7 +27,7 @@ public class Curso implements Serializable {
 	@Column(name = "ID_CURSO")
 	private Long idCurso;
 	
-	@Column(name = "NOME_CURSO", length = 30, nullable = false)
+	@Column(name = "NOME_CURSO", length = 100, nullable = false)
 	private String nome;
 	
 	@Column(name = "CARGA_HORARIA", nullable = false)

@@ -34,7 +34,7 @@ public class Modulo implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;
 	
-	@Column(name = "NOME_MODULO", length = 30, nullable = false)
+	@Column(name = "NOME_MODULO", length = 100, nullable = false)
 	private String nome;
 	
 	@Column(name = "DT_INICIO", nullable = false)

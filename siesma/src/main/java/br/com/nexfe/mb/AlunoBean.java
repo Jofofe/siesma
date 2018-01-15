@@ -71,14 +71,15 @@ public class AlunoBean {
 		//Criptografar a Senha
 		if (getAluno().getIdUsuario() != null) {
 			if (getAluno().getIdUsuario() > 0) {
-				alunoDAO.alterar(getAluno());			
+				alunoDAO.alterar(getAluno());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
 			getAluno().setDtCadastro(new Date());
 			getAluno().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ALUNO.getChave()));
-			alunoDAO.salvar(getAluno());		
+			alunoDAO.salvar(getAluno());	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -90,7 +91,7 @@ public class AlunoBean {
 		getAlunoExclusao().setDtFimVinculo(new Date());
 		alunoDAO.alterar(getAlunoExclusao());
 		setAlunoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Vinculo encerrado com sucesso!"));
 		init();
 	}
 	
