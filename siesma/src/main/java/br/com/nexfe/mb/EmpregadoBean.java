@@ -91,6 +91,14 @@ public class EmpregadoBean {
 		init();
 	}
 	
+	public void reativar(){
+		getEmpregadoExclusao().setDtFimVinculo(null);
+		empregadoDAO.alterar(getEmpregadoExclusao());
+		setEmpregadoExclusao(null);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Vinculo reativado com sucesso!"));
+		init();
+	}
+	
 	/////////////////////////VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	public void validateEmail(FacesContext fc, UIComponent uic, Object obj) throws ValidatorException {

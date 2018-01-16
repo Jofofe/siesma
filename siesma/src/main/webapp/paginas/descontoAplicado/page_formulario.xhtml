@@ -8,20 +8,23 @@
 		rendered="#{descontoAplicadoBean.descontoAplicado != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
-			<h:outputLabel for="aluno" value="* Aluno:" />
+			<h:outputLabel for="aluno" value="* Aluno:" rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 			<p:autoComplete id="aluno" value="#{descontoAplicadoBean.descontoAplicado.aluno}" required="true"
 				completeMethod="#{descontoAplicadoBean.autoCompleteAluno}" converter="alunoConverter"
-				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"/>
+				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"
+				rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 
-			<h:outputLabel for="modulo" value="* Modulo:" />
+			<h:outputLabel for="modulo" value="* Modulo:" rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 			<p:autoComplete id="modulo" value="#{descontoAplicadoBean.descontoAplicado.modulo}" required="true"
 				completeMethod="#{descontoAplicadoBean.autoCompleteModulo}" converter="moduloConverter"
-				var="m" itemLabel="#{m.nomeComCurso}" itemValue="#{m}" forceSelection="true" label="Modulo"/>
+				var="m" itemLabel="#{m.nomeComCurso}" itemValue="#{m}" forceSelection="true" label="Modulo"
+				rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 				
-			<h:outputLabel for="desconto" value="* Desconto" />
+			<h:outputLabel for="desconto" value="* Desconto" rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 			<p:autoComplete id="desconto" value="#{descontoAplicadoBean.descontoAplicado.desconto}" required="true"
 				completeMethod="#{descontoAplicadoBean.autoCompleteDesconto}" converter="descontoConverter"
-				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Desconto"/>
+				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Desconto"
+				rendered="#{descontoAplicadoBean.descontoAplicado.idDescontoAplicado == null}"/>
 
 			<h:outputLabel for="obs" value="Observação:" />
 			<p:inputTextarea id="obs" value="#{descontoAplicadoBean.descontoAplicado.obsDesconto}" label="Observação" rows="5" cols="30" 

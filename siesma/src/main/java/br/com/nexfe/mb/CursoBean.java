@@ -71,6 +71,14 @@ public class CursoBean {
 		init();
 	}
 	
+	public void reativar(){
+		getCursoExclusao().setInExcluido(ConstantesExclusao.NAO_EXCLUIDO.getNome());
+		cursoDAO.alterar(getCursoExclusao());
+		setCursoExclusao(null);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Reativado com sucesso!"));
+		init();
+	}
+	
 	///////////////////////// VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	public void validateNomeCurso(FacesContext fc, UIComponent uic, Object obj) throws ValidatorException {

@@ -4,13 +4,13 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de forma de pagamento" style="width:600px"
+	<p:panel id="cad" header="Cadastro de forma de pagamento" style="width:500px;height:auto;margin:auto;"
 		rendered="#{formaPagamentoBean.formaPagamento != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{formaPagamentoBean.formaPagamento.nome}"
-				required="true" label="Nome" />
+				maxlength="50" required="true" label="Nome" />
 
 			<h:outputLabel value="* Classe de pagamento:" />
 			<p:selectOneMenu id="classe_som"

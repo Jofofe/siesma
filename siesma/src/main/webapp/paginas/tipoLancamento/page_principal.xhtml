@@ -4,15 +4,15 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="titulo">Lançamento comercial</ui:define>
+	<ui:define name="titulo">Tipo de lançamento</ui:define>
 	<ui:define name="content">
 	
 		<h:form id="form_principal" enctype="multipart/form-data">	
 			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
 	 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
 		    <p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>	
-			<ui:include src="/paginas/lancamentoComercial/page_formulario.xhtml" />
-			<ui:include src="/paginas/lancamentoComercial/page_lista.xhtml" />
+			<ui:include src="/paginas/tipoLancamento/page_formulario.xhtml" />
+			<ui:include src="/paginas/tipoLancamento/page_lista.xhtml" />
 		</h:form>
 
 

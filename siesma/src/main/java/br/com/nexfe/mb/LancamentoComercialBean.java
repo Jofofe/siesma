@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.nexfe.constantes.ConstantesStatusPagamento;
+import br.com.nexfe.constantes.ConstantesStatus;
 import br.com.nexfe.dao.FormaPagamentoDAO;
 import br.com.nexfe.dao.LancamentoComercialDAO;
 import br.com.nexfe.entidades.FormaPagamento;
@@ -55,26 +55,27 @@ public class LancamentoComercialBean {
 		alteraStatus();
 		if (getLancamentoComercial().getIdLancamentoComercial() != null) {
 			if (getLancamentoComercial().getIdLancamentoComercial() > 0) {
-				lancamentoComercialDAO.alterar(getLancamentoComercial());			
+				lancamentoComercialDAO.alterar(getLancamentoComercial());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			lancamentoComercialDAO.salvar(getLancamentoComercial());		
+			lancamentoComercialDAO.salvar(getLancamentoComercial());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
 	private void alteraStatus() {
 		if(getLancamentoComercial().getDtPrevista() == null && getLancamentoComercial().getDtRecebimento() == null) {
-			getLancamentoComercial().setStatus(ConstantesStatusPagamento.SEM_PREVISAO.getNome());
+			getLancamentoComercial().setStatus(ConstantesStatus.SEM_PREVISAO.getNome());
 		} else if(getLancamentoComercial().getDtPrevista() != null && getLancamentoComercial().getDtRecebimento() == null) {
-			getLancamentoComercial().setStatus(ConstantesStatusPagamento.AGUARDANDO_PAGAMENTO.getNome());
+			getLancamentoComercial().setStatus(ConstantesStatus.AGUARDANDO_PAGAMENTO.getNome());
 		} else if(getLancamentoComercial().getDtRecebimento() != null) {
 			if(getLancamentoComercial().getDtPrevista() == null || 
 					getLancamentoComercial().getDtRecebimento().compareTo(getLancamentoComercial().getDtPrevista()) <= 0) {
-				getLancamentoComercial().setStatus(ConstantesStatusPagamento.PAGO_EM_DIA.getNome());
+				getLancamentoComercial().setStatus(ConstantesStatus.PAGO_EM_DIA.getNome());
 			} else {
-				getLancamentoComercial().setStatus(ConstantesStatusPagamento.PAGO_COM_ATRASO.getNome());
+				getLancamentoComercial().setStatus(ConstantesStatus.PAGO_COM_ATRASO.getNome());
 			}
 		}
 	}
@@ -90,7 +91,7 @@ public class LancamentoComercialBean {
 	public void delete(){
 		lancamentoComercialDAO.excluir(getLancamentoComercialExclusao());
 		setLancamentoComercialExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
 	}
 

@@ -24,6 +24,9 @@
         <class>br.com.nexfe.entidades.ProfessorDisciplina</class>
         <class>br.com.nexfe.entidades.ClassePagamento</class>
         <class>br.com.nexfe.entidades.FormaPagamento</class>
+        <class>br.com.nexfe.entidades.UnidadeMedida</class>
+        <class>br.com.nexfe.entidades.TipoPagamento</class>
+        <class>br.com.nexfe.entidades.TipoLancamento</class>
         <class>br.com.nexfe.entidades.LancamentoComercial</class>
 
         <properties>

@@ -53,12 +53,13 @@ public class FormaPagamentoBean {
 	public void saveAndUpdate() {
 		if (getFormaPagamento().getIdFormaPagamento() != null) {
 			if (getFormaPagamento().getIdFormaPagamento() > 0) {
-				formaPagamentoDAO.alterar(getFormaPagamento());			
+				formaPagamentoDAO.alterar(getFormaPagamento());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			formaPagamentoDAO.salvar(getFormaPagamento());		
+			formaPagamentoDAO.salvar(getFormaPagamento());	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -73,7 +74,7 @@ public class FormaPagamentoBean {
 	public void delete(){
 		formaPagamentoDAO.excluir(getFormaPagamentoExclusao());
 		setFormaPagamentoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
 	}
 

@@ -40,8 +40,13 @@
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{empregadoBean.selectDelete(item)}"
-					rendered="#{empregadoBean.empregado.dtFimVinculo == null}"
+					rendered="#{item.dtFimVinculo == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
+				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+					style="color:red; margin-left:20px;"
+					actionListener="#{empregadoBean.selectDelete(item)}"
+					rendered="#{item.dtFimVinculo != null}"
+					oncomplete="PF('confirmaReativacao').show();" update="form_principal" />
 			</p:column>
 
 		</p:dataTable>
@@ -56,6 +61,17 @@
 			action="#{empregadoBean.delete()}" />
 		<p:commandButton value="Não"
 			oncomplete="PF('confirmaExclusao').hide();" />
+	</p:confirmDialog>
+	
+	<p:confirmDialog
+		message="Deseja realmente reativar o vínculo do Empregado #{empregadoBean.empregadoExclusao.nome}?"
+		widgetVar="confirmaReativacao">
+
+		<p:commandButton value="Sim" update="form_principal"
+			oncomplete="PF('confirmaReativacao').hide();"
+			action="#{empregadoBean.reativar()}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaReativacao').hide();" />
 	</p:confirmDialog>
 
 

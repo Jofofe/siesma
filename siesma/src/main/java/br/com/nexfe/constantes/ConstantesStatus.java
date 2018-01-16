@@ -1,15 +1,17 @@
 package br.com.nexfe.constantes;
 
-public enum ConstantesStatusPagamento {
+public enum ConstantesStatus {
 	
-	SEM_PREVISAO("Sem previs√£o"), 
+	SEM_PREVISAO("Sem previs„o"), 
 	AGUARDANDO_PAGAMENTO("Aguardando pagamento"), 
 	PAGO_EM_DIA("Pago em dia"),
-	PAGO_COM_ATRASO("Pago com atraso");
+	PAGO_COM_ATRASO("Pago com atraso"),
+	ATIVO("Ativo"),
+	INATIVO("Inativo");
 
 	private String nome;
 
-	private ConstantesStatusPagamento(String nome) {
+	private ConstantesStatus(String nome) {
 		this.nome = nome;
 	}
 

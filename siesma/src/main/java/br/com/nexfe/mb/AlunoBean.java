@@ -95,6 +95,14 @@ public class AlunoBean {
 		init();
 	}
 	
+	public void reativar(){
+		getAlunoExclusao().setDtFimVinculo(null);
+		alunoDAO.alterar(getAlunoExclusao());
+		setAlunoExclusao(null);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Vinculo reativado com sucesso!"));
+		init();
+	}
+	
 	///////////////////////// VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	public void validateEmail(FacesContext fc, UIComponent uic, Object obj) throws ValidatorException {

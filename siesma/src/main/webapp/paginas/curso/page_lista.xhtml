@@ -40,8 +40,13 @@
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{cursoBean.selectDelete(item)}"
-					rendered="#{cursoBean.curso.inExcluido == 'N'}"
+					rendered="#{item.inExcluido == 'N'}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
+				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+					style="color:red; margin-left:20px;"
+					actionListener="#{cursoBean.selectDelete(item)}"
+					rendered="#{item.inExcluido == 'S'}"
+					oncomplete="PF('confirmaReativacao').show();" update="form_principal" />
 			</p:column>
 
 		</p:dataTable>
@@ -56,6 +61,17 @@
 			action="#{cursoBean.delete()}" />
 		<p:commandButton value="Não"
 			oncomplete="PF('confirmaExclusao').hide();" />
+	</p:confirmDialog>
+	
+	<p:confirmDialog
+		message="Deseja realmente reativar o curso #{cursoBean.cursoExclusao.nome}?"
+		widgetVar="confirmaReativacao">
+
+		<p:commandButton value="Sim" update="form_principal"
+			oncomplete="PF('confirmaReativacao').hide();"
+			action="#{cursoBean.reativar()}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaReativacao').hide();" />
 	</p:confirmDialog>
 
 

@@ -4,7 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de lançamento comercial" style="width:600px"
+	<p:panel id="cad" header="Cadastro de lançamento comercial" style="width:600px;height:auto;margin:auto;"
 		rendered="#{lancamentoComercialBean.lancamentoComercial != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
@@ -15,7 +15,7 @@
 				
 			<h:outputLabel for="valor" value="* Valor recebimento:" />
 			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}" 
-				required="true" label="Valor recebimento"/> 
+				maxlength="9" required="true" label="Valor recebimento"/> 
 
 			<p:outputLabel for="dtPrevista" value="Data prevista:" />
 			<p:calendar id="dtPrevista" value="#{lancamentoComercialBean.lancamentoComercial.dtPrevista}"
@@ -26,8 +26,9 @@
 				showOn="button" label="Data de recebimento" />
 			
 			<h:outputLabel for="obs" value="Observação:" />
-			<p:inputText id="obs" value="#{lancamentoComercialBean.lancamentoComercial.obsRecebimento}"
-				label="Observação" />
+			<p:inputTextarea id="obs" value="#{lancamentoComercialBean.lancamentoComercial.obsRecebimento}" label="Observação" rows="5" cols="30" 
+				counter="display" maxlength="100" counterTemplate="{0} caracteres remanescentes." autoResize="false" />
+    		<h:outputText id="display" />
 			
 
 		</p:panelGrid>
