@@ -26,6 +26,10 @@
 				sortBy="#{item.funcao.nomeFuncao}" filterBy="#{item.funcao.nomeFuncao}">
 				<h:outputText value="#{item.funcao.nomeFuncao}" />
 			</p:column>
+			<p:column headerText="Data de fim do vínculo" filterMatchMode="contains"
+				sortBy="#{item.dtFimVinculo}" filterBy="#{item.dtFimVinculo}">
+				<h:outputText value="#{item.dtFimVinculo}" />
+			</p:column>
 
 
 
@@ -36,6 +40,7 @@
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{empregadoBean.selectDelete(item)}"
+					rendered="#{empregadoBean.empregado.dtFimVinculo == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
 			</p:column>
 

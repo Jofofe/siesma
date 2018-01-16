@@ -5,7 +5,9 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import br.com.nexfe.constantes.ConstantesExclusao;
 import br.com.nexfe.dao.CursoDAO;
@@ -27,7 +29,7 @@ public class CursoBean {
 	
 	public void init() {
 		cursoDAO = new CursoDAO();
-		setCursos(cursoDAO.listar(Curso.class));
+		setCursos(cursoDAO.listarTodosSemDistincao());
 		setCurso(null);
 	}
 
@@ -67,6 +69,23 @@ public class CursoBean {
 		setCursoExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	///////////////////////// VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	public void validateNomeCurso(FacesContext fc, UIComponent uic, Object obj) throws ValidatorException {
+		String nome = (String) obj;
+		for(Curso c : getCursos()) {
+			if(c.getNome().equalsIgnoreCase(nome)) {
+				if(getCurso().getIdCurso() != null && getCurso().getIdCurso() == c.getIdCurso()) {
+					System.out.println("Trouxe o mesmo nome do curso sendo alterado");
+				} else {
+					FacesMessage msg = new FacesMessage("Curso já existente!");
+					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+					throw new ValidatorException(msg);
+				}
+			}
+		}
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\

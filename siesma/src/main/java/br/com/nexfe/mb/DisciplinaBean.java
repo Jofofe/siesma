@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -53,12 +54,13 @@ public class DisciplinaBean {
 	public void saveAndUpdate() {
 		if (getDisciplina().getIdDisciplina() != null) {
 			if (getDisciplina().getIdDisciplina() > 0) {
-				disciplinaDAO.alterar(getDisciplina());			
+				disciplinaDAO.alterar(getDisciplina());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			disciplinaDAO.salvar(getDisciplina());		
+			disciplinaDAO.salvar(getDisciplina());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -74,8 +76,18 @@ public class DisciplinaBean {
 	public void delete(){
 		disciplinaDAO.excluir(getDisciplinaExclusao());
 		setDisciplinaExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	public List<Modulo> autoCompleteModulo(String query) {
+		List<Modulo> sugestoes = new ArrayList<Modulo>();
+		for (Modulo m : getModulos()) {
+			if (m.getNomeComCurso().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(m);
+			}
+		}
+		return sugestoes;
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\

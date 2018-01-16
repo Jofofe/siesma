@@ -42,7 +42,7 @@ public class EmpregadoBean {
 		empregadoDAO = new EmpregadoDAO();
 		nivelAcessoDAO = new NivelAcessoDAO();
 		funcaoDAO = new FuncaoDAO();
-		setEmpregados(empregadoDAO.listar(Empregado.class));
+		setEmpregados(empregadoDAO.listarTodosSemDistincao());
 		setFuncoes(funcaoDAO.listar(Funcao.class));
 		setEmpregado(null);
 	}

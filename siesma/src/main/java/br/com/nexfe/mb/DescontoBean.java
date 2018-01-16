@@ -45,12 +45,14 @@ public class DescontoBean {
 	public void saveAndUpdate() {
 		if (getDesconto().getIdDesconto() != null) {
 			if (getDesconto().getIdDesconto()> 0) {
-				descontoDAO.alterar(getDesconto());			
+				descontoDAO.alterar(getDesconto());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			descontoDAO.salvar(getDesconto());		
+			descontoDAO.salvar(getDesconto());	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
+
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -65,7 +67,7 @@ public class DescontoBean {
 	public void delete(){
 		descontoDAO.excluir(getDescontoExclusao());
 		setDescontoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
 	}
 	

@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -69,12 +70,13 @@ public class DescontoAplicadoBean {
 	public void saveAndUpdate() {
 		if (getDescontoAplicado().getIdDescontoAplicado() != null) {
 			if (getDescontoAplicado().getIdDescontoAplicado() > 0) {
-				descontoAplicadoDAO.alterar(getDescontoAplicado());			
+				descontoAplicadoDAO.alterar(getDescontoAplicado());	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			descontoAplicadoDAO.salvar(getDescontoAplicado());		
+			descontoAplicadoDAO.salvar(getDescontoAplicado());	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -89,8 +91,38 @@ public class DescontoAplicadoBean {
 	public void delete(){
 		descontoAplicadoDAO.excluir(getDescontoAplicadoExclusao());
 		setDescontoAplicadoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	public List<Aluno> autoCompleteAluno(String query) {
+		List<Aluno> sugestoes = new ArrayList<Aluno>();
+		for (Aluno a : getAlunos()) {
+			if (a.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(a);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Modulo> autoCompleteModulo(String query) {
+		List<Modulo> sugestoes = new ArrayList<Modulo>();
+		for (Modulo m : getModulos()) {
+			if (m.getNomeComCurso().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(m);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Desconto> autoCompleteDesconto(String query) {
+		List<Desconto> sugestoes = new ArrayList<Desconto>();
+		for (Desconto d : getDescontos()) {
+			if (d.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(d);
+			}
+		}
+		return sugestoes;
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\

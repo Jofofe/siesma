@@ -4,28 +4,29 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Aplicação de desconto" style="width:600px"
+	<p:panel id="cad" header="Aplicação de desconto" style="width:600px;height:auto;margin:auto;"
 		rendered="#{descontoAplicadoBean.descontoAplicado != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
 			<h:outputLabel for="aluno" value="* Aluno:" />
 			<p:autoComplete id="aluno" value="#{descontoAplicadoBean.descontoAplicado.aluno}" required="true"
-				completeMethod="#{descontoAplicadoBean.getAlunos()}" converter="alunoConverter"
+				completeMethod="#{descontoAplicadoBean.autoCompleteAluno}" converter="alunoConverter"
 				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"/>
 
 			<h:outputLabel for="modulo" value="* Modulo:" />
 			<p:autoComplete id="modulo" value="#{descontoAplicadoBean.descontoAplicado.modulo}" required="true"
-				completeMethod="#{descontoAplicadoBean.getModulos()}" converter="moduloConverter"
-				var="m" itemLabel="#{m.nome}" itemValue="#{m}" forceSelection="true" label="Modulo"/>
+				completeMethod="#{descontoAplicadoBean.autoCompleteModulo}" converter="moduloConverter"
+				var="m" itemLabel="#{m.nomeComCurso}" itemValue="#{m}" forceSelection="true" label="Modulo"/>
 				
 			<h:outputLabel for="desconto" value="* Desconto" />
 			<p:autoComplete id="desconto" value="#{descontoAplicadoBean.descontoAplicado.desconto}" required="true"
-				completeMethod="#{descontoAplicadoBean.getDescontos()}" converter="descontoConverter"
+				completeMethod="#{descontoAplicadoBean.autoCompleteDesconto}" converter="descontoConverter"
 				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Desconto"/>
 
 			<h:outputLabel for="obs" value="Observação:" />
-			<p:inputText id="obs" value="#{descontoAplicadoBean.descontoAplicado.obsDesconto}"
-				required="true" label="Observação" />
+			<p:inputTextarea id="obs" value="#{descontoAplicadoBean.descontoAplicado.obsDesconto}" label="Observação" rows="5" cols="30" 
+				counter="display" maxlength="100" counterTemplate="{0} caracteres remanescentes." autoResize="false" />
+    		<h:outputText id="display" />
 
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"

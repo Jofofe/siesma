@@ -16,5 +16,5 @@ public class ModuloDAO extends DaoImpl<Modulo>{
 		query.setParameter("dataAtual", new Date());
 		return query.getResultList(); 
 	}
-
+	
 }

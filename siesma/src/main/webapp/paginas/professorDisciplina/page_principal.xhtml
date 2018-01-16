@@ -8,7 +8,9 @@
 	<ui:define name="content">
 	
 		<h:form id="form_principal" enctype="multipart/form-data">	
-			<p:growl id="messages" />	
+			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		    <p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
 			<ui:include src="/paginas/professorDisciplina/page_formulario.xhtml" />
 			<ui:include src="/paginas/professorDisciplina/page_lista.xhtml" />
 		</h:form>

@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -61,12 +62,13 @@ public class AvaliacaoBean {
 	public void saveAndUpdate() {
 		if (getAvaliacao().getIdAvaliacao()!= null) {
 			if (getAvaliacao().getIdAvaliacao() > 0) {
-				avaliacaoDAO.alterar(getAvaliacao());			
+				avaliacaoDAO.alterar(getAvaliacao());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterada com sucesso!"));
 			}
 		} else {
-			avaliacaoDAO.salvar(getAvaliacao());		
+			avaliacaoDAO.salvar(getAvaliacao());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
 		init();
 	}
 	
@@ -81,8 +83,18 @@ public class AvaliacaoBean {
 	public void delete(){
 		avaliacaoDAO.excluir(getAvaliacaoExclusao());
 		setAvaliacaoExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	public List<Disciplina> autoCompleteDisciplina(String query) {
+		List<Disciplina> sugestoes = new ArrayList<Disciplina>();
+		for (Disciplina d : getDisciplinas()) {
+			if (d.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(d);
+			}
+		}
+		return sugestoes;
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\

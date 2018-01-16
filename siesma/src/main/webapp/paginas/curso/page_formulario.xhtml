@@ -10,7 +10,7 @@
 		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{cursoBean.curso.nome}" required="true"
-				maxlength="100" label="Nome" style="width:300px"/>
+				maxlength="100" label="Nome" style="width:300px" validator="#{cursoBean.validateNomeCurso}"/>
 			
 			<h:outputLabel for="carga" value="* Carga horária:" />
 			<p:inputText id="carga" value="#{cursoBean.curso.cargaHoraria}" required="true" 

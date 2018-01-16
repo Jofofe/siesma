@@ -49,7 +49,7 @@ public class AlunoBean {
 		nivelAcessoDAO = new NivelAcessoDAO();
 		generoDAO = new GeneroDAO();
 		ufDAO = new UfDAO();
-		setAlunos(alunoDAO.listar(Aluno.class));
+		setAlunos(alunoDAO.listarTodosSemDistincao());
 		setGeneros(generoDAO.listar(Genero.class));
 		setUfs(ufDAO.listar(Uf.class));
 		setAluno(null);

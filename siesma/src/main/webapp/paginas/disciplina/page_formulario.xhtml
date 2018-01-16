@@ -4,18 +4,18 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Disciplina" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Disciplina" style="width:600px;height:auto;margin:auto;"
 		rendered="#{disciplinaBean.disciplina != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{disciplinaBean.disciplina.nome}"
-				required="true" label="Nome" />
+				maxlength="100" required="true" style="width:300px" label="Nome" />
 
 			<h:outputLabel for="modulo" value="* Modulo:" />
 			<p:autoComplete id="modulo" value="#{disciplinaBean.disciplina.modulo}" required="true"
-				completeMethod="#{disciplinaBean.getModulos()}" converter="moduloConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Modulo"/>
+				completeMethod="#{disciplinaBean.autoCompleteModulo}" converter="moduloConverter"
+				var="c" itemLabel="#{c.nomeComCurso}" itemValue="#{c}" label="Modulo"/>
 
 			<p:outputLabel for="dtInicio" value="* Data de início:" />
 			<p:calendar id="dtInicio" value="#{disciplinaBean.disciplina.dtInicio}"
@@ -27,12 +27,12 @@
 
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
-			action="#{disciplinaBean.saveAndUpdate()}"
+			action="#{disciplinaBean.saveAndUpdate}"
 			update="form_principal, itensCadastro">
 			<span class="fa-icon-save" />
 		</p:commandButton>
 		<p:commandButton icon="voltar-icon" value="Voltar"
-			action="#{disciplinaBean.back()}" immediate="true"
+			action="#{disciplinaBean.back}" immediate="true"
 			update="form_principal" />
 	</p:panel>
 	<p:blockUI block="cad" trigger="btn_salvar" />

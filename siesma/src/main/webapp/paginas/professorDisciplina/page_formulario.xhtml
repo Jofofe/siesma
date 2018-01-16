@@ -4,19 +4,21 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de professor para a disciplina" style="width:600px"
+	<p:panel id="cad" header="Cadastro de professor para a disciplina" style="width:500px;height:auto;margin:auto;"
 		rendered="#{professorDisciplinaBean.professorDisciplina != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 		
-			<h:outputLabel for="disciplina" value="* Disciplina:" />
+			<h:outputLabel for="disciplina" value="* Disciplina:" rendered="#{professorDisciplinaBean.professorDisciplina.idProfessorDisciplina == null}"/>
 			<p:autoComplete id="disciplina" value="#{professorDisciplinaBean.professorDisciplina.disciplina}" required="true"
-				completeMethod="#{professorDisciplinaBean.getDisciplinas()}" converter="disciplinaConverter"
-				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Disciplina"/>
+				completeMethod="#{professorDisciplinaBean.autoCompleteDisciplina}" converter="disciplinaConverter"
+				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Disciplina"
+				rendered="#{professorDisciplinaBean.professorDisciplina.idProfessorDisciplina == null}"/>
 
-			<h:outputLabel for="prof" value="* Professor:" />
+			<h:outputLabel for="prof" value="* Professor:" rendered="#{professorDisciplinaBean.professorDisciplina.idProfessorDisciplina == null}"/>
 			<p:autoComplete id="prof" value="#{professorDisciplinaBean.professorDisciplina.empregado}" required="true"
-				completeMethod="#{professorDisciplinaBean.getEmpregados()}" converter="empregadoConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Professor"/>
+				completeMethod="#{professorDisciplinaBean.autoCompleteEmpregado}" converter="empregadoConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Professor"
+				rendered="#{professorDisciplinaBean.professorDisciplina.idProfessorDisciplina == null}"/>
 
 			<p:outputLabel for="dtInicio" value="* Data de início:" />
 			<p:calendar id="dtInicio" value="#{professorDisciplinaBean.professorDisciplina.dtInicio}"

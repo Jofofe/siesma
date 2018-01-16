@@ -16,5 +16,12 @@ public class DisciplinaDAO extends DaoImpl<Disciplina>{
 		query.setParameter("dataAtual", new Date());
 		return query.getResultList(); 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Disciplina> listarDisciplinasMagistradas(Long idEmpregado) {
+		Query query = em.createNamedQuery("Disciplina.selectDisciplinasMagistradas", Disciplina.class);
+		query.setParameter("idEmpregado", idEmpregado);
+		return query.getResultList(); 
+	}
 
 }

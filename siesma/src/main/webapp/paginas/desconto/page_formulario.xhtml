@@ -4,13 +4,13 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Desconto" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Desconto" style="width:500px;height:auto;margin:auto;"
 		rendered="#{descontoBean.desconto != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{descontoBean.desconto.nome}" required="true"
-				label="Nome"/>
+				maxlength="30" label="Nome"/>
 			
         	<h:outputLabel for="perc" value="* Percentual:" />
         	<p:inputNumber id="perc" value="#{descontoBean.desconto.percentual}" symbol="%" 

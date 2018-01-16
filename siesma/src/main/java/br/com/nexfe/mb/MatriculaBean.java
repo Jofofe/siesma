@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -59,15 +60,18 @@ public class MatriculaBean {
 	}
 	
 	public void saveAndUpdate() {
-		if (getMatricula().getIdMatricula() != null) {
-			if (getMatricula().getIdMatricula() > 0) {
-				matriculaDAO.alterar(getMatricula());			
+		if(validaCursosAluno()) {
+			if (getMatricula().getIdMatricula() != null) {
+				if (getMatricula().getIdMatricula() > 0) {
+					matriculaDAO.alterar(getMatricula());
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
+				}
+			} else {
+				matriculaDAO.salvar(getMatricula());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 			}
-		} else {
-			matriculaDAO.salvar(getMatricula());		
+			init();
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
-		init();
 	}
 	
 	//public boolean canDelete(Matricula m) {
@@ -81,8 +85,43 @@ public class MatriculaBean {
 	public void delete(){
 		matriculaDAO.excluir(getMatriculaExclusao());
 		setMatriculaExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	public List<Curso> autoCompleteCurso(String query) {
+		List<Curso> sugestoes = new ArrayList<Curso>();
+		for (Curso c : getCursos()) {
+			if (c.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(c);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Aluno> autoCompleteAluno(String query) {
+		List<Aluno> sugestoes = new ArrayList<Aluno>();
+		for (Aluno a : getAlunos()) {
+			if (a.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(a);
+			}
+		}
+		return sugestoes;
+	}
+	
+	////////////////////////VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	public boolean validaCursosAluno() {
+		if(getMatricula().getIdMatricula() == null) {
+			List<Curso> cursosAluno = cursoDAO.listarCursosMatriculados(getMatricula().getAluno().getIdUsuario());
+			for(Curso c : cursosAluno) {
+				if(getMatricula().getCurso().getIdCurso() == c.getIdCurso()) {
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aluno j� matriculado no curso!", "Erro"));
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\

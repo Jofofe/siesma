@@ -16,7 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Curso.selectAll", query="select e from Curso e where e.inExcluido = 'N' order by e.nome") } )
+@NamedQueries(value = { 
+		@NamedQuery(name="Curso.selectAllNoDistinction", query="select e from Curso e order by e.nome"), 
+		@NamedQuery(name="Curso.selectAll", query="select e from Curso e where e.inExcluido = 'N' order by e.nome"),
+		@NamedQuery(name="Curso.selectCursosMatriculados", query="select e from Curso e join e.matriculas m where e.inExcluido = 'N' "
+				+ "and m.aluno.idUsuario in (:idAluno) order by e.nome")
+} )
 @Table(name = "CURSO")
 public class Curso implements Serializable {
 	

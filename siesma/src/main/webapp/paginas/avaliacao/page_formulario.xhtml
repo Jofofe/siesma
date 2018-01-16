@@ -4,18 +4,19 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Avaliação" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Avaliação" style="width:600px;height:auto;margin:auto;"
 		rendered="#{avaliacaoBean.avaliacao != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{avaliacaoBean.avaliacao.nome}"
-				required="true" label="Nome" />
+				maxlength="30" required="true" label="Nome" />
 				
-			<h:outputLabel for="disciplina" value="* Disciplina:" />
+			<h:outputLabel for="disciplina" value="* Disciplina:" rendered="#{avaliacaoBean.avaliacao.idAvaliacao == null}"/>
 			<p:autoComplete id="disciplina" value="#{avaliacaoBean.avaliacao.disciplina}" required="true"
-				completeMethod="#{avaliacaoBean.getDisciplinas()}" converter="disciplinaConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Disciplina"/>
+				completeMethod="#{avaliacaoBean.autoCompleteDisciplina}" converter="disciplinaConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Disciplina"
+				rendered="#{avaliacaoBean.avaliacao.idAvaliacao == null}"/>
 				
 			<h:outputLabel value="* Tipo de avaliação:" rendered="#{avaliacaoBean.avaliacao.idAvaliacao == null}"/>
 			<p:selectOneMenu id="avaliacao_som"
@@ -27,7 +28,9 @@
 			</p:selectOneMenu>
 				
 			<h:outputLabel for="obs" value="Observação:" />
-			<p:inputText id="obs" value="#{avaliacaoBean.avaliacao.obsAvaliacao}" label="Observação" />
+			<p:inputTextarea id="obs" value="#{avaliacaoBean.avaliacao.obsAvaliacao}" label="Observação" rows="5" cols="30" 
+				counter="display" maxlength="100" counterTemplate="{0} caracteres remanescentes." autoResize="false" />
+    		<h:outputText id="display" />
 
 
 		</p:panelGrid>

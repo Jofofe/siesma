@@ -26,6 +26,10 @@
 				sortBy="#{item.iesGraduacao}" filterBy="#{item.iesGraduacao}">
 				<h:outputText value="#{item.iesGraduacao}" />
 			</p:column>
+			<p:column headerText="Data de fim do vínculo" filterMatchMode="contains"
+				sortBy="#{item.dtFimVinculo}" filterBy="#{item.dtFimVinculo}">
+				<h:outputText value="#{item.dtFimVinculo}" />
+			</p:column>
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
@@ -34,6 +38,7 @@
 				<p:commandButton icon="ui-icon-close"
 					style="color:red; margin-left:20px;"
 					actionListener="#{alunoBean.selectDelete(item)}"
+					rendered="#{alunoBean.aluno.dtFimVinculo == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
 			</p:column>
 

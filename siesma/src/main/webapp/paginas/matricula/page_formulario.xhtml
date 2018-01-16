@@ -4,19 +4,21 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Matricula" style="width:600px"
+	<p:panel id="cad" header="Cadastro de Matricula" style="width:550px;height:auto;margin:auto;"
 		rendered="#{matriculaBean.matricula != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
-			<h:outputLabel for="aluno" value="* Aluno:" />
+			<h:outputLabel for="aluno" value="* Aluno:" rendered="#{matriculaBean.matricula.idMatricula == null}"/>
 			<p:autoComplete id="aluno" value="#{matriculaBean.matricula.aluno}" required="true"
-				completeMethod="#{matriculaBean.getAlunos()}" converter="alunoConverter"
-				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"/>
+				completeMethod="#{matriculaBean.autoCompleteAluno}" converter="alunoConverter"
+				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"
+				rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
 
-			<h:outputLabel for="curso" value="* Curso:" />
+			<h:outputLabel for="curso" value="* Curso:" rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
 			<p:autoComplete id="curso" value="#{matriculaBean.matricula.curso}" required="true"
-				completeMethod="#{matriculaBean.getCursos()}" converter="cursoConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Curso"/>
+				completeMethod="#{matriculaBean.autoCompleteCurso}" converter="cursoConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Curso"
+				rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
 
 			<p:outputLabel for="dtInicio" value="* Data de matrícula" />
 			<p:calendar id="dtInicio" value="#{matriculaBean.matricula.dtMatricula}"

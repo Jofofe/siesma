@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -59,15 +60,18 @@ public class ProfessorDisciplinaBean {
 	}
 	
 	public void saveAndUpdate() {
-		if (getProfessorDisciplina().getIdProfessorDisciplina() != null) {
-			if (getProfessorDisciplina().getIdProfessorDisciplina() > 0) {
-				profDiscDAO.alterar(getProfessorDisciplina());			
+		if(validaDisciplinasMagistradas()) {
+			if (getProfessorDisciplina().getIdProfessorDisciplina() != null) {
+				if (getProfessorDisciplina().getIdProfessorDisciplina() > 0) {
+					profDiscDAO.alterar(getProfessorDisciplina());	
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
+				}
+			} else {
+				profDiscDAO.salvar(getProfessorDisciplina());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 			}
-		} else {
-			profDiscDAO.salvar(getProfessorDisciplina());		
+			init();
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada com sucesso!"));
-		init();
 	}
 	
 	public void selectDelete(ProfessorDisciplina d){
@@ -81,8 +85,44 @@ public class ProfessorDisciplinaBean {
 	public void delete(){
 		profDiscDAO.excluir(getProfessorDisciplinaExclusao());
 		setProfessorDisciplinaExclusao(null);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Exclusão realizada com sucesso!"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
+	}
+	
+	public List<Disciplina> autoCompleteDisciplina(String query) {
+		List<Disciplina> sugestoes = new ArrayList<Disciplina>();
+		for (Disciplina d : getDisciplinas()) {
+			if (d.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(d);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Empregado> autoCompleteEmpregado(String query) {
+		List<Empregado> sugestoes = new ArrayList<Empregado>();
+		for (Empregado e : getEmpregados()) {
+			if (e.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(e);
+			}
+		}
+		return sugestoes;
+	}
+	
+	//////////////////////// VALIDATORS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	public boolean validaDisciplinasMagistradas() {
+		if (getProfessorDisciplina().getIdProfessorDisciplina() == null) {
+			List<Disciplina> disciplinasMagistradas = disciplinaDAO.listarDisciplinasMagistradas(getProfessorDisciplina().getEmpregado().getIdUsuario());
+			for (Disciplina d : disciplinasMagistradas) {
+				if (getProfessorDisciplina().getDisciplina().getIdDisciplina() == d.getIdDisciplina()) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Professor j� magistra a disciplina!", "Erro"));
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\
