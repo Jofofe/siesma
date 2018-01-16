@@ -75,8 +75,8 @@ public class Aluno extends Usuario {
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = DescontoAplicado.class, mappedBy="aluno")
 	private List<DescontoAplicado> descontosAplicados;
 	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoAluno.class, mappedBy="aluno")
-	private List<PagamentoAluno> pagamentosAlunos;
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = LancamentoComercial.class, mappedBy="aluno")
+	private List<LancamentoComercial> lancamentosComerciais;
 	
 	public Date getDtNascimento() {
 		return dtNascimento;
@@ -206,12 +206,12 @@ public class Aluno extends Usuario {
 		this.descontosAplicados = descontosAplicados;
 	}
 	
-	public List<PagamentoAluno> getPagamentosAlunos() {
-		return pagamentosAlunos;
+	public List<LancamentoComercial> getLancamentosComerciais() {
+		return lancamentosComerciais;
 	}
 
-	public void setPagamentosAlunos(List<PagamentoAluno> pagamentosAlunos) {
-		this.pagamentosAlunos = pagamentosAlunos;
+	public void setLancamentosComerciais(List<LancamentoComercial> lancamentosComerciais) {
+		this.lancamentosComerciais = lancamentosComerciais;
 	}
 
 	@Override

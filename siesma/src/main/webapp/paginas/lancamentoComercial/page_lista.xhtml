@@ -14,9 +14,28 @@
 		<p:dataTable id="tabela" value="#{lancamentoComercialBean.lancamentosComerciais}" var="item"
 			filteredValue="#{lancamentoComercialBean.lancamentosComerciaisFiltrados}" paginator="true"
 			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
+			
+			<p:column headerText="Nome" filterMatchMode="contains"
+				sortBy="#{item.nomeContemplado}" filterBy="#{item.nomeContemplado}">
+				<h:outputText value="#{item.nomeContemplado}" />
+			</p:column>
+			<p:column headerText="Tipo" filterMatchMode="contains"
+				sortBy="#{item.tipoContemplado}" filterBy="#{item.tipoContemplado}">
+				<h:outputText value="#{item.tipoContemplado}" />
+			</p:column>
+			
+			<p:column headerText="Tipo de lançamento" filterMatchMode="contains"
+				sortBy="#{item.tipoLancamento.descricao}" filterBy="#{item.tipoLancamento.descricao}">
+				<h:outputText value="#{item.tipoLancamento.descricao}" />
+			</p:column>
+			
 			<p:column headerText="Forma de pagamento" filterMatchMode="contains"
 				sortBy="#{item.formaPagamento.nome}" filterBy="#{item.formaPagamento.nome}">
 				<h:outputText value="#{item.formaPagamento.nome}" />
+			</p:column>
+			<p:column headerText="Tipo de lançamento" filterMatchMode="contains"
+				sortBy="#{item.tipoLancamento.descricao}" filterBy="#{item.tipoLancamento.descricao}">
+				<h:outputText value="#{item.tipoLancamento.descricao}" />
 			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
 				sortBy="#{item.vlRecebimento}" filterBy="#{item.vlRecebimento}">

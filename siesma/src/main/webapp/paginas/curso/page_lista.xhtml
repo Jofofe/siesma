@@ -37,7 +37,7 @@
 				exportable="false">
 				<p:commandButton icon="ui-icon-pencil"
 					action="#{cursoBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-arrowreturn-1-s"
 					style="color:red; margin-left:20px;"
 					actionListener="#{cursoBean.selectDelete(item)}"
 					rendered="#{item.inExcluido == 'N'}"
@@ -53,7 +53,7 @@
 
 	</p:panel>
 	<p:confirmDialog
-		message="Deseja realmente excluir o curso #{cursoBean.cursoExclusao.nome}?"
+		message="Deseja realmente desativar o curso #{cursoBean.cursoExclusao.nome}?"
 		widgetVar="confirmaExclusao">
 
 		<p:commandButton value="Sim" update="form_principal"

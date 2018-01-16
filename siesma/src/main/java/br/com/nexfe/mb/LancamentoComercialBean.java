@@ -1,5 +1,6 @@
 package br.com.nexfe.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -8,10 +9,16 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.nexfe.constantes.ConstantesStatus;
+import br.com.nexfe.dao.AlunoDAO;
+import br.com.nexfe.dao.EmpregadoDAO;
 import br.com.nexfe.dao.FormaPagamentoDAO;
 import br.com.nexfe.dao.LancamentoComercialDAO;
+import br.com.nexfe.dao.TipoLancamentoDAO;
+import br.com.nexfe.entidades.Aluno;
+import br.com.nexfe.entidades.Empregado;
 import br.com.nexfe.entidades.FormaPagamento;
 import br.com.nexfe.entidades.LancamentoComercial;
+import br.com.nexfe.entidades.TipoLancamento;
 
 @ManagedBean
 @ViewScoped
@@ -21,22 +28,43 @@ public class LancamentoComercialBean {
 	
 	private FormaPagamentoDAO formaPagamentoDAO;
 	
+	private TipoLancamentoDAO tipoLancamentoDAO;
+	
+	private AlunoDAO alunoDAO;
+	
+	private EmpregadoDAO empregadoDAO;
+	
 	private LancamentoComercial lancamentoComercial;
 	
 	private LancamentoComercial lancamentoComercialExclusao;
 	
 	private List<FormaPagamento> formasPagamentos;
 	
+	private List<TipoLancamento> tiposLancamentos;
+	
+	private List<Aluno> alunos;
+	
+	private List<Empregado> empregados;
+	
 	private List<LancamentoComercial> lancamentosComerciais;
 	
 	private List<LancamentoComercial> lancamentosComerciaisFiltrados;
 	
+	private Integer tipo;
+	
 	public void init() {
 		lancamentoComercialDAO = new LancamentoComercialDAO();
 		formaPagamentoDAO = new FormaPagamentoDAO();
+		tipoLancamentoDAO = new TipoLancamentoDAO();
+		alunoDAO = new AlunoDAO();
+		empregadoDAO = new EmpregadoDAO();
 		setFormasPagamentos(formaPagamentoDAO.listarDataAtual());
 		setLancamentosComerciais(lancamentoComercialDAO.listarDataAtual());
+		setTiposLancamentos(tipoLancamentoDAO.listar(TipoLancamento.class));
+		setAlunos(alunoDAO.listar(Aluno.class));
+		setEmpregados(empregadoDAO.listarProfessores());
 		setLancamentoComercial(null);
+		setTipo(null);
 	}
 
 	public void back() {
@@ -94,6 +122,48 @@ public class LancamentoComercialBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
 		init();
 	}
+	
+	public List<FormaPagamento> autoCompleteFormaPagamento(String query) {
+		List<FormaPagamento> sugestoes = new ArrayList<FormaPagamento>();
+		for (FormaPagamento f : getFormasPagamentos()) {
+			if (f.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(f);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<TipoLancamento> autoCompleteTipoLancamento(String query) {
+		List<TipoLancamento> sugestoes = new ArrayList<TipoLancamento>();
+		for (TipoLancamento t : getTiposLancamentos()) {
+			if (t.getDescricao().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(t);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Aluno> autoCompleteAluno(String query) {
+		List<Aluno> sugestoes = new ArrayList<Aluno>();
+		for (Aluno a : getAlunos()) {
+			if (a.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(a);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Empregado> autoCompleteEmpregado(String query) {
+		List<Empregado> sugestoes = new ArrayList<Empregado>();
+		for (Empregado e : getEmpregados()) {
+			if (e.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(e);
+			}
+		}
+		return sugestoes;
+	}
+	
+	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	public LancamentoComercial getLancamentoComercial() {
 		return lancamentoComercial;
@@ -135,4 +205,36 @@ public class LancamentoComercialBean {
 		this.lancamentosComerciaisFiltrados = lancamentosComerciaisFiltrados;
 	}
 
+	public List<TipoLancamento> getTiposLancamentos() {
+		return tiposLancamentos;
+	}
+
+	public void setTiposLancamentos(List<TipoLancamento> tiposLancamentos) {
+		this.tiposLancamentos = tiposLancamentos;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public List<Empregado> getEmpregados() {
+		return empregados;
+	}
+
+	public void setEmpregados(List<Empregado> empregados) {
+		this.empregados = empregados;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+	
 }

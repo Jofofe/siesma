@@ -1,6 +1,7 @@
 package br.com.nexfe.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="TipoLancamento.selectAll", query="select e from TipoLancamento e order by e.descricao") } )
+@NamedQueries(value = { 
+		@NamedQuery(name="TipoLancamento.selectAll", query="select e from TipoLancamento e where e.status = 'Ativo' order by e.descricao"),
+		@NamedQuery(name="TipoLancamento.selectAllNoDistinction", query="select e from TipoLancamento e order by e.descricao") 
+} )
 @Table(name = "TIPO_LANCAMENTO")
 public class TipoLancamento implements Serializable {
 	
@@ -42,6 +47,9 @@ public class TipoLancamento implements Serializable {
 	
 	@Column(name = "STATUS", length = 20, nullable = false)
 	private String status;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = LancamentoComercial.class, mappedBy="tipoLancamento")
+	private List<LancamentoComercial> lancamentosComerciais;
 
 	public Long getIdTipoLancamento() {
 		return idTipoLancamento;
@@ -89,6 +97,14 @@ public class TipoLancamento implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public List<LancamentoComercial> getLancamentosComerciais() {
+		return lancamentosComerciais;
+	}
+
+	public void setLancamentosComerciais(List<LancamentoComercial> lancamentosComerciais) {
+		this.lancamentosComerciais = lancamentosComerciais;
 	}
 
 	@Override

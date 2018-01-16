@@ -3,7 +3,6 @@ package br.com.nexfe.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +33,18 @@ public class LancamentoComercial implements Serializable {
 	@JoinColumn(name = "ID_FORMA_PAGAMENTO")
 	private FormaPagamento formaPagamento;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_TIPO_LANCAMENTO")
+	private TipoLancamento tipoLancamento;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_ALUNO")
+	private Aluno aluno;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_EMPREGADO")
+	private Empregado empregado;
+	
 	@Column(name = "VALOR_RECEBIMENTO", nullable = false)
 	private BigDecimal vlRecebimento;
 	
@@ -49,12 +59,6 @@ public class LancamentoComercial implements Serializable {
 	
 	@Column(name = "OBS_RECEBIMENTO", length = 100)
 	private String obsRecebimento;
-	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoAluno.class, mappedBy="lancamentoComercial")
-	private List<PagamentoAluno> pagamentosAlunos;
-	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = PagamentoProfessor.class, mappedBy="lancamentoComercial")
-	private List<PagamentoProfessor> pagamentosProfessores;
 
 	public Long getIdLancamentoComercial() {
 		return idLancamentoComercial;
@@ -70,6 +74,30 @@ public class LancamentoComercial implements Serializable {
 
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+	
+	public TipoLancamento getTipoLancamento() {
+		return tipoLancamento;
+	}
+
+	public void setTipoLancamento(TipoLancamento tipoLancamento) {
+		this.tipoLancamento = tipoLancamento;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public Empregado getEmpregado() {
+		return empregado;
+	}
+
+	public void setEmpregado(Empregado empregado) {
+		this.empregado = empregado;
 	}
 
 	public BigDecimal getVlRecebimento() {
@@ -112,20 +140,20 @@ public class LancamentoComercial implements Serializable {
 		this.obsRecebimento = obsRecebimento;
 	}
 	
-	public List<PagamentoAluno> getPagamentosAlunos() {
-		return pagamentosAlunos;
+	public String getNomeContemplado() {
+		if(getAluno() == null) {
+			return getEmpregado().getNome();
+		} else {
+			return getAluno().getNome();
+		}
 	}
-
-	public void setPagamentosAlunos(List<PagamentoAluno> pagamentosAlunos) {
-		this.pagamentosAlunos = pagamentosAlunos;
-	}
-
-	public List<PagamentoProfessor> getPagamentosProfessores() {
-		return pagamentosProfessores;
-	}
-
-	public void setPagamentosProfessores(List<PagamentoProfessor> pagamentosProfessores) {
-		this.pagamentosProfessores = pagamentosProfessores;
+	
+	public String getTipoContemplado() {
+		if(getAluno() == null) {
+			return "Empregado";
+		} else {
+			return "Aluno";
+		}
 	}
 
 	@Override

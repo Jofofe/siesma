@@ -7,11 +7,39 @@
 	<p:panel id="cad" header="Cadastro de lançamento comercial" style="width:600px;height:auto;margin:auto;"
 		rendered="#{lancamentoComercialBean.lancamentoComercial != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
+		
+			<h:outputLabel value="* Tipo:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:selectOneMenu id="tipo_som" value="#{lancamentoComercialBean.tipo}" effect="fade" required="true" 
+				label="Função" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}">
+				<f:selectItem itemLabel="Selecione" itemValue="" />
+				<f:selectItem itemLabel="Aluno" itemValue="1" />
+				<f:selectItem itemLabel="Empregado" itemValue="2" />
+				<p:ajax event="change" update="form_principal, cad" />
+			</p:selectOneMenu>
 
-			<h:outputLabel for="forma" value="* Forma de pagamento:" />
+			<h:outputLabel for="forma" value="* Forma de pagamento:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
 			<p:autoComplete id="forma" value="#{lancamentoComercialBean.lancamentoComercial.formaPagamento}" required="true"
-				completeMethod="#{lancamentoComercialBean.getFormasPagamentos()}" converter="formaPagamentoConverter"
-				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Forma pagamento"/>
+				completeMethod="#{lancamentoComercialBean.autoCompleteFormaPagamento}" converter="formaPagamentoConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Forma pagamento"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+				
+			<h:outputLabel for="tipo" value="* Tipo de Lançamento:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:autoComplete id="tipo" value="#{lancamentoComercialBean.lancamentoComercial.tipoLancamento}" required="true"
+				completeMethod="#{lancamentoComercialBean.autoCompleteTipoLancamento}" converter="tipoLancamentoConverter"
+				var="t" itemLabel="#{t.descricao}" itemValue="#{t}" forceSelection="true" label="Tipo lançamento"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+				
+			<h:outputLabel for="aluno" value="Aluno:" rendered="#{lancamentoComercialBean.tipo == 1}"/>
+			<p:autoComplete id="aluno" value="#{lancamentoComercialBean.lancamentoComercial.aluno}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteAluno}" converter="alunoConverter"
+				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"
+				rendered="#{lancamentoComercialBean.tipo == 1}"/>
+				
+			<h:outputLabel for="empregado" value="Empregado:" rendered="#{lancamentoComercialBean.tipo == 2}"/>
+			<p:autoComplete id="empregado" value="#{lancamentoComercialBean.lancamentoComercial.empregado}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteEmpregado}" converter="empregadoConverter"
+				var="e" itemLabel="#{e.nome}" itemValue="#{e}" forceSelection="true" label="Empregado"
+				rendered="#{lancamentoComercialBean.tipo == 2}"/>
 				
 			<h:outputLabel for="valor" value="* Valor recebimento:" />
 			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}" 
@@ -33,12 +61,12 @@
 
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
-			action="#{lancamentoComercialBean.saveAndUpdate()}"
+			action="#{lancamentoComercialBean.saveAndUpdate}"
 			update="form_principal, itensCadastro">
 			<span class="fa-icon-save" />
 		</p:commandButton>
 		<p:commandButton icon="voltar-icon" value="Voltar"
-			action="#{lancamentoComercialBean.back()}" immediate="true"
+			action="#{lancamentoComercialBean.back}" immediate="true"
 			update="form_principal" />
 	</p:panel>
 	<p:blockUI block="cad" trigger="btn_salvar" />

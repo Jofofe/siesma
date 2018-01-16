@@ -41,7 +41,7 @@ public class TipoLancamentoBean {
 		tipoLancamentoDAO = new TipoLancamentoDAO();
 		tipoPagamentoDAO = new TipoPagamentoDAO();
 		unidadeMedidaDAO = new UnidadeMedidaDAO();
-		setTiposLancamentos(tipoLancamentoDAO.listar(TipoLancamento.class));
+		setTiposLancamentos(tipoLancamentoDAO.listarTodosSemDistincao());
 		setTiposPagamentos(tipoPagamentoDAO.listar(TipoPagamento.class));
 		setUnidadesMedidas(unidadeMedidaDAO.listar(UnidadeMedida.class));
 		setTipoLancamento(null);
