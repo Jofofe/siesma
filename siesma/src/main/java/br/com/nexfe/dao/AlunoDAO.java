@@ -13,5 +13,5 @@ public class AlunoDAO extends DaoImpl<Aluno> {
 		TypedQuery<Aluno> query = em.createNamedQuery("Aluno.selectAllNoDistinction", Aluno.class);
 		return query.getResultList(); 
 	}
-
+	
 }

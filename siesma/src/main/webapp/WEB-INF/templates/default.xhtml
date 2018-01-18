@@ -12,11 +12,12 @@
 </h:head>
 <h:body>
 
-
-	<h:form>
+	<h:form id="form_home">
+	
 		<p:growl id="messages" />
 
 		<p:menubar>
+		
 			<p:submenu label="Usuarios" icon="ui-icon-person">
 				<p:menuitem value="Empregado" outcome="pretty:empregado" />
 				<p:menuitem value="Aluno" outcome="pretty:aluno" />
@@ -42,17 +43,14 @@
 				<p:menuitem value="Lançamento Comercial" outcome="pretty:lancamentoComercial" />
 			</p:submenu>
 
-
-
-
 			<p:submenu label="Ajuda" icon="ui-icon-help">
 				<p:menuitem value="Sobre" url="#"  onclick="PF('dlg').show();"/>
 			</p:submenu>
 
-			<p:menuitem value="Sair"
-				url="#"
-				icon="ui-icon-close" />
-
+			<f:facet name="options">
+            	<p:commandButton value="Sair" oncomplete="PF('confirmaSair').show();"
+            		icon="ui-icon-extlink"/>
+        	</f:facet>
 
 		</p:menubar>
 	</h:form>
@@ -62,6 +60,17 @@
 	<ui:insert name="content">
 
 	</ui:insert>
+	
+	<p:confirmDialog
+		message="Deseja realmente encerrar a sessão do usuario #{usuarioBean.usuario.nome}?"
+		widgetVar="confirmaSair">
+
+		<p:commandButton value="Sim" update="form_home"
+			oncomplete="PF('confirmaSair').hide();"
+			action="#{usuarioBean.logout}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaSair').hide();" />
+	</p:confirmDialog>
 
 	<p:dialog header="Sobre" widgetVar="dlg" showEffect="explode"
 		hideEffect="bounce" height="100">

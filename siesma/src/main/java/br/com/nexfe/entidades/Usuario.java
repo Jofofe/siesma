@@ -13,10 +13,15 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USUARIO")
+@NamedQueries(value = { 
+		@NamedQuery(name="Usuario.selectLogin", query="select e from Usuario e where e.email = :email and e.senha = :senha")
+} )
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements Serializable {
 	

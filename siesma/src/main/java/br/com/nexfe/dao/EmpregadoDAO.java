@@ -20,5 +20,5 @@ public class EmpregadoDAO extends DaoImpl<Empregado> {
 		Query query = em.createNamedQuery("Empregado.listarProfessores", Empregado.class);
 		return query.getResultList(); 
 	}
-
+	
 }
