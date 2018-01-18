@@ -118,6 +118,18 @@ public class AlunoBean {
 			FacesMessage msg = new FacesMessage("Email invalido!");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
+		} else {
+			for(Aluno a : getAlunos()) {
+				if(a.getEmail().equalsIgnoreCase(email)) {
+					if(getAluno().getIdUsuario() != null && getAluno().getIdUsuario() == a.getIdUsuario()) {
+						System.out.println("Trouxe o mesmo email do aluno sendo alterado");
+					} else {
+						FacesMessage msg = new FacesMessage("Email já existente!");
+						msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+						throw new ValidatorException(msg);
+					}
+				}
+			}
 		}
 	}
 

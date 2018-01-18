@@ -18,6 +18,10 @@
 				sortBy="#{item.nome}" filterBy="#{item.nome}">
 				<h:outputText value="#{item.nome}" />
 			</p:column>
+			<p:column headerText="Email" filterMatchMode="contains"
+				sortBy="#{item.email}" filterBy="#{item.email}">
+				<h:outputText value="#{item.email}" />
+			</p:column>
 			<p:column headerText="CPF" filterMatchMode="contains"
 				sortBy="#{item.cpf}" filterBy="#{item.cpf}">
 				<h:outputText value="#{item.cpf}" />

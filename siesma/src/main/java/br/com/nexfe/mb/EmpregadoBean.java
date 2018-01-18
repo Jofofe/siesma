@@ -114,6 +114,18 @@ public class EmpregadoBean {
 			FacesMessage msg = new FacesMessage("Email invalido!");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
+		} else {
+			for(Empregado e : getEmpregados()) {
+				if(e.getEmail().equalsIgnoreCase(email)) {
+					if(getEmpregado().getIdUsuario() != null && getEmpregado().getIdUsuario() == e.getIdUsuario()) {
+						System.out.println("Trouxe o mesmo email do empregado sendo alterado");
+					} else {
+						FacesMessage msg = new FacesMessage("Email já existente!");
+						msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+						throw new ValidatorException(msg);
+					}
+				}
+			}
 		}
 	}
 
