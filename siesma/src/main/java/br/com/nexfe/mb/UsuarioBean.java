@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.nexfe.dao.UsuarioDAO;
 import br.com.nexfe.entidades.Usuario;
+import br.com.nexfe.util.UtilCrypt;
  
 @ManagedBean
 @SessionScoped
@@ -45,9 +46,8 @@ public class UsuarioBean implements Serializable {
 			return null;
 		} else{	
 			usuarioDAO = new UsuarioDAO();
-			setUsuario(usuarioDAO.login(getEmail(), getSenha()));
+			setUsuario(usuarioDAO.login(getEmail(), UtilCrypt.criptografia(getSenha())));
 			if(getUsuario() != null){
-				getUsuario().setSenha(null);
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				facesContext.getExternalContext().getSessionMap().put("usuarioAutenticado", getUsuario());
 				return "paginas/home?faces-redirect=true";

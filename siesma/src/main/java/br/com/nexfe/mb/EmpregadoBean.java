@@ -17,6 +17,7 @@ import br.com.nexfe.dao.NivelAcessoDAO;
 import br.com.nexfe.entidades.Empregado;
 import br.com.nexfe.entidades.Funcao;
 import br.com.nexfe.util.UtilCpf;
+import br.com.nexfe.util.UtilCrypt;
 
 @ManagedBean
 @ViewScoped
@@ -67,16 +68,22 @@ public class EmpregadoBean {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			getEmpregado().setDtCadastro(new Date());
-			if(getEmpregado().getFuncao().getNomeFuncao().compareTo(ConstantesNivelAcesso.ADMINISTRATIVO.getNome()) == 0) {
-				getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ADMINISTRATIVO.getChave()));
-			} else {
-				getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.DOCENTE.getChave()));
-			}
+			addPostValues();
 			empregadoDAO.salvar(getEmpregado());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
 		init();
+	}
+	
+	private void addPostValues() {
+		String senhaCrypt = getEmpregado().getSenha();
+		getEmpregado().setDtCadastro(new Date());
+		if(getEmpregado().getFuncao().getNomeFuncao().compareTo(ConstantesNivelAcesso.ADMINISTRATIVO.getNome()) == 0) {
+			getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ADMINISTRATIVO.getChave()));
+		} else {
+			getEmpregado().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.DOCENTE.getChave()));
+		}
+		getEmpregado().setSenha(UtilCrypt.criptografia(senhaCrypt));
 	}
 	
 	public void selectDelete(Empregado emp){

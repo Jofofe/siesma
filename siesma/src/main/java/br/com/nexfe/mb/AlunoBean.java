@@ -19,6 +19,7 @@ import br.com.nexfe.entidades.Aluno;
 import br.com.nexfe.entidades.Genero;
 import br.com.nexfe.entidades.Uf;
 import br.com.nexfe.util.UtilCpf;
+import br.com.nexfe.util.UtilCrypt;
 
 @ManagedBean
 @ViewScoped
@@ -75,12 +76,18 @@ public class AlunoBean {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Alterado com sucesso!"));
 			}
 		} else {
-			getAluno().setDtCadastro(new Date());
-			getAluno().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ALUNO.getChave()));
+			addPostValues();
 			alunoDAO.salvar(getAluno());	
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
 		init();
+	}
+	
+	private void addPostValues() {
+		String senhaCrypt = getAluno().getSenha();
+		getAluno().setDtCadastro(new Date());
+		getAluno().setNivelAcesso(nivelAcessoDAO.retornaNivelAcesso(ConstantesNivelAcesso.ALUNO.getChave()));
+		getAluno().setSenha(UtilCrypt.criptografia(senhaCrypt));
 	}
 	
 	public void selectDelete(Aluno a){
