@@ -29,7 +29,7 @@ public class Matricula implements Serializable {
 	private Long idMatricula;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_USUARIO")
+	@JoinColumn(name = "ID_ALUNO")
 	private Aluno aluno;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

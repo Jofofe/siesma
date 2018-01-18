@@ -28,7 +28,7 @@ public class DescontoAplicado implements Serializable {
 	private Long idDescontoAplicado;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_USUARIO")
+	@JoinColumn(name = "ID_ALUNO")
 	private Aluno aluno;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -30,7 +30,7 @@ public class ProfessorDisciplina implements Serializable {
 	private Long idProfessorDisciplina;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_USUARIO")
+	@JoinColumn(name = "ID_EMPREGADO")
 	private Empregado empregado;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

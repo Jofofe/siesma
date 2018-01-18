@@ -20,7 +20,7 @@ import javax.persistence.Table;
 		@NamedQuery(name="Aluno.selectAll", query="select e from Aluno e where e.dtFimVinculo is null order by e.nome")
 } )
 @Table(name = "ALUNO")
-@PrimaryKeyJoinColumn(name="ID_USUARIO")
+@PrimaryKeyJoinColumn(name="ID_ALUNO", referencedColumnName = "ID_USUARIO")
 public class Aluno extends Usuario {
 
 	private static final long serialVersionUID = 9005969662213209863L;

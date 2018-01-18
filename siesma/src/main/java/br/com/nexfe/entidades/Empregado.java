@@ -22,7 +22,7 @@ import javax.persistence.Table;
 				+ "and e.dtFimVinculo is null order by e.nome") 
 })
 @Table(name = "EMPREGADO")
-@PrimaryKeyJoinColumn(name="ID_USUARIO")
+@PrimaryKeyJoinColumn(name="ID_EMPREGADO", referencedColumnName = "ID_USUARIO")
 public class Empregado extends Usuario{
 
 	private static final long serialVersionUID = 2128384515857966003L;

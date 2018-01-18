@@ -5,67 +5,67 @@
    http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
 
 	<url-mapping id="empregado">
-		<pattern value="/empregado/" />
+		<pattern value="/paginas/empregado/" />
 		<view-id value="/paginas/empregado/page_principal.xhtml" />
 		<action onPostback="false">#{empregadoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="aluno">
-		<pattern value="/aluno/" />
+		<pattern value="/paginas/aluno/" />
 		<view-id value="/paginas/aluno/page_principal.xhtml" />
 		<action onPostback="false">#{alunoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="curso">
-		<pattern value="/curso/" />
+		<pattern value="/paginas/curso/" />
 		<view-id value="/paginas/curso/page_principal.xhtml" />
 		<action onPostback="false">#{cursoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="modulo">
-		<pattern value="/modulo/" />
+		<pattern value="/paginas/modulo/" />
 		<view-id value="/paginas/modulo/page_principal.xhtml" />
 		<action onPostback="false">#{moduloBean.init}</action>
 	</url-mapping>
 	<url-mapping id="disciplina">
-		<pattern value="/disciplina/" />
+		<pattern value="/paginas/disciplina/" />
 		<view-id value="/paginas/disciplina/page_principal.xhtml" />
 		<action onPostback="false">#{disciplinaBean.init}</action>
 	</url-mapping>
 	<url-mapping id="professorDisciplina">
-		<pattern value="/professorDisciplina/" />
+		<pattern value="/paginas/professorDisciplina/" />
 		<view-id value="/paginas/professorDisciplina/page_principal.xhtml" />
 		<action onPostback="false">#{professorDisciplinaBean.init}</action>
 	</url-mapping>
 	<url-mapping id="matricula">
-		<pattern value="/matricula/" />
+		<pattern value="/paginas/matricula/" />
 		<view-id value="/paginas/matricula/page_principal.xhtml" />
 		<action onPostback="false">#{matriculaBean.init}</action>
 	</url-mapping>
 	<url-mapping id="desconto">
-		<pattern value="/desconto/" />
+		<pattern value="/paginas/desconto/" />
 		<view-id value="/paginas/desconto/page_principal.xhtml" />
 		<action onPostback="false">#{descontoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="avaliacao">
-		<pattern value="/avaliacao/" />
+		<pattern value="/paginas/avaliacao/" />
 		<view-id value="/paginas/avaliacao/page_principal.xhtml" />
 		<action onPostback="false">#{avaliacaoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="descontoAplicado">
-		<pattern value="/descontoAplicado/" />
+		<pattern value="/paginas/descontoAplicado/" />
 		<view-id value="/paginas/descontoAplicado/page_principal.xhtml" />
 		<action onPostback="false">#{descontoAplicadoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="formaPagamento">
-		<pattern value="/formaPagamento/" />
+		<pattern value="/paginas/formaPagamento/" />
 		<view-id value="/paginas/formaPagamento/page_principal.xhtml" />
 		<action onPostback="false">#{formaPagamentoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="tipoLancamento">
-		<pattern value="/tipoLancamento/" />
+		<pattern value="/paginas/tipoLancamento/" />
 		<view-id value="/paginas/tipoLancamento/page_principal.xhtml" />
 		<action onPostback="false">#{tipoLancamentoBean.init}</action>
 	</url-mapping>
 	<url-mapping id="lancamentoComercial">
-		<pattern value="/lancamentoComercial/" />
+		<pattern value="/paginas/lancamentoComercial/" />
 		<view-id value="/paginas/lancamentoComercial/page_principal.xhtml" />
 		<action onPostback="false">#{lancamentoComercialBean.init}</action>
 	</url-mapping>
