@@ -42,8 +42,9 @@
 				rendered="#{lancamentoComercialBean.tipo == 2}"/>
 				
 			<h:outputLabel for="valor" value="* Valor recebimento:" />
-			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}" 
-				maxlength="9" required="true" label="Valor recebimento"/> 
+			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}"
+				decimalSeparator="," thousandSeparator="." minValue="0.00" maxValue="999999999.99"
+				symbol="R$ " required="true" label="Valor recebimento"/> 
 
 			<p:outputLabel for="dtPrevista" value="Data prevista:" />
 			<p:calendar id="dtPrevista" value="#{lancamentoComercialBean.lancamentoComercial.dtPrevista}"

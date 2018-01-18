@@ -23,8 +23,8 @@
 				<h:outputText value="#{item.cargaHoraria}" />
 			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
-				sortBy="#{item.valorCurso}" filterBy="#{item.valorCurso}">
-				<h:outputText value="#{item.valorCurso}" />
+				sortBy="R$ #{item.valorCurso}" filterBy="R$ #{item.valorCurso}">
+				<h:outputText value="R$ #{item.valorCurso}" />
 			</p:column>
 			<p:column headerText="Desativado" filterMatchMode="contains"
 				sortBy="#{item.inExcluido}" filterBy="#{item.inExcluido}">

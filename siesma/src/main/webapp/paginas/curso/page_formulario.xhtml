@@ -20,7 +20,8 @@
 			
 			<h:outputLabel for="valorCurso" value="* Valor curso:" />
 			<p:inputNumber id="valorCurso" value="#{cursoBean.curso.valorCurso}" 
-				maxlength="9" required="true" label="Valor curso"/>  
+				decimalSeparator="," thousandSeparator="." minValue="0.00" maxValue="999999999.99"
+				symbol="R$ " required="true" label="Valor curso"/>  
 			
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"

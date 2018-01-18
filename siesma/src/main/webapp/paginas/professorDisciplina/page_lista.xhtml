@@ -22,6 +22,10 @@
 				sortBy="#{item.empregado.nome}" filterBy="#{item.empregado.nome}">
 				<h:outputText value="#{item.empregado.nome}" />
 			</p:column>
+			<p:column headerText="Valor hora" filterMatchMode="contains"
+				sortBy="R$ #{item.empregado.valorHora}" filterBy="R$ #{item.empregado.valorHora}">
+				<h:outputText value="R$ #{item.empregado.valorHora}" />
+			</p:column>
 			<p:column headerText="Data de início" filterMatchMode="contains"
 				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
 				<h:outputText value="#{item.dtInicio}" />

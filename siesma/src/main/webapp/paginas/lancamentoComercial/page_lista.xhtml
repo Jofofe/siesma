@@ -38,8 +38,8 @@
 				<h:outputText value="#{item.tipoLancamento.descricao}" />
 			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
-				sortBy="#{item.vlRecebimento}" filterBy="#{item.vlRecebimento}">
-				<h:outputText value="#{item.vlRecebimento}" />
+				sortBy="R$ #{item.vlRecebimento}" filterBy="R$ #{item.vlRecebimento}">
+				<h:outputText value="R$ #{item.vlRecebimento}" />
 			</p:column>
 			<p:column headerText="Data prevista" filterMatchMode="contains"
 				sortBy="#{item.dtPrevista}" filterBy="#{item.dtPrevista}">
