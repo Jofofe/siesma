@@ -41,18 +41,18 @@
 				var="e" itemLabel="#{e.nome}" itemValue="#{e}" forceSelection="true" label="Empregado"
 				rendered="#{lancamentoComercialBean.tipo == 2}"/>
 				
-			<h:outputLabel for="valor" value="* Valor recebimento:" />
+			<h:outputLabel for="valor" value="* Valor:" />
 			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}"
 				decimalSeparator="," thousandSeparator="." minValue="0.00" maxValue="999999999.99"
-				symbol="R$ " required="true" label="Valor recebimento"/> 
+				symbol="R$ " required="true" label="Valor"/> 
 
 			<p:outputLabel for="dtPrevista" value="Data prevista:" />
 			<p:calendar id="dtPrevista" value="#{lancamentoComercialBean.lancamentoComercial.dtPrevista}"
 				showOn="button" label="Data prevista" />
 
-			<p:outputLabel for="dtRecebimento" value="Data de recebimento:" />
+			<p:outputLabel for="dtRecebimento" value="Data de lançamento:" />
 			<p:calendar id="dtRecebimento" value="#{lancamentoComercialBean.lancamentoComercial.dtRecebimento}"
-				showOn="button" label="Data de recebimento" />
+				showOn="button" label="Data de lançamento" />
 			
 			<h:outputLabel for="obs" value="Observação:" />
 			<p:inputTextarea id="obs" value="#{lancamentoComercialBean.lancamentoComercial.obsRecebimento}" label="Observação" rows="5" cols="30" 

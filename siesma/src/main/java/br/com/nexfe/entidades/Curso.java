@@ -2,6 +2,7 @@ package br.com.nexfe.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,11 +47,21 @@ public class Curso implements Serializable {
 	@Column(name = "IN_EXCLUIDO", nullable = false)
 	private String inExcluido;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_TURNO")
+	private Turno turno;
+	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Modulo.class, mappedBy="curso")
 	private List<Modulo> modulos;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Matricula.class, mappedBy="curso")
 	private List<Matricula> matriculas;
+	
+	@Column(name = "DT_INICIO", nullable = false)
+	private Date dtInicio;
+	
+	@Column(name = "DT_FIM")
+	private Date dtFim;
 
 	public Long getIdCurso() {
 		return idCurso;
@@ -106,13 +119,41 @@ public class Curso implements Serializable {
 		this.modulos = modulos;
 	}
 
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+	public Date getDtInicio() {
+		return dtInicio;
+	}
+
+	public void setDtInicio(Date dtInicio) {
+		this.dtInicio = dtInicio;
+	}
+
+	public Date getDtFim() {
+		return dtFim;
+	}
+
+	public void setDtFim(Date dtFim) {
+		this.dtFim = dtFim;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cargaHoraria == null) ? 0 : cargaHoraria.hashCode());
+		result = prime * result + ((dtFim == null) ? 0 : dtFim.hashCode());
+		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
 		result = prime * result + ((idCurso == null) ? 0 : idCurso.hashCode());
+		result = prime * result + ((inExcluido == null) ? 0 : inExcluido.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((turno == null) ? 0 : turno.hashCode());
 		result = prime * result + ((valorCurso == null) ? 0 : valorCurso.hashCode());
 		return result;
 	}
@@ -131,15 +172,35 @@ public class Curso implements Serializable {
 				return false;
 		} else if (!cargaHoraria.equals(other.cargaHoraria))
 			return false;
+		if (dtFim == null) {
+			if (other.dtFim != null)
+				return false;
+		} else if (!dtFim.equals(other.dtFim))
+			return false;
+		if (dtInicio == null) {
+			if (other.dtInicio != null)
+				return false;
+		} else if (!dtInicio.equals(other.dtInicio))
+			return false;
 		if (idCurso == null) {
 			if (other.idCurso != null)
 				return false;
 		} else if (!idCurso.equals(other.idCurso))
 			return false;
+		if (inExcluido == null) {
+			if (other.inExcluido != null)
+				return false;
+		} else if (!inExcluido.equals(other.inExcluido))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (turno == null) {
+			if (other.turno != null)
+				return false;
+		} else if (!turno.equals(other.turno))
 			return false;
 		if (valorCurso == null) {
 			if (other.valorCurso != null)

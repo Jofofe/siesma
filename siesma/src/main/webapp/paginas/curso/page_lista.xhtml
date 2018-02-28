@@ -22,9 +22,17 @@
 				sortBy="#{item.cargaHoraria}" filterBy="#{item.cargaHoraria}">
 				<h:outputText value="#{item.cargaHoraria}" />
 			</p:column>
+			<p:column headerText="Turno" filterMatchMode="contains"
+				sortBy="#{item.turno.nomeTurno}" filterBy="#{item.turno.nomeTurno}">
+				<h:outputText value="#{item.turno.nomeTurno}" />
+			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
 				sortBy="R$ #{item.valorCurso}" filterBy="R$ #{item.valorCurso}">
 				<h:outputText value="R$ #{item.valorCurso}" />
+			</p:column>
+			<p:column headerText="Data de início" filterMatchMode="contains"
+				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
+				<h:outputText value="#{item.dtInicio}" />
 			</p:column>
 			<p:column headerText="Desativado" filterMatchMode="contains"
 				sortBy="#{item.inExcluido}" filterBy="#{item.inExcluido}">

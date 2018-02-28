@@ -11,13 +11,17 @@ import javax.faces.validator.ValidatorException;
 
 import br.com.nexfe.constantes.ConstantesExclusao;
 import br.com.nexfe.dao.CursoDAO;
+import br.com.nexfe.dao.TurnoDAO;
 import br.com.nexfe.entidades.Curso;
+import br.com.nexfe.entidades.Turno;
 
 @ManagedBean
 @ViewScoped
 public class CursoBean {
 	
 	private CursoDAO cursoDAO;
+	
+	private TurnoDAO turnoDAO;
 	
 	private Curso curso;
 	
@@ -27,9 +31,13 @@ public class CursoBean {
 	
 	private List<Curso> cursosFiltrados;
 	
+	private List<Turno> turnos;
+	
 	public void init() {
 		cursoDAO = new CursoDAO();
+		turnoDAO = new TurnoDAO();
 		setCursos(cursoDAO.listarTodosSemDistincao());
+		setTurnos(turnoDAO.listar(Turno.class));
 		setCurso(null);
 	}
 
@@ -128,6 +136,14 @@ public class CursoBean {
 
 	public void setCursosFiltrados(List<Curso> cursosFiltrados) {
 		this.cursosFiltrados = cursosFiltrados;
+	}
+
+	public List<Turno> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
 	}
 	
 }
