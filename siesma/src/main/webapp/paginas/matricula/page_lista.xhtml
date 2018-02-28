@@ -22,6 +22,10 @@
 				sortBy="#{item.curso.nome}" filterBy="#{item.curso.nome}">
 				<h:outputText value="#{item.curso.nome}" />
 			</p:column>
+			<p:column headerText="Modulo Inicial" filterMatchMode="contains"
+				sortBy="#{item.modulo.nome}" filterBy="#{item.modulo.nome}">
+				<h:outputText value="#{item.modulo.nome}" />
+			</p:column>
 			<p:column headerText="Data Matricula" filterMatchMode="contains"
 				sortBy="#{item.dtMatricula}" filterBy="#{item.dtMatricula}">
 				<h:outputText value="#{item.dtMatricula}" />
