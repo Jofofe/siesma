@@ -36,6 +36,10 @@ public class Matricula implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_MODULO")
+	private Modulo modulo;
+	
 	@Column(name = "DT_MATRICULA", nullable = false)
 	private Date dtMatricula;
 	
@@ -104,4 +108,12 @@ public class Matricula implements Serializable {
 		this.dtCancelamento = dtCancelamento;
 	}
 
+	public Modulo getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(Modulo modulo) {
+		this.modulo = modulo;
+	}
+	
 }

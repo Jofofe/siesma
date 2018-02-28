@@ -8,16 +8,24 @@
 		rendered="#{matriculaBean.matricula != null}">
 		<p:panelGrid columns="2" id="itensCadastro">
 
-			<h:outputLabel for="aluno" value="* Aluno:" rendered="#{matriculaBean.matricula.idMatricula == null}"/>
-			<p:autoComplete id="aluno" value="#{matriculaBean.matricula.aluno}" required="true"
-				completeMethod="#{matriculaBean.autoCompleteAluno}" converter="alunoConverter"
-				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"
-				rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
-
 			<h:outputLabel for="curso" value="* Curso:" rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
 			<p:autoComplete id="curso" value="#{matriculaBean.matricula.curso}" required="true"
 				completeMethod="#{matriculaBean.autoCompleteCurso}" converter="cursoConverter"
 				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Curso"
+				rendered="#{matriculaBean.matricula.idMatricula  == null}">
+				<p:ajax event="itemSelect" update="form_principal, cad" />
+			</p:autoComplete>
+				
+			<h:outputLabel for="modulo" value="Modulo inicial:" rendered="#{matriculaBean.matricula.curso != null}"/>
+			<p:autoComplete id="modulo" value="#{matriculaBean.matricula.modulo}"
+				completeMethod="#{matriculaBean.autoCompleteModulo}" converter="moduloConverter"
+				var="m" itemLabel="#{m.nome}" itemValue="#{m}" forceSelection="true" label="Modulo"
+				rendered="#{matriculaBean.matricula.curso != null}"/>
+
+			<h:outputLabel for="aluno" value="* Aluno:" rendered="#{matriculaBean.matricula.idMatricula == null}"/>
+			<p:autoComplete id="aluno" value="#{matriculaBean.matricula.aluno}" required="true"
+				completeMethod="#{matriculaBean.autoCompleteAluno}" converter="alunoConverter"
+				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Aluno"
 				rendered="#{matriculaBean.matricula.idMatricula  == null}"/>
 
 			<p:outputLabel for="dtInicio" value="* Data de matrícula" />

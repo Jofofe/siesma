@@ -20,7 +20,9 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries(value = { 
 		@NamedQuery(name="Modulo.selectAllDate", query="select e from Modulo e where e.curso.inExcluido = 'N' "
-		+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome")
+		+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") ,
+		@NamedQuery(name="Modulo.selectModulosCurso", query="select e from Modulo e where e.curso.idCurso = :idCurso "
+				+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") 
 } )
 @Table(name = "MODULO")
 public class Modulo implements Serializable {
@@ -50,6 +52,9 @@ public class Modulo implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = DescontoAplicado.class, mappedBy="modulo")
 	private List<DescontoAplicado> descontosAplicados;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Matricula.class, mappedBy="modulo")
+	private List<Matricula> matriculas;
 	
 	public Long getIdModulo() {
 		return idModulo;
@@ -109,6 +114,14 @@ public class Modulo implements Serializable {
 	
 	public String getNomeComCurso() {
 		return nome + " - " + curso.getNome();
+	}
+	
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	@Override

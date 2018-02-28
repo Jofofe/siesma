@@ -11,9 +11,11 @@ import javax.faces.context.FacesContext;
 import br.com.nexfe.dao.AlunoDAO;
 import br.com.nexfe.dao.CursoDAO;
 import br.com.nexfe.dao.MatriculaDAO;
+import br.com.nexfe.dao.ModuloDAO;
 import br.com.nexfe.entidades.Aluno;
 import br.com.nexfe.entidades.Curso;
 import br.com.nexfe.entidades.Matricula;
+import br.com.nexfe.entidades.Modulo;
 
 @ManagedBean(name = "matriculaBean")
 @ViewScoped
@@ -25,6 +27,8 @@ public class MatriculaBean {
 	
 	private CursoDAO cursoDAO;
 	
+	private ModuloDAO moduloDAO;
+	
 	private Matricula matricula;
 	
 	private Matricula matriculaExclusao;
@@ -35,15 +39,19 @@ public class MatriculaBean {
 	
 	private List<Curso> cursos;
 	
+	private List<Modulo> modulos;
+	
 	private List<Matricula> matriculasFiltradas;
 	
 	public void init() {
 		matriculaDAO = new MatriculaDAO();
 		alunoDAO = new AlunoDAO();
 		cursoDAO = new CursoDAO();
+		moduloDAO = new ModuloDAO();
 		setMatriculas(matriculaDAO.listar(Matricula.class));
 		setAlunos(alunoDAO.listar(Aluno.class));
 		setCursos(cursoDAO.listar(Curso.class));
+		setModulos(moduloDAO.listarDataAtual());
 		setMatricula(null);
 	}
 
@@ -104,6 +112,19 @@ public class MatriculaBean {
 		for (Aluno a : getAlunos()) {
 			if (a.getNome().toUpperCase().startsWith(query.toUpperCase())) {
 				sugestoes.add(a);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Modulo> autoCompleteModulo(String query) {
+		List<Modulo> sugestoes = new ArrayList<Modulo>();
+		if(getMatricula().getCurso() != null && getMatricula().getCurso().getIdCurso() != null){
+			setModulos(moduloDAO.listarModulosCurso(getMatricula().getCurso().getIdCurso()));
+		}
+		for (Modulo m : getModulos()) {
+			if (m.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(m);
 			}
 		}
 		return sugestoes;
@@ -180,6 +201,14 @@ public class MatriculaBean {
 
 	public void setMatriculasFiltradas(List<Matricula> matriculasFiltradas) {
 		this.matriculasFiltradas = matriculasFiltradas;
+	}
+
+	public List<Modulo> getModulos() {
+		return modulos;
+	}
+
+	public void setModulos(List<Modulo> modulos) {
+		this.modulos = modulos;
 	}
 	
 }
