@@ -23,23 +23,13 @@
 				sortBy="#{item.tipoContemplado}" filterBy="#{item.tipoContemplado}">
 				<h:outputText value="#{item.tipoContemplado}" />
 			</p:column>
-			
-			<p:column headerText="Tipo de lançamento" filterMatchMode="contains"
-				sortBy="#{item.tipoLancamento.descricao}" filterBy="#{item.tipoLancamento.descricao}">
-				<h:outputText value="#{item.tipoLancamento.descricao}" />
-			</p:column>
-			
-			<p:column headerText="Forma de pagamento" filterMatchMode="contains"
-				sortBy="#{item.formaPagamento.nome}" filterBy="#{item.formaPagamento.nome}">
-				<h:outputText value="#{item.formaPagamento.nome}" />
-			</p:column>
-			<p:column headerText="Tipo de lançamento" filterMatchMode="contains"
-				sortBy="#{item.tipoLancamento.descricao}" filterBy="#{item.tipoLancamento.descricao}">
-				<h:outputText value="#{item.tipoLancamento.descricao}" />
-			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
 				sortBy="R$ #{item.vlRecebimento}" filterBy="R$ #{item.vlRecebimento}">
 				<h:outputText value="R$ #{item.vlRecebimento}" />
+			</p:column>
+			<p:column headerText="Desconto" filterMatchMode="contains"
+				sortBy="#{item.desconto.nome}" filterBy="#{item.desconto.nome}">
+				<h:outputText value="#{item.desconto.nome}" />
 			</p:column>
 			<p:column headerText="Data prevista" filterMatchMode="contains"
 				sortBy="#{item.dtPrevista}" filterBy="#{item.dtPrevista}">

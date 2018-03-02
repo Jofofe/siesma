@@ -38,8 +38,12 @@ public class LancamentoComercial implements Serializable {
 	private TipoLancamento tipoLancamento;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_ALUNO")
-	private Aluno aluno;
+	@JoinColumn(name = "ID_MATRICULA")
+	private Matricula matricula;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_DESCONTO")
+	private Desconto desconto;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_EMPREGADO")
@@ -84,12 +88,20 @@ public class LancamentoComercial implements Serializable {
 		this.tipoLancamento = tipoLancamento;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
+	public Matricula getMatricula() {
+		return matricula;
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+
+	public Desconto getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Desconto desconto) {
+		this.desconto = desconto;
 	}
 
 	public Empregado getEmpregado() {
@@ -141,18 +153,18 @@ public class LancamentoComercial implements Serializable {
 	}
 	
 	public String getNomeContemplado() {
-		if(getAluno() == null) {
+		if(getMatricula() == null) {
 			return getEmpregado().getNome();
 		} else {
-			return getAluno().getNome();
+			return getMatricula().getAluno().getNome() + " - " + getMatricula().getCurso().getNome();
 		}
 	}
 	
 	public String getTipoContemplado() {
-		if(getAluno() == null) {
+		if(getMatricula() == null) {
 			return "Empregado";
 		} else {
-			return "Aluno";
+			return "Aluno matriculado";
 		}
 	}
 

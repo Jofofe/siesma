@@ -9,15 +9,17 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.nexfe.constantes.ConstantesStatus;
-import br.com.nexfe.dao.AlunoDAO;
+import br.com.nexfe.dao.DescontoDAO;
 import br.com.nexfe.dao.EmpregadoDAO;
 import br.com.nexfe.dao.FormaPagamentoDAO;
 import br.com.nexfe.dao.LancamentoComercialDAO;
+import br.com.nexfe.dao.MatriculaDAO;
 import br.com.nexfe.dao.TipoLancamentoDAO;
-import br.com.nexfe.entidades.Aluno;
+import br.com.nexfe.entidades.Desconto;
 import br.com.nexfe.entidades.Empregado;
 import br.com.nexfe.entidades.FormaPagamento;
 import br.com.nexfe.entidades.LancamentoComercial;
+import br.com.nexfe.entidades.Matricula;
 import br.com.nexfe.entidades.TipoLancamento;
 
 @ManagedBean
@@ -30,9 +32,11 @@ public class LancamentoComercialBean {
 	
 	private TipoLancamentoDAO tipoLancamentoDAO;
 	
-	private AlunoDAO alunoDAO;
+	private MatriculaDAO matriculaDAO;
 	
 	private EmpregadoDAO empregadoDAO;
+	
+	private DescontoDAO descontoDAO;
 	
 	private LancamentoComercial lancamentoComercial;
 	
@@ -42,9 +46,11 @@ public class LancamentoComercialBean {
 	
 	private List<TipoLancamento> tiposLancamentos;
 	
-	private List<Aluno> alunos;
+	private List<Matricula> matriculas;
 	
 	private List<Empregado> empregados;
+	
+	private List<Desconto> descontos;
 	
 	private List<LancamentoComercial> lancamentosComerciais;
 	
@@ -56,13 +62,15 @@ public class LancamentoComercialBean {
 		lancamentoComercialDAO = new LancamentoComercialDAO();
 		formaPagamentoDAO = new FormaPagamentoDAO();
 		tipoLancamentoDAO = new TipoLancamentoDAO();
-		alunoDAO = new AlunoDAO();
+		matriculaDAO = new MatriculaDAO();
 		empregadoDAO = new EmpregadoDAO();
+		descontoDAO = new DescontoDAO();
 		setFormasPagamentos(formaPagamentoDAO.listarDataAtual());
 		setLancamentosComerciais(lancamentoComercialDAO.listarDataAtual());
 		setTiposLancamentos(tipoLancamentoDAO.listar(TipoLancamento.class));
-		setAlunos(alunoDAO.listar(Aluno.class));
+		setMatriculas(matriculaDAO.listar(Matricula.class));
 		setEmpregados(empregadoDAO.listarProfessores());
+		setDescontos(descontoDAO.listarDataAtual());
 		setLancamentoComercial(null);
 		setTipo(null);
 	}
@@ -143,11 +151,21 @@ public class LancamentoComercialBean {
 		return sugestoes;
 	}
 	
-	public List<Aluno> autoCompleteAluno(String query) {
-		List<Aluno> sugestoes = new ArrayList<Aluno>();
-		for (Aluno a : getAlunos()) {
-			if (a.getNome().toUpperCase().startsWith(query.toUpperCase())) {
-				sugestoes.add(a);
+	public List<Matricula> autoCompleteMatricula(String query) {
+		List<Matricula> sugestoes = new ArrayList<Matricula>();
+		for (Matricula m : getMatriculas()) {
+			if (m.getAluno().getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(m);
+			}
+		}
+		return sugestoes;
+	}
+	
+	public List<Desconto> autoCompleteDesconto(String query) {
+		List<Desconto> sugestoes = new ArrayList<Desconto>();
+		for (Desconto d : getDescontos()) {
+			if (d.getNome().toUpperCase().startsWith(query.toUpperCase())) {
+				sugestoes.add(d);
 			}
 		}
 		return sugestoes;
@@ -213,12 +231,20 @@ public class LancamentoComercialBean {
 		this.tiposLancamentos = tiposLancamentos;
 	}
 
-	public List<Aluno> getAlunos() {
-		return alunos;
+	public List<Matricula> getMatriculas() {
+		return matriculas;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
+	public List<Desconto> getDescontos() {
+		return descontos;
+	}
+
+	public void setDescontos(List<Desconto> descontos) {
+		this.descontos = descontos;
 	}
 
 	public List<Empregado> getEmpregados() {

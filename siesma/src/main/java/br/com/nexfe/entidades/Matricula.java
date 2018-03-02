@@ -2,6 +2,7 @@ package br.com.nexfe.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -51,6 +53,9 @@ public class Matricula implements Serializable {
 	
 	@Column(name = "DT_CANCELAMENTO")
 	private Date dtCancelamento;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = LancamentoComercial.class, mappedBy="matricula")
+	private List<LancamentoComercial> lancamentosComerciais;
 
 	public Long getIdMatricula() {
 		return idMatricula;
@@ -58,6 +63,10 @@ public class Matricula implements Serializable {
 
 	public void setIdMatricula(Long idMatricula) {
 		this.idMatricula = idMatricula;
+	}
+	
+	public String getAlunoCurso() {
+		return aluno.getNome() + " - " + curso.getNome();
 	}
 
 	public Aluno getAluno() {

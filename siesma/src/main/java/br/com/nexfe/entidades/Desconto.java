@@ -44,6 +44,9 @@ public class Desconto implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = DescontoAplicado.class, mappedBy="desconto")
 	private List<DescontoAplicado> descontosAplicados;
 	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = LancamentoComercial.class, mappedBy="desconto")
+	private List<LancamentoComercial> lancamentosComerciais;
+	
 	public Long getIdDesconto() {
 		return idDesconto;
 	}
