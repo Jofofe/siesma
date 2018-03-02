@@ -16,6 +16,18 @@
 				<f:selectItem itemLabel="Empregado" itemValue="2" />
 				<p:ajax event="change" update="form_principal, cad" />
 			</p:selectOneMenu>
+			
+			<h:outputLabel for="matricula" value="Matricula:" rendered="#{lancamentoComercialBean.tipo == 1}"/>
+			<p:autoComplete id="matricula" value="#{lancamentoComercialBean.lancamentoComercial.matricula}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteMatricula}" converter="matriculaConverter"
+				var="m" itemLabel="#{m.alunoCurso}" itemValue="#{m}" forceSelection="true" label="Matricula"
+				rendered="#{lancamentoComercialBean.tipo == 1}"/>
+				
+			<h:outputLabel for="empregado" value="Empregado:" rendered="#{lancamentoComercialBean.tipo == 2}"/>
+			<p:autoComplete id="empregado" value="#{lancamentoComercialBean.lancamentoComercial.empregado}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteEmpregado}" converter="empregadoConverter"
+				var="e" itemLabel="#{e.nome}" itemValue="#{e}" forceSelection="true" label="Empregado"
+				rendered="#{lancamentoComercialBean.tipo == 2}"/>
 
 			<h:outputLabel for="forma" value="* Forma de pagamento:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
 			<p:autoComplete id="forma" value="#{lancamentoComercialBean.lancamentoComercial.formaPagamento}" required="true"
@@ -28,18 +40,6 @@
 				completeMethod="#{lancamentoComercialBean.autoCompleteTipoLancamento}" converter="tipoLancamentoConverter"
 				var="t" itemLabel="#{t.descricao}" itemValue="#{t}" forceSelection="true" label="Tipo lançamento"
 				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
-				
-			<h:outputLabel for="matricula" value="Matricula:" rendered="#{lancamentoComercialBean.tipo == 1}"/>
-			<p:autoComplete id="matricula" value="#{lancamentoComercialBean.lancamentoComercial.matricula}"
-				completeMethod="#{lancamentoComercialBean.autoCompleteMatricula}" converter="matriculaConverter"
-				var="m" itemLabel="#{m.alunoCurso}" itemValue="#{m}" forceSelection="true" label="Matricula"
-				rendered="#{lancamentoComercialBean.tipo == 1}"/>
-				
-			<h:outputLabel for="empregado" value="Empregado:" rendered="#{lancamentoComercialBean.tipo == 2}"/>
-			<p:autoComplete id="empregado" value="#{lancamentoComercialBean.lancamentoComercial.empregado}"
-				completeMethod="#{lancamentoComercialBean.autoCompleteEmpregado}" converter="empregadoConverter"
-				var="e" itemLabel="#{e.nome}" itemValue="#{e}" forceSelection="true" label="Empregado"
-				rendered="#{lancamentoComercialBean.tipo == 2}"/>
 				
 			<h:outputLabel for="desconto" value="Desconto:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
 			<p:autoComplete id="desconto" value="#{lancamentoComercialBean.lancamentoComercial.desconto}"

@@ -34,23 +34,39 @@
 				sortBy="#{item.dtFimPrevisto}" filterBy="#{item.dtFimPrevisto}">
 				<h:outputText value="#{item.dtFimPrevisto}" />
 			</p:column>
+			<p:column headerText="Data de termino" filterMatchMode="contains"
+				sortBy="#{item.dtFimEfetivo}" filterBy="#{item.dtFimEfetivo}">
+				<h:outputText value="#{item.dtFimEfetivo}" />
+			</p:column>
+			<p:column headerText="Data de cancelamento" filterMatchMode="contains"
+				sortBy="#{item.dtCancelamento}" filterBy="#{item.dtCancelamento}">
+				<h:outputText value="#{item.dtCancelamento}" />
+			</p:column>
+			
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
 				<p:commandButton icon="ui-icon-pencil"
 					action="#{matriculaBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-arrowreturn-1-s"
 					style="color:red; margin-left:20px;"
 					actionListener="#{matriculaBean.selectDelete(item)}"
+					rendered="#{item.dtCancelamento == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
+				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+					style="color:red; margin-left:20px;"
+					actionListener="#{matriculaBean.selectDelete(item)}"
+					rendered="#{item.dtCancelamento != null}"
+					oncomplete="PF('confirmaReativacao').show();" update="form_principal" />
+					
 			</p:column>
 
 		</p:dataTable>
 
 	</p:panel>
 	<p:confirmDialog
-		message="Deseja realmente excluir a matricula do aluno #{matriculaBean.matriculaExclusao.aluno.nome}?"
+		message="Deseja realmente cancelar a matricula do aluno #{matriculaBean.matriculaExclusao.aluno.nome}?"
 		widgetVar="confirmaExclusao">
 
 		<p:commandButton value="Sim" update="form_principal"
@@ -58,6 +74,17 @@
 			action="#{matriculaBean.delete()}" />
 		<p:commandButton value="Não"
 			oncomplete="PF('confirmaExclusao').hide();" />
+	</p:confirmDialog>
+	
+	<p:confirmDialog
+		message="Deseja realmente reativar a matricula do aluno #{matriculaBean.matriculaExclusao.aluno.nome}?"
+		widgetVar="confirmaReativacao">
+
+		<p:commandButton value="Sim" update="form_principal"
+			oncomplete="PF('confirmaReativacao').hide();"
+			action="#{matriculaBean.reativar()}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaReativacao').hide();" />
 	</p:confirmDialog>
 
 

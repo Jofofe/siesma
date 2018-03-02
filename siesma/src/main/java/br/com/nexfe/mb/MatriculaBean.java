@@ -1,6 +1,7 @@
 package br.com.nexfe.mb;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -48,7 +49,7 @@ public class MatriculaBean {
 		alunoDAO = new AlunoDAO();
 		cursoDAO = new CursoDAO();
 		moduloDAO = new ModuloDAO();
-		setMatriculas(matriculaDAO.listar(Matricula.class));
+		setMatriculas(matriculaDAO.listarTodosSemDistincao());
 		setAlunos(alunoDAO.listar(Aluno.class));
 		setCursos(cursoDAO.listar(Curso.class));
 		setModulos(moduloDAO.listarDataAtual());
@@ -91,9 +92,18 @@ public class MatriculaBean {
 	}
 	   
 	public void delete(){
-		matriculaDAO.excluir(getMatriculaExclusao());
+		getMatriculaExclusao().setDtCancelamento(new Date());
+		matriculaDAO.alterar(getMatriculaExclusao());
 		setMatriculaExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
+		init();
+	}
+	
+	public void reativar(){
+		getMatriculaExclusao().setDtCancelamento(null);
+		matriculaDAO.alterar(getMatriculaExclusao());
+		setMatriculaExclusao(null);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Reativado com sucesso!"));
 		init();
 	}
 	

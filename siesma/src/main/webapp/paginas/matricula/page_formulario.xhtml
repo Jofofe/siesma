@@ -35,6 +35,10 @@
 			<p:outputLabel for="dtFimPrevisto" value="Data prevista de termino:" />
 			<p:calendar id="dtFimPrevisto" value="#{matriculaBean.matricula.dtFimPrevisto}"
 				showOn="button" label="Data prevista de termino" />
+				
+			<p:outputLabel for="dtFimEfetivo" value="Data de termino:" />
+			<p:calendar id="dtFimEfetivo" value="#{matriculaBean.matricula.dtFimEfetivo}"
+				showOn="button" label="Data de termino" />
 
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"

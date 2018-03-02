@@ -18,8 +18,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Matricula.selectAll", query="select e from Matricula e where e.dtCancelamento is null"
-		+ " and e.dtFimEfetivo is null and e.aluno.dtFimVinculo is null order by e.aluno.nome") } )
+@NamedQueries(value = { 
+		@NamedQuery(name="Matricula.selectAll", query="select e from Matricula e where e.dtCancelamento is null"
+		+ " and e.dtFimEfetivo is null and e.aluno.dtFimVinculo is null order by e.aluno.nome"), 
+		@NamedQuery(name="Matricula.selectAllNoDistinction", query="select e from Matricula e order by e.aluno.nome")	
+})
 @Table(name = "MATRICULA")
 public class Matricula implements Serializable {
 	
