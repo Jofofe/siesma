@@ -16,7 +16,7 @@
 				<p:ajax event="itemSelect" update="form_principal, cad" />
 			</p:autoComplete>
 				
-			<h:outputLabel for="modulo" value="* Modulo inicial:" rendered="#{matriculaBean.matricula.curso != null}"/>
+			<h:outputLabel for="modulo" value="* Modulo:" rendered="#{matriculaBean.matricula.curso != null}"/>
 			<p:autoComplete id="modulo" value="#{matriculaBean.matricula.modulo}" required="true"
 				completeMethod="#{matriculaBean.autoCompleteModulo}" converter="moduloConverter"
 				var="m" itemLabel="#{m.nome}" itemValue="#{m}" forceSelection="true" label="Modulo"

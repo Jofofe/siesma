@@ -69,5 +69,10 @@
 		<view-id value="/paginas/lancamentoComercial/page_principal.xhtml" />
 		<action onPostback="false">#{lancamentoComercialBean.init}</action>
 	</url-mapping>
+	<url-mapping id="presenca">
+		<pattern value="/paginas/presenca/" />
+		<view-id value="/paginas/presenca/page_principal.xhtml" />
+		<action onPostback="false">#{presencaBean.init}</action>
+	</url-mapping>
 	
 </pretty-config>
