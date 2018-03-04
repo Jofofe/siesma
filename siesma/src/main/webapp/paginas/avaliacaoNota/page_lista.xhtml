@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:panel header="Listas de notas"
+		rendered="#{avaliacaoNotaBean.avaliacao == null}">
+		<p:commandButton value="Nova lista de notas" icon="adicionar-icon"
+			action="#{avaliacaoNotaBean.add()}" update="form_principal" />
+
+		<p:dataTable id="tabela" value="#{avaliacaoNotaBean.avaliacoesComNotas}" var="item"
+			filteredValue="#{avaliacaoNotaBean.avaliacoesFiltradas}" paginator="true"
+			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Avaliação" filterMatchMode="contains"
+				sortBy="#{item.nome}" filterBy="#{item.nome}">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="Tipo de avaliação" filterMatchMode="contains"
+				sortBy="#{item.tipoAvaliacao.nomeAvaliacao}" filterBy="#{item.tipoAvaliacao.nomeAvaliacao}">
+				<h:outputText value="#{item.tipoAvaliacao.nomeAvaliacao}" />
+			</p:column>
+
+			<p:column headerText="Ação" style="text-align:center;" width="150"
+				exportable="false">
+				<p:commandButton icon="ui-icon-pencil"
+					action="#{avaliacaoNotaBean.edit(item)}" update="form_principal" />
+				<p:commandButton icon="ui-icon-close"
+					style="color:red; margin-left:20px;"
+					actionListener="#{avaliacaoNotaBean.selectDelete(item)}"
+					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
+					
+			</p:column>
+
+		</p:dataTable>
+
+	</p:panel>
+	<p:confirmDialog
+		message="Deseja realmente excluir as notas a avaliação #{avaliacaoNotaBean.avaliacaoExclusao.nome}?"
+		widgetVar="confirmaExclusao">
+
+		<p:commandButton value="Sim" update="form_principal"
+			oncomplete="PF('confirmaExclusao').hide();"
+			action="#{avaliacaoNotaBean.delete()}" />
+		<p:commandButton value="Não"
+			oncomplete="PF('confirmaExclusao').hide();" />
+			
+	</p:confirmDialog>
+
+</ui:composition>

@@ -74,5 +74,10 @@
 		<view-id value="/paginas/presenca/page_principal.xhtml" />
 		<action onPostback="false">#{presencaBean.init}</action>
 	</url-mapping>
+	<url-mapping id="avaliacaoNota">
+		<pattern value="/paginas/avaliacaoNota/" />
+		<view-id value="/paginas/avaliacaoNota/page_principal.xhtml" />
+		<action onPostback="false">#{avaliacaoNotaBean.init}</action>
+	</url-mapping>
 	
 </pretty-config>

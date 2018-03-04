@@ -16,5 +16,12 @@ public class AvaliacaoDAO extends DaoImpl<Avaliacao> {
 		query.setParameter("dataAtual", new Date());
 		return query.getResultList(); 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Avaliacao> listarAvaliacoesComNota() {
+		Query query = em.createNamedQuery("Avaliacao.selectAllComNota", Avaliacao.class);
+		query.setParameter("dataAtual", new Date());
+		return query.getResultList(); 
+	}
 
 }

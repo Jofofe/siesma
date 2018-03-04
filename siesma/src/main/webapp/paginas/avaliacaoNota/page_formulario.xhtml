@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="cad" header="Cadastro de Lista de notas" style="width:550px;height:auto;margin:auto;"
+		rendered="#{avaliacaoNotaBean.avaliacao != null}">
+		<p:panelGrid columns="2" id="itensCadastro">
+
+			<h:outputLabel for="avaliacao" value="* Avaliação" rendered="#{avaliacaoNotaBean.operacaoInclusao}"/>
+			<p:autoComplete id="avaliacao" value="#{avaliacaoNotaBean.avaliacao}" required="true"
+				completeMethod="#{avaliacaoNotaBean.autoCompleteAvaliacao}" converter="avaliacaoConverter"
+				var="a" itemLabel="#{a.nome}" itemValue="#{a}" forceSelection="true" label="Avaliação"
+				rendered="#{avaliacaoNotaBean.operacaoInclusao}" valueChangeListener="#{avaliacaoNotaBean.carregaAlunosAvaliacoes}">
+				<p:ajax event="itemSelect" update="form_principal, cad" />
+			</p:autoComplete>
+				
+		</p:panelGrid>
+		
+		<p:dataTable id="listaAvaliacaoNota" var="an" value="#{avaliacaoNotaBean.avaliacao.avaliacoesNotas}">
+			<p:column headerText="Aluno">
+				<h:outputText value="#{an.matricula.aluno.nome}" />
+			</p:column>
+			<p:column headerText="Nota">
+				<p:inputNumber id="nota" value="#{an.nota}"
+                minValue="0.00" maxValue="100.00" emptyValue="empty"
+                required="true" label="Nota"/>
+			</p:column>
+		</p:dataTable>
+		
+		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
+			action="#{avaliacaoNotaBean.saveAndUpdate()}"
+			update="form_principal, itensCadastro">
+			<span class="fa-icon-save" />
+		</p:commandButton>
+		<p:commandButton icon="voltar-icon" value="Voltar"
+			action="#{avaliacaoNotaBean.back()}" immediate="true"
+			update="form_principal" />
+	</p:panel>
+	<p:blockUI block="cad" trigger="btn_salvar" />
+
+</ui:composition>
