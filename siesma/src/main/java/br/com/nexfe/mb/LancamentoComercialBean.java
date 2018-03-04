@@ -66,7 +66,7 @@ public class LancamentoComercialBean {
 		empregadoDAO = new EmpregadoDAO();
 		descontoDAO = new DescontoDAO();
 		setFormasPagamentos(formaPagamentoDAO.listarDataAtual());
-		setLancamentosComerciais(lancamentoComercialDAO.listarDataAtual());
+		setLancamentosComerciais(lancamentoComercialDAO.listar(LancamentoComercial.class));
 		setTiposLancamentos(tipoLancamentoDAO.listar(TipoLancamento.class));
 		setMatriculas(matriculaDAO.listar(Matricula.class));
 		setEmpregados(empregadoDAO.listarProfessores());

@@ -15,10 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name="LancamentoComercial.selectAllDate", query="select e from LancamentoComercial e where :dataAtual between e.formaPagamento.dtInicio and e.formaPagamento.dtFim "
-		+ " order by e.formaPagamento.nome") } )
+@NamedQueries(value = { 
+		@NamedQuery(name="LancamentoComercial.selectAllDate", query="select e from LancamentoComercial e where :dataAtual between e.formaPagamento.dtInicio and e.formaPagamento.dtFim "
+		+ " order by e.formaPagamento.nome"),
+		@NamedQuery(name="LancamentoComercial.selectAll", query="select e from LancamentoComercial e")
+} )
 @Table(name = "LANCAMENTO_COMERCIAL")
 public class LancamentoComercial implements Serializable {
 	
@@ -63,6 +67,15 @@ public class LancamentoComercial implements Serializable {
 	
 	@Column(name = "OBS_RECEBIMENTO", length = 100)
 	private String obsRecebimento;
+	
+	@Transient
+	public String getNomeContemplado() {
+		if(getMatricula() == null) {
+			return getEmpregado().getNome();
+		} else {
+			return getMatricula().getAluno().getNome();
+		}
+	}
 
 	public Long getIdLancamentoComercial() {
 		return idLancamentoComercial;
@@ -150,14 +163,6 @@ public class LancamentoComercial implements Serializable {
 
 	public void setObsRecebimento(String obsRecebimento) {
 		this.obsRecebimento = obsRecebimento;
-	}
-	
-	public String getNomeContemplado() {
-		if(getMatricula() == null) {
-			return getEmpregado().getNome();
-		} else {
-			return getMatricula().getAluno().getNome() + " - " + getMatricula().getCurso().getNome();
-		}
 	}
 	
 	public String getTipoContemplado() {
