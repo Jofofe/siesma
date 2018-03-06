@@ -16,5 +16,17 @@ public class LancamentoComercialDAO extends DaoImpl<LancamentoComercial>{
 		query.setParameter("dataAtual", new Date());
 		return query.getResultList(); 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<LancamentoComercial> listarAlunos() {
+		Query query = em.createNamedQuery("LancamentoComercial.selectAlunos", LancamentoComercial.class);
+		return query.getResultList(); 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<LancamentoComercial> listarEmpregados() {
+		Query query = em.createNamedQuery("LancamentoComercial.selectEmpregados", LancamentoComercial.class);
+		return query.getResultList(); 
+	}
 
 }

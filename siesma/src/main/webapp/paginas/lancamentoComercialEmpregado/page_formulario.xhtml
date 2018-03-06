@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="cad" header="Cadastro de lançamento comercial de empregado" style="width:600px;height:auto;margin:auto;"
+		rendered="#{lancamentoComercialBean.lancamentoComercial != null}">
+		<p:panelGrid columns="2" id="itensCadastro">
+		
+			<h:outputLabel for="empregado" value="Empregado:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:autoComplete id="empregado" value="#{lancamentoComercialBean.lancamentoComercial.empregado}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteEmpregado}" converter="empregadoConverter"
+				var="e" itemLabel="#{e.nome}" itemValue="#{e}" forceSelection="true" label="Empregado"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+
+			<h:outputLabel for="forma" value="* Forma de pagamento:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:autoComplete id="forma" value="#{lancamentoComercialBean.lancamentoComercial.formaPagamento}" required="true"
+				completeMethod="#{lancamentoComercialBean.autoCompleteFormaPagamento}" converter="formaPagamentoConverter"
+				var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true" label="Forma pagamento"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+				
+			<h:outputLabel for="tipo" value="* Tipo de Lançamento:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:autoComplete id="tipo" value="#{lancamentoComercialBean.lancamentoComercial.tipoLancamento}" required="true"
+				completeMethod="#{lancamentoComercialBean.autoCompleteTipoLancamento}" converter="tipoLancamentoConverter"
+				var="t" itemLabel="#{t.descricao}" itemValue="#{t}" forceSelection="true" label="Tipo lançamento"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+				
+			<h:outputLabel for="desconto" value="Desconto:" rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+			<p:autoComplete id="desconto" value="#{lancamentoComercialBean.lancamentoComercial.desconto}"
+				completeMethod="#{lancamentoComercialBean.autoCompleteDesconto}" converter="descontoConverter"
+				var="d" itemLabel="#{d.nome}" itemValue="#{d}" forceSelection="true" label="Desconto"
+				rendered="#{lancamentoComercialBean.lancamentoComercial.idLancamentoComercial == null}"/>
+				
+			<h:outputLabel for="valor" value="* Valor:" />
+			<p:inputNumber id="valor" value="#{lancamentoComercialBean.lancamentoComercial.vlRecebimento}"
+				decimalSeparator="," thousandSeparator="." minValue="0.00" maxValue="999999999.99"
+				symbol="R$ " required="true" label="Valor"/> 
+
+			<p:outputLabel for="dtPrevista" value="Data prevista:" />
+			<p:calendar id="dtPrevista" value="#{lancamentoComercialBean.lancamentoComercial.dtPrevista}"
+				showOn="button" label="Data prevista" />
+
+			<p:outputLabel for="dtRecebimento" value="Data de lançamento:" />
+			<p:calendar id="dtRecebimento" value="#{lancamentoComercialBean.lancamentoComercial.dtRecebimento}"
+				showOn="button" label="Data de lançamento" />
+			
+			<h:outputLabel for="obs" value="Observação:" />
+			<p:inputTextarea id="obs" value="#{lancamentoComercialBean.lancamentoComercial.obsRecebimento}" label="Observação" rows="5" cols="30" 
+				counter="display" maxlength="100" counterTemplate="{0} caracteres remanescentes." autoResize="false" />
+    		<h:outputText id="display" />
+			
+
+		</p:panelGrid>
+		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
+			action="#{lancamentoComercialBean.saveAndUpdate}"
+			update="form_principal, itensCadastro">
+			<span class="fa-icon-save" />
+		</p:commandButton>
+		<p:commandButton icon="voltar-icon" value="Voltar"
+			action="#{lancamentoComercialBean.back}" immediate="true"
+			update="form_principal" />
+	</p:panel>
+	<p:blockUI block="cad" trigger="btn_salvar" />
+
+</ui:composition>

@@ -6,9 +6,9 @@
 
 
 
-	<p:panel header="Lista de lancamentos comerciais"
+	<p:panel header="Lista de lancamentos comerciais de alunos"
 		rendered="#{lancamentoComercialBean.lancamentoComercial == null}">
-		<p:commandButton value="Novo lancamento comercial" icon="adicionar-icon"
+		<p:commandButton value="Novo lancamento comercial de aluno" icon="adicionar-icon"
 			action="#{lancamentoComercialBean.add()}" update="form_principal" />
 
 		<p:dataTable id="tabela" value="#{lancamentoComercialBean.lancamentosComerciais}" var="item"
@@ -16,12 +16,8 @@
 			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
 			
 			<p:column headerText="Nome" filterMatchMode="contains"
-				sortBy="#{item.nomeContemplado}" filterBy="#{item.nomeContemplado}">
-				<h:outputText value="#{item.nomeContemplado}" />
-			</p:column>
-			<p:column headerText="Tipo" filterMatchMode="contains"
-				sortBy="#{item.tipoContemplado}" filterBy="#{item.tipoContemplado}">
-				<h:outputText value="#{item.tipoContemplado}" />
+				sortBy="#{item.matricula.aluno.nome}" filterBy="#{item.matricula.aluno.nome}">
+				<h:outputText value="#{item.matricula.aluno.nome}" />
 			</p:column>
 			<p:column headerText="Valor" filterMatchMode="contains"
 				sortBy="R$ #{item.vlRecebimento}" filterBy="R$ #{item.vlRecebimento}">

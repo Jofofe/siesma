@@ -21,7 +21,8 @@ import javax.persistence.Transient;
 @NamedQueries(value = { 
 		@NamedQuery(name="LancamentoComercial.selectAllDate", query="select e from LancamentoComercial e where :dataAtual between e.formaPagamento.dtInicio and e.formaPagamento.dtFim "
 		+ " order by e.formaPagamento.nome"),
-		@NamedQuery(name="LancamentoComercial.selectAll", query="select e from LancamentoComercial e")
+		@NamedQuery(name="LancamentoComercial.selectEmpregados", query="select e from LancamentoComercial e where e.matricula is null"),
+		@NamedQuery(name="LancamentoComercial.selectAlunos", query="select e from LancamentoComercial e where e.empregado is null")
 } )
 @Table(name = "LANCAMENTO_COMERCIAL")
 public class LancamentoComercial implements Serializable {
@@ -74,6 +75,15 @@ public class LancamentoComercial implements Serializable {
 			return getEmpregado().getNome();
 		} else {
 			return getMatricula().getAluno().getNome();
+		}
+	}
+	
+	@Transient
+	public String getTipoContemplado() {
+		if(getMatricula() == null) {
+			return "Empregado";
+		} else {
+			return "Aluno matriculado";
 		}
 	}
 
@@ -165,14 +175,6 @@ public class LancamentoComercial implements Serializable {
 		this.obsRecebimento = obsRecebimento;
 	}
 	
-	public String getTipoContemplado() {
-		if(getMatricula() == null) {
-			return "Empregado";
-		} else {
-			return "Aluno matriculado";
-		}
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

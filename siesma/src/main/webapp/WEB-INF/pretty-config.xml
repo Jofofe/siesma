@@ -64,10 +64,15 @@
 		<view-id value="/paginas/tipoLancamento/page_principal.xhtml" />
 		<action onPostback="false">#{tipoLancamentoBean.init}</action>
 	</url-mapping>
-	<url-mapping id="lancamentoComercial">
-		<pattern value="/paginas/lancamentoComercial/" />
-		<view-id value="/paginas/lancamentoComercial/page_principal.xhtml" />
-		<action onPostback="false">#{lancamentoComercialBean.init}</action>
+	<url-mapping id="lancamentoComercialEmpregado">
+		<pattern value="/paginas/lancamentoComercialEmpregado/" />
+		<view-id value="/paginas/lancamentoComercialEmpregado/page_principal.xhtml" />
+		<action onPostback="false">#{lancamentoComercialBean.initEmpregado}</action>
+	</url-mapping>
+	<url-mapping id="lancamentoComercialAluno">
+		<pattern value="/paginas/lancamentoComercialAluno/" />
+		<view-id value="/paginas/lancamentoComercialAluno/page_principal.xhtml" />
+		<action onPostback="false">#{lancamentoComercialBean.initAluno}</action>
 	</url-mapping>
 	<url-mapping id="presenca">
 		<pattern value="/paginas/presenca/" />

@@ -56,9 +56,27 @@ public class LancamentoComercialBean {
 	
 	private List<LancamentoComercial> lancamentosComerciaisFiltrados;
 	
-	private Integer tipo;
+	private int tipo;
+		
+	private static final int ALUNO = 1;
 	
-	public void init() {
+	private static final int EMPREGADO = 2;
+	
+	public void initAluno() {
+		inicializaLancamento();
+		setLancamentosComerciais(lancamentoComercialDAO.listarAlunos());
+		setMatriculas(matriculaDAO.listar(Matricula.class));
+		setTipo(ALUNO);
+	}
+	
+	public void initEmpregado() {
+		inicializaLancamento();
+		setLancamentosComerciais(lancamentoComercialDAO.listarEmpregados());
+		setEmpregados(empregadoDAO.listarProfessores());
+		setTipo(EMPREGADO);
+	}
+	
+	private void inicializaLancamento() {
 		lancamentoComercialDAO = new LancamentoComercialDAO();
 		formaPagamentoDAO = new FormaPagamentoDAO();
 		tipoLancamentoDAO = new TipoLancamentoDAO();
@@ -66,13 +84,9 @@ public class LancamentoComercialBean {
 		empregadoDAO = new EmpregadoDAO();
 		descontoDAO = new DescontoDAO();
 		setFormasPagamentos(formaPagamentoDAO.listarDataAtual());
-		setLancamentosComerciais(lancamentoComercialDAO.listar(LancamentoComercial.class));
 		setTiposLancamentos(tipoLancamentoDAO.listar(TipoLancamento.class));
-		setMatriculas(matriculaDAO.listar(Matricula.class));
-		setEmpregados(empregadoDAO.listarProfessores());
 		setDescontos(descontoDAO.listarDataAtual());
 		setLancamentoComercial(null);
-		setTipo(null);
 	}
 
 	public void back() {
@@ -98,7 +112,11 @@ public class LancamentoComercialBean {
 			lancamentoComercialDAO.salvar(getLancamentoComercial());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Incluido com sucesso!"));
 		}
-		init();
+		if(getTipo() == ALUNO) {
+			initAluno();
+		} else {
+			initEmpregado();
+		}
 	}
 	
 	private void alteraStatus() {
@@ -128,7 +146,11 @@ public class LancamentoComercialBean {
 		lancamentoComercialDAO.excluir(getLancamentoComercialExclusao());
 		setLancamentoComercialExclusao(null);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Excluido com sucesso!"));
-		init();
+		if(getTipo() == ALUNO) {
+			initAluno();
+		} else {
+			initEmpregado();
+		}
 	}
 	
 	public List<FormaPagamento> autoCompleteFormaPagamento(String query) {
@@ -255,11 +277,11 @@ public class LancamentoComercialBean {
 		this.empregados = empregados;
 	}
 
-	public Integer getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 	
