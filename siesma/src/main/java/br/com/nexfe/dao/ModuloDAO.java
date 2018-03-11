@@ -25,4 +25,12 @@ public class ModuloDAO extends DaoImpl<Modulo>{
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Modulo> listarModulosMatriculados(Long idAluno) {
+		Query query = em.createNamedQuery("Modulo.selectModulosMatriculados", Modulo.class);
+		query.setParameter("idAluno", idAluno);
+		query.setParameter("dataAtual", new Date());
+		return query.getResultList(); 
+	}
+	
 }

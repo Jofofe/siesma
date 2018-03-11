@@ -147,10 +147,10 @@ public class MatriculaBean {
 	
 	public boolean validaCursosAluno() {
 		if(getMatricula().getIdMatricula() == null) {
-			List<Curso> cursosAluno = cursoDAO.listarCursosMatriculados(getMatricula().getAluno().getIdUsuario());
-			for(Curso c : cursosAluno) {
-				if(getMatricula().getCurso().getIdCurso() == c.getIdCurso()) {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aluno já matriculado no curso!", "Erro"));
+			List<Modulo> modulosAluno = moduloDAO.listarModulosMatriculados(getMatricula().getAluno().getIdUsuario());
+			for(Modulo m : modulosAluno) {
+				if(getMatricula().getModulo().getIdModulo() == m.getIdModulo()) {
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aluno já matriculado no modulo!", "Erro"));
 					return false;
 				}
 			}

@@ -22,7 +22,9 @@ import javax.persistence.Table;
 		@NamedQuery(name="Modulo.selectAllDate", query="select e from Modulo e where e.curso.inExcluido = 'N' "
 		+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") ,
 		@NamedQuery(name="Modulo.selectModulosCurso", query="select e from Modulo e where e.curso.idCurso = :idCurso "
-				+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") 
+				+ "and :dataAtual between e.dtInicio and e.dtFim order by e.nome") ,
+		@NamedQuery(name="Modulo.selectModulosMatriculados", query="select e from Modulo e join e.matriculas m where "
+				+ " m.aluno.idUsuario in (:idAluno) and :dataAtual between e.dtInicio and e.dtFim order by e.nome")
 } )
 @Table(name = "MODULO")
 public class Modulo implements Serializable {
