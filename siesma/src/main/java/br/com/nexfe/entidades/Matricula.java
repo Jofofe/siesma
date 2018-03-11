@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,6 +60,16 @@ public class Matricula implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = LancamentoComercial.class, mappedBy="matricula")
 	private List<LancamentoComercial> lancamentosComerciais;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = PresencaMatricula.class, mappedBy="matricula")
+	private List<PresencaMatricula> presencasMatriculas;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = AvaliacaoNota.class, mappedBy="matricula")
+	private List<AvaliacaoNota> avaliacoesNotas;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, 
+			targetEntity = MatriculaDocumento.class, mappedBy="matricula")
+	private List<MatriculaDocumento> matriculasDocumentos;
 
 	public Long getIdMatricula() {
 		return idMatricula;
@@ -126,6 +137,105 @@ public class Matricula implements Serializable {
 
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
+	}
+
+	public List<LancamentoComercial> getLancamentosComerciais() {
+		return lancamentosComerciais;
+	}
+
+	public void setLancamentosComerciais(List<LancamentoComercial> lancamentosComerciais) {
+		this.lancamentosComerciais = lancamentosComerciais;
+	}
+	
+	public List<PresencaMatricula> getPresencasMatriculas() {
+		return presencasMatriculas;
+	}
+
+	public void setPresencasMatriculas(List<PresencaMatricula> presencasMatriculas) {
+		this.presencasMatriculas = presencasMatriculas;
+	}
+
+	public List<AvaliacaoNota> getAvaliacoesNotas() {
+		return avaliacoesNotas;
+	}
+
+	public void setAvaliacoesNotas(List<AvaliacaoNota> avaliacoesNotas) {
+		this.avaliacoesNotas = avaliacoesNotas;
+	}
+
+	public List<MatriculaDocumento> getMatriculasDocumentos() {
+		return matriculasDocumentos;
+	}
+
+	public void setMatriculasDocumentos(List<MatriculaDocumento> matriculasDocumentos) {
+		this.matriculasDocumentos = matriculasDocumentos;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
+		result = prime * result + ((dtCancelamento == null) ? 0 : dtCancelamento.hashCode());
+		result = prime * result + ((dtFimEfetivo == null) ? 0 : dtFimEfetivo.hashCode());
+		result = prime * result + ((dtFimPrevisto == null) ? 0 : dtFimPrevisto.hashCode());
+		result = prime * result + ((dtMatricula == null) ? 0 : dtMatricula.hashCode());
+		result = prime * result + ((idMatricula == null) ? 0 : idMatricula.hashCode());
+		result = prime * result + ((modulo == null) ? 0 : modulo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (curso == null) {
+			if (other.curso != null)
+				return false;
+		} else if (!curso.equals(other.curso))
+			return false;
+		if (dtCancelamento == null) {
+			if (other.dtCancelamento != null)
+				return false;
+		} else if (!dtCancelamento.equals(other.dtCancelamento))
+			return false;
+		if (dtFimEfetivo == null) {
+			if (other.dtFimEfetivo != null)
+				return false;
+		} else if (!dtFimEfetivo.equals(other.dtFimEfetivo))
+			return false;
+		if (dtFimPrevisto == null) {
+			if (other.dtFimPrevisto != null)
+				return false;
+		} else if (!dtFimPrevisto.equals(other.dtFimPrevisto))
+			return false;
+		if (dtMatricula == null) {
+			if (other.dtMatricula != null)
+				return false;
+		} else if (!dtMatricula.equals(other.dtMatricula))
+			return false;
+		if (idMatricula == null) {
+			if (other.idMatricula != null)
+				return false;
+		} else if (!idMatricula.equals(other.idMatricula))
+			return false;
+		if (modulo == null) {
+			if (other.modulo != null)
+				return false;
+		} else if (!modulo.equals(other.modulo))
+			return false;
+		return true;
 	}
 	
 }

@@ -11,11 +11,14 @@ import javax.faces.context.FacesContext;
 
 import br.com.nexfe.dao.AlunoDAO;
 import br.com.nexfe.dao.CursoDAO;
+import br.com.nexfe.dao.DocumentoDAO;
 import br.com.nexfe.dao.MatriculaDAO;
 import br.com.nexfe.dao.ModuloDAO;
 import br.com.nexfe.entidades.Aluno;
 import br.com.nexfe.entidades.Curso;
+import br.com.nexfe.entidades.Documento;
 import br.com.nexfe.entidades.Matricula;
+import br.com.nexfe.entidades.MatriculaDocumento;
 import br.com.nexfe.entidades.Modulo;
 
 @ManagedBean(name = "matriculaBean")
@@ -29,6 +32,8 @@ public class MatriculaBean {
 	private CursoDAO cursoDAO;
 	
 	private ModuloDAO moduloDAO;
+	
+	private DocumentoDAO documentoDAO;
 	
 	private Matricula matricula;
 	
@@ -49,6 +54,7 @@ public class MatriculaBean {
 		alunoDAO = new AlunoDAO();
 		cursoDAO = new CursoDAO();
 		moduloDAO = new ModuloDAO();
+		documentoDAO = new DocumentoDAO();
 		setMatriculas(matriculaDAO.listarTodosSemDistincao());
 		setAlunos(alunoDAO.listar(Aluno.class));
 		setCursos(cursoDAO.listar(Curso.class));
@@ -62,6 +68,7 @@ public class MatriculaBean {
 
 	public void add() {
 		setMatricula(new Matricula());
+		carregaMatriculasDocumentos();
 	}
 	
 	public void edit(Matricula m){
@@ -82,10 +89,6 @@ public class MatriculaBean {
 			init();
 		}
 	}
-	
-	//public boolean canDelete(Matricula m) {
-	//	return m.get() == null || m.get.isEmpty();
-	//}
 	
 	public void selectDelete(Matricula m){
 		setMatriculaExclusao(m);
@@ -156,7 +159,18 @@ public class MatriculaBean {
 	}
 	
 	////////////////////GETTERS AND SETTERS\\\\\\\\\\\\\\\\\\\\\\\\\\
-
+	
+	public void carregaMatriculasDocumentos() {
+		MatriculaDocumento matriculaDocumento = null;
+		getMatricula().setMatriculasDocumentos(new ArrayList<MatriculaDocumento>());
+		for(Documento documento : documentoDAO.listar(Documento.class)) {
+			matriculaDocumento = new MatriculaDocumento();
+			matriculaDocumento.setMatricula(getMatricula());
+			matriculaDocumento.setDocumento(documento);
+			getMatricula().getMatriculasDocumentos().add(matriculaDocumento);
+		}
+	}
+	
 	public CursoDAO getCursoDAO() {
 		return cursoDAO;
 	}

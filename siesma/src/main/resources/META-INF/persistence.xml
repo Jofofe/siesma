@@ -28,6 +28,10 @@
         <class>br.com.nexfe.entidades.TipoPagamento</class>
         <class>br.com.nexfe.entidades.TipoLancamento</class>
         <class>br.com.nexfe.entidades.LancamentoComercial</class>
+        <class>br.com.nexfe.entidades.AvaliacaoNota</class>
+        <class>br.com.nexfe.entidades.Presenca</class>
+        <class>br.com.nexfe.entidades.PresencaMatricula</class>
+        <class>br.com.nexfe.entidades.MatriculaDocumento</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

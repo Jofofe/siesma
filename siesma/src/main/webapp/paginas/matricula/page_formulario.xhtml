@@ -41,6 +41,16 @@
 				showOn="button" label="Data de termino" />
 
 		</p:panelGrid>
+		
+		<p:dataTable id="listaDocumento" var="md" value="#{matriculaBean.matricula.matriculasDocumentos}">
+			<p:column headerText="Documento">
+				<h:outputText value="#{md.documento.nomeDocumento}" />
+			</p:column>
+			<p:column headerText="Entregue?">
+				<p:selectBooleanCheckbox value="#{md.entregue}" />
+			</p:column>
+		</p:dataTable>
+		
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"
 			action="#{matriculaBean.saveAndUpdate()}"
 			update="form_principal, itensCadastro">

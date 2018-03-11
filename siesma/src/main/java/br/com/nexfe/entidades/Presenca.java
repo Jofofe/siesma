@@ -37,7 +37,6 @@ public class Presenca implements Serializable {
 	@Column(name = "DATA_PRESENCA", nullable = false)
 	private Date dtPresenca;
 	
-	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, 
 			targetEntity = PresencaMatricula.class, mappedBy="presenca")
 	private List<PresencaMatricula> presencasMatriculas;
