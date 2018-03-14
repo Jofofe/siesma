@@ -28,33 +28,41 @@
 			</p:column>
 			<p:column headerText="Data Matricula" filterMatchMode="contains"
 				sortBy="#{item.dtMatricula}" filterBy="#{item.dtMatricula}">
-				<h:outputText value="#{item.dtMatricula}" />
+				<h:outputText value="#{item.dtMatricula}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Data prevista de termino" filterMatchMode="contains"
 				sortBy="#{item.dtFimPrevisto}" filterBy="#{item.dtFimPrevisto}">
-				<h:outputText value="#{item.dtFimPrevisto}" />
+				<h:outputText value="#{item.dtFimPrevisto}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Data de termino" filterMatchMode="contains"
 				sortBy="#{item.dtFimEfetivo}" filterBy="#{item.dtFimEfetivo}">
-				<h:outputText value="#{item.dtFimEfetivo}" />
+				<h:outputText value="#{item.dtFimEfetivo}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Data de cancelamento" filterMatchMode="contains"
 				sortBy="#{item.dtCancelamento}" filterBy="#{item.dtCancelamento}">
-				<h:outputText value="#{item.dtCancelamento}" />
+				<h:outputText value="#{item.dtCancelamento}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{matriculaBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-s"
+				<p:commandButton icon="ui-icon-arrowreturn-1-s" title="Cancelar"
 					style="color:red; margin-left:20px;"
 					actionListener="#{matriculaBean.selectDelete(item)}"
 					rendered="#{item.dtCancelamento == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+				<p:commandButton icon="ui-icon-arrowreturn-1-n" title="Reativar"
 					style="color:red; margin-left:20px;"
 					actionListener="#{matriculaBean.selectDelete(item)}"
 					rendered="#{item.dtCancelamento != null}"

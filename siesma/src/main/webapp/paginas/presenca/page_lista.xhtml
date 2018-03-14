@@ -16,7 +16,9 @@
 			rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
 			<p:column headerText="Data" filterMatchMode="contains"
 				sortBy="#{item.dtPresenca}" filterBy="#{item.dtPresenca}">
-				<h:outputText value="#{item.dtPresenca}" />
+				<h:outputText value="#{item.dtPresenca}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Disciplina" filterMatchMode="contains"
 				sortBy="#{item.disciplina.nome}" filterBy="#{item.disciplina.nome}">
@@ -25,9 +27,9 @@
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{presencaBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-close" title="Excluir"
 					style="color:red; margin-left:20px;"
 					actionListener="#{presencaBean.selectDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />

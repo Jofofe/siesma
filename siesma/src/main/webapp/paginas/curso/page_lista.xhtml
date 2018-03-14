@@ -32,25 +32,29 @@
 			</p:column>
 			<p:column headerText="Data de início" filterMatchMode="contains"
 				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
-				<h:outputText value="#{item.dtInicio}" />
+				<h:outputText value="#{item.dtInicio}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Desativado" filterMatchMode="contains"
 				sortBy="#{item.inExcluido}" filterBy="#{item.inExcluido}">
-				<h:outputText value="#{item.inExcluido}" />
+				<h:outputText value="#{item.inExcluido}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{cursoBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-s"
+				<p:commandButton icon="ui-icon-arrowreturn-1-s" title="Desativar"
 					style="color:red; margin-left:20px;"
 					actionListener="#{cursoBean.selectDelete(item)}"
 					rendered="#{item.inExcluido == 'N'}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+				<p:commandButton icon="ui-icon-arrowreturn-1-n" title="Reativar"
 					style="color:red; margin-left:20px;"
 					actionListener="#{cursoBean.selectDelete(item)}"
 					rendered="#{item.inExcluido == 'S'}"

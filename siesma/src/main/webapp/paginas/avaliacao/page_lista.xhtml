@@ -30,9 +30,9 @@
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{avaliacaoBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-close" title="Excluir"
 					style="color:red; margin-left:20px;"
 					actionListener="#{avaliacaoBean.selectDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />

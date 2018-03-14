@@ -39,10 +39,12 @@
 
 			<p:outputLabel for="dtPrevista" value="Data prevista:" />
 			<p:calendar id="dtPrevista" value="#{lancamentoComercialBean.lancamentoComercial.dtPrevista}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data prevista" />
 
 			<p:outputLabel for="dtRecebimento" value="Data de lançamento:" />
 			<p:calendar id="dtRecebimento" value="#{lancamentoComercialBean.lancamentoComercial.dtRecebimento}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de lançamento" />
 			
 			<h:outputLabel for="obs" value="Observação:" />

@@ -35,7 +35,7 @@ public class ModuloBean {
 		moduloDAO = new ModuloDAO();
 		cursoDAO = new CursoDAO();
 		setCursos(cursoDAO.listar(Curso.class));
-		setModulos(moduloDAO.listarDataAtual());
+		setModulos(moduloDAO.listar(Modulo.class));
 		setModulo(null);
 	}
 
@@ -67,7 +67,8 @@ public class ModuloBean {
 	}
 	
 	public boolean canDelete(Modulo m) {
-		return m.getDisciplinas() == null || m.getDisciplinas().isEmpty();
+		return (m.getDisciplinas() == null || m.getDisciplinas().isEmpty())
+				&& (m.getMatriculas() == null || m.getMatriculas().isEmpty());
 	}
 	
 	public void selectDelete(Modulo m){

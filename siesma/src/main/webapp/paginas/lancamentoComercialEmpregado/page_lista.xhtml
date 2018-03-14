@@ -29,23 +29,29 @@
 			</p:column>
 			<p:column headerText="Data prevista" filterMatchMode="contains"
 				sortBy="#{item.dtPrevista}" filterBy="#{item.dtPrevista}">
-				<h:outputText value="#{item.dtPrevista}" />
+				<h:outputText value="#{item.dtPrevista}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Data de lançamento" filterMatchMode="contains"
 				sortBy="#{item.dtRecebimento}" filterBy="#{item.dtRecebimento}">
-				<h:outputText value="#{item.dtRecebimento}" />
+				<h:outputText value="#{item.dtRecebimento}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Status" filterMatchMode="contains"
 				sortBy="#{item.status}" filterBy="#{item.status}">
-				<h:outputText value="#{item.status}" />
+				<h:outputText value="#{item.status}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{lancamentoComercialBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-close" title="Excluir"
 					style="color:red; margin-left:20px;"
 					actionListener="#{lancamentoComercialBean.selectDelete(item)}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />

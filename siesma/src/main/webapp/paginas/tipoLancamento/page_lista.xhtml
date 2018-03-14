@@ -33,14 +33,14 @@
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{tipoLancamentoBean.edit(item)}" update="form_principal" />
 				<p:commandButton icon="ui-icon-arrowreturn-1-s"
-					style="color:red; margin-left:20px;"
+					style="color:red; margin-left:20px;" title="Desativar"
 					actionListener="#{tipoLancamentoBean.selectDelete(item)}"
 					rendered="#{item.status == 'Ativo'}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+				<p:commandButton icon="ui-icon-arrowreturn-1-n" title="Reativar"
 					style="color:red; margin-left:20px;"
 					actionListener="#{tipoLancamentoBean.selectDelete(item)}"
 					rendered="#{item.status == 'Inativo'}"

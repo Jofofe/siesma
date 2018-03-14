@@ -34,10 +34,12 @@
 				
 			<p:outputLabel for="dtInicio" value="* Data de início:" />
 			<p:calendar id="dtInicio" value="#{cursoBean.curso.dtInicio}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de início" required="true" />
 
 			<p:outputLabel for="dtFim" value="Data de termino:" />
 			<p:calendar id="dtFim" value="#{cursoBean.curso.dtFim}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de termino" />
 			
 		</p:panelGrid>

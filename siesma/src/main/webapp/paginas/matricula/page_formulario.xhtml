@@ -31,14 +31,17 @@
 
 			<p:outputLabel for="dtInicio" value="* Data de matrícula" />
 			<p:calendar id="dtInicio" value="#{matriculaBean.matricula.dtMatricula}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de matrícula" required="true" />
 
 			<p:outputLabel for="dtFimPrevisto" value="Data prevista de termino:" />
 			<p:calendar id="dtFimPrevisto" value="#{matriculaBean.matricula.dtFimPrevisto}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data prevista de termino" />
 				
 			<p:outputLabel for="dtFimEfetivo" value="Data de termino:" />
 			<p:calendar id="dtFimEfetivo" value="#{matriculaBean.matricula.dtFimEfetivo}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de termino" />
 
 		</p:panelGrid>

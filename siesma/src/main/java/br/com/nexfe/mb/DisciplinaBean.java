@@ -35,7 +35,7 @@ public class DisciplinaBean {
 		disciplinaDAO = new DisciplinaDAO();
 		moduloDAO = new ModuloDAO();
 		setModulos(moduloDAO.listarDataAtual());
-		setDisciplinas(disciplinaDAO.listarDataAtual());
+		setDisciplinas(disciplinaDAO.listar(Disciplina.class));
 		setDisciplina(null);
 	}
 

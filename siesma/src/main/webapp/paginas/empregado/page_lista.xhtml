@@ -32,21 +32,23 @@
 			</p:column>
 			<p:column headerText="Data de fim do vínculo" filterMatchMode="contains"
 				sortBy="#{item.dtFimVinculo}" filterBy="#{item.dtFimVinculo}">
-				<h:outputText value="#{item.dtFimVinculo}" />
+				<h:outputText value="#{item.dtFimVinculo}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{empregadoBean.edit(item)}" update="form_principal" />
 				<p:commandButton icon="ui-icon-arrowreturn-1-s"
-					style="color:red; margin-left:20px;"
+					style="color:red; margin-left:20px;" title="Encerrar vínculo"
 					actionListener="#{empregadoBean.selectDelete(item)}"
 					rendered="#{item.dtFimVinculo == null}"
 					oncomplete="PF('confirmaExclusao').show();" update="form_principal" />
-				<p:commandButton icon="ui-icon-arrowreturn-1-n"
+				<p:commandButton icon="ui-icon-arrowreturn-1-n" title="Reativar vínculo"
 					style="color:red; margin-left:20px;"
 					actionListener="#{empregadoBean.selectDelete(item)}"
 					rendered="#{item.dtFimVinculo != null}"

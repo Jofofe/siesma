@@ -33,7 +33,8 @@
         		required="true" maxlength="20" rendered="#{alunoBean.aluno.idUsuario == null}"/>
 			
 			<p:outputLabel for="dtNasc" value="* Data de Nascimento:" />
-	        <p:calendar id="dtNasc" value="#{alunoBean.aluno.dtNascimento}" showOn="button" 
+	        <p:calendar id="dtNasc" value="#{alunoBean.aluno.dtNascimento}" showOn="button"
+	        	navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 	        	label="Data de nascimento" required="true"/>
 				
 			<h:outputLabel value="* Genero:" />
@@ -55,10 +56,10 @@
 				
 			<h:outputLabel for="nat" value="* Naturalidade " />
 			<p:inputText id="nat" value="#{alunoBean.aluno.naturalidade}" required="true"
-				maxlength="20" label="Naturalidade"/>
+				maxlength="50" label="Naturalidade"/>
 				
 			<h:outputLabel for="prof" value="Profissão:" />
-			<p:inputText id="prof" value="#{alunoBean.aluno.profissao}" maxlength="20" label="Profissão"/>
+			<p:inputText id="prof" value="#{alunoBean.aluno.profissao}" maxlength="50" label="Profissão"/>
 				
 			<h:outputLabel for="end" value="* Endereço:" />
 			<p:inputText id="end" value="#{alunoBean.aluno.endereco}" required="true"
@@ -94,8 +95,9 @@
 				mask="(99) 9999-9999" label="Telefone Comercial"/>
 				
 			<p:outputLabel for="dtVenc" value="* Data de vencimento:" />
-	        <p:calendar id="dtVenc" value="#{alunoBean.aluno.dtVencimento}" showOn="button" 
-	        	label="Data de vencimento:"/>
+	        <p:calendar id="dtVenc" value="#{alunoBean.aluno.dtVencimento}" required="true"
+	        	navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
+	        	showOn="button" label="Data de vencimento"/>
 	        	
 	        <h:outputLabel for="ies" value="* Graduação" />
 			<p:inputText id="ies" value="#{alunoBean.aluno.iesGraduacao}" required="true"

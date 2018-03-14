@@ -18,6 +18,7 @@
 				
 			<p:outputLabel for="dtPresenca" value="* Data da presença" />
 			<p:calendar id="dtPresenca" value="#{presencaBean.presenca.dtPresenca}"
+				navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
 				showOn="button" label="Data de presença" required="true" />
 
 		</p:panelGrid>

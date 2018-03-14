@@ -28,20 +28,24 @@
 			</p:column>
 			<p:column headerText="Data de início" filterMatchMode="contains"
 				sortBy="#{item.dtInicio}" filterBy="#{item.dtInicio}">
-				<h:outputText value="#{item.dtInicio}" />
+				<h:outputText value="#{item.dtInicio}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Data de termino" filterMatchMode="contains"
 				sortBy="#{item.dtFim}" filterBy="#{item.dtFim}">
-				<h:outputText value="#{item.dtFim}" />
+				<h:outputText value="#{item.dtFim}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 
 
 
 			<p:column headerText="Ação" style="text-align:center;" width="150"
 				exportable="false">
-				<p:commandButton icon="ui-icon-pencil"
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					action="#{formaPagamentoBean.edit(item)}" update="form_principal" />
-				<p:commandButton icon="ui-icon-close"
+				<p:commandButton icon="ui-icon-close" title="Excluir"
 					style="color:red; margin-left:20px;"
 					actionListener="#{formaPagamentoBean.selectDelete(item)}"
 					rendered="#{formaPagamentoBean.canDelete(item)}"
