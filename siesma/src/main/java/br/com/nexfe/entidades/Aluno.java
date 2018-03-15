@@ -60,14 +60,17 @@ public class Aluno extends Usuario {
 	@Column(name = "TEL_COMERCIAL", length = 20)
 	private String telComercial;
 	
-	@Column(name = "DT_VENCIMENTO", nullable = false)
-	private Date dtVencimento;
-	
 	@Column(name = "IES_GRADUACAO", length = 50, nullable = false)
 	private String iesGraduacao;
 	
-	@Column(name = "SITUACAO_COMERCIAL", length = 50, nullable = false)
-	private String situacaoComercial;
+	@Column(name = "NOME_PAI", length = 100, nullable = false)
+	private String nomePai;
+	
+	@Column(name = "NOME_MAE", length = 100, nullable = false)
+	private String nomeMae;
+	
+	@Column(name = "CURSO_GRADUACAO", length = 50)
+	private String cursoGraduacao;
 	
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Matricula.class, mappedBy="aluno")
 	private List<Matricula> matriculas;
@@ -163,14 +166,6 @@ public class Aluno extends Usuario {
 		this.telComercial = telComercial;
 	}
 
-	public Date getDtVencimento() {
-		return dtVencimento;
-	}
-
-	public void setDtVencimento(Date dtVencimento) {
-		this.dtVencimento = dtVencimento;
-	}
-
 	public String getIesGraduacao() {
 		return iesGraduacao;
 	}
@@ -178,13 +173,29 @@ public class Aluno extends Usuario {
 	public void setIesGraduacao(String iesGraduacao) {
 		this.iesGraduacao = iesGraduacao;
 	}
-
-	public String getSituacaoComercial() {
-		return situacaoComercial;
+	
+	public String getNomePai() {
+		return nomePai;
 	}
 
-	public void setSituacaoComercial(String situacaoComercial) {
-		this.situacaoComercial = situacaoComercial;
+	public void setNomePai(String nomePai) {
+		this.nomePai = nomePai;
+	}
+
+	public String getNomeMae() {
+		return nomeMae;
+	}
+
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
+
+	public String getCursoGraduacao() {
+		return cursoGraduacao;
+	}
+
+	public void setCursoGraduacao(String cursoGraduacao) {
+		this.cursoGraduacao = cursoGraduacao;
 	}
 	
 	public List<Matricula> getMatriculas() {
@@ -210,14 +221,15 @@ public class Aluno extends Usuario {
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+		result = prime * result + ((cursoGraduacao == null) ? 0 : cursoGraduacao.hashCode());
 		result = prime * result + ((dtNascimento == null) ? 0 : dtNascimento.hashCode());
-		result = prime * result + ((dtVencimento == null) ? 0 : dtVencimento.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((iesGraduacao == null) ? 0 : iesGraduacao.hashCode());
 		result = prime * result + ((naturalidade == null) ? 0 : naturalidade.hashCode());
+		result = prime * result + ((nomeMae == null) ? 0 : nomeMae.hashCode());
+		result = prime * result + ((nomePai == null) ? 0 : nomePai.hashCode());
 		result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
-		result = prime * result + ((situacaoComercial == null) ? 0 : situacaoComercial.hashCode());
 		result = prime * result + ((telComercial == null) ? 0 : telComercial.hashCode());
 		result = prime * result + ((telResidencia == null) ? 0 : telResidencia.hashCode());
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
@@ -248,15 +260,15 @@ public class Aluno extends Usuario {
 				return false;
 		} else if (!cidade.equals(other.cidade))
 			return false;
+		if (cursoGraduacao == null) {
+			if (other.cursoGraduacao != null)
+				return false;
+		} else if (!cursoGraduacao.equals(other.cursoGraduacao))
+			return false;
 		if (dtNascimento == null) {
 			if (other.dtNascimento != null)
 				return false;
 		} else if (!dtNascimento.equals(other.dtNascimento))
-			return false;
-		if (dtVencimento == null) {
-			if (other.dtVencimento != null)
-				return false;
-		} else if (!dtVencimento.equals(other.dtVencimento))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
@@ -278,15 +290,20 @@ public class Aluno extends Usuario {
 				return false;
 		} else if (!naturalidade.equals(other.naturalidade))
 			return false;
+		if (nomeMae == null) {
+			if (other.nomeMae != null)
+				return false;
+		} else if (!nomeMae.equals(other.nomeMae))
+			return false;
+		if (nomePai == null) {
+			if (other.nomePai != null)
+				return false;
+		} else if (!nomePai.equals(other.nomePai))
+			return false;
 		if (profissao == null) {
 			if (other.profissao != null)
 				return false;
 		} else if (!profissao.equals(other.profissao))
-			return false;
-		if (situacaoComercial == null) {
-			if (other.situacaoComercial != null)
-				return false;
-		} else if (!situacaoComercial.equals(other.situacaoComercial))
 			return false;
 		if (telComercial == null) {
 			if (other.telComercial != null)

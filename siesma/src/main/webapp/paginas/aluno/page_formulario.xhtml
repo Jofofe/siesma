@@ -4,13 +4,21 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panel id="cad" header="Cadastro de Aluno" style="width:800px;height:auto;margin:auto;"
+	<p:panel id="cad" header="Cadastro de Aluno" style="width:900px;height:auto;margin:auto;"
 		rendered="#{alunoBean.aluno != null}">
 		<p:panelGrid columns="4" id="itensCadastro">
 		
 			<h:outputLabel for="nome" value="* Nome:" />
 			<p:inputText id="nome" value="#{alunoBean.aluno.nome}" required="true"
 				maxlength="100" label="Nome" style="width:300px"/>
+				
+				<h:outputLabel for="nomePai" value="* Nome do pai:" />
+			<p:inputText id="nomePai" value="#{alunoBean.aluno.nomePai}" required="true"
+				maxlength="100" label="Nome do pai" style="width:300px"/>
+				
+				<h:outputLabel for="nomeMae" value="* Nome da mãe:" />
+			<p:inputText id="nomeMae" value="#{alunoBean.aluno.nomeMae}" required="true"
+				maxlength="100" label="Nome da mãe" style="width:300px"/>
 			
 			<h:outputLabel for="cpf" value="* CPF:" />
 			<p:inputMask id="cpf" value="#{alunoBean.aluno.cpf}" validator="#{alunoBean.validateCpf}"
@@ -94,18 +102,13 @@
 			<p:inputMask id="telCom" value="#{alunoBean.aluno.telComercial}" 
 				mask="(99) 9999-9999" label="Telefone Comercial"/>
 				
-			<p:outputLabel for="dtVenc" value="* Data de vencimento:" />
-	        <p:calendar id="dtVenc" value="#{alunoBean.aluno.dtVencimento}" required="true"
-	        	navigator="true" yearRange="c-80:c+10" pattern="dd/MM/yyyy" locale="pt"
-	        	showOn="button" label="Data de vencimento"/>
-	        	
-	        <h:outputLabel for="ies" value="* Graduação" />
-			<p:inputText id="ies" value="#{alunoBean.aluno.iesGraduacao}" required="true"
+	        <h:outputLabel for="ies" value="IES Graduação" />
+			<p:inputText id="ies" value="#{alunoBean.aluno.iesGraduacao}"
 				maxlength="50" label="Graduação"/>
-			
-			<h:outputLabel for="sitCom" value="* Situação Comercial" />
-			<p:inputText id="sitCom" value="#{alunoBean.aluno.situacaoComercial}" required="true"
-				maxlength="50" label="Situação Comercial"/>
+				
+			<h:outputLabel for="cg" value="Curso Graduação" />
+			<p:inputText id="cg" value="#{alunoBean.aluno.cursoGraduacao}"
+				maxlength="50" label="Graduação"/>
 			
 		</p:panelGrid>
 		<p:commandButton id="btn_salvar" icon="salvar-icon" value="Salvar"

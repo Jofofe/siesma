@@ -26,9 +26,13 @@
 				sortBy="#{item.cpf}" filterBy="#{item.cpf}">
 				<h:outputText value="#{item.cpf}" />
 			</p:column>
-			<p:column headerText="Graduação" filterMatchMode="contains"
+			<p:column headerText="IES Graduação" filterMatchMode="contains"
 				sortBy="#{item.iesGraduacao}" filterBy="#{item.iesGraduacao}">
 				<h:outputText value="#{item.iesGraduacao}" />
+			</p:column>
+			<p:column headerText="Curso Graduação" filterMatchMode="contains"
+				sortBy="#{item.cursoGraduacao}" filterBy="#{item.cursoGraduacao}">
+				<h:outputText value="#{item.cursoGraduacao}" />
 			</p:column>
 			<p:column headerText="Data de fim do vínculo" filterMatchMode="contains"
 				sortBy="#{item.dtFimVinculo}" filterBy="#{item.dtFimVinculo}">
